@@ -317,7 +317,9 @@
         <div class="swiper-container">
           <div class="swiper-wrapper">
             <div class="swiper-slide">
+            <a href="movie_info.jsp">
               <img src="../common/images/a1.jpg" />
+              </a>
             </div>
             <div class="swiper-slide">
               <img src="../common/images/a2.jpg" />

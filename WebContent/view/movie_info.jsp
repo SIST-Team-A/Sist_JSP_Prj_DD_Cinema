@@ -28,7 +28,7 @@
         font-family: "Noto Sans KR", sans-serif;
       }
       body {
-        margin: 0px;
+        margin: 0;
         overflow-x: hidden;
       }
       div {
@@ -44,9 +44,11 @@
       }
       #wrap {
         display: flex;
+        width: 100%;
         height: 100%;
         flex-direction: column;
         justify-content: space-between;
+        align-items: center;
       }
       ul {
         list-style: none;
@@ -58,7 +60,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        margin-bottom: auto;
+        /* margin-bottom: auto; */
       }
       #header-top {
         display: flex;
@@ -73,6 +75,7 @@
         justify-content: center;
         width: 85%;
         border-top: 1px solid #b2b2b2;
+        font-size:14px;
         margin: 0 auto;
       }
       #header-bottom ul {
@@ -107,35 +110,85 @@
       }
 
       #main {
+        width: 50%;
+        max-width: 800px;
+        min-width: 750px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin: 50px 0;
+      }
+
+      #main div {
+        /* border: 1px solid black; */
+      }
+
+      #main-info {
         width: 100%;
-        min-width: 950px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      #movie-info {
+        display: flex;
+        flex-direction: column;
+        width: 45%;
+      }
+
+      #movie-title {
+        border-bottom: 1px solid #ccc;
+      }
+
+      #movie-detail {
+        margin-top: 50px;
+        width: 100%;
+        height: 100%;
+      }
+
+      #story {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 15px;
+      }
+
+      #story-label {
+        width: 15%;
         display: flex;
         flex-direction: row;
         justify-content: center;
-        flex-wrap: wrap;
-      }
-      #main-title {
-        width: 100%;
-        text-align: center;
-        padding: 10px 0;
+        border-bottom: 1px solid #ccc;
       }
 
-      .item {
-        width: 300px;
+      #trailer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: 15px;
+      }
+
+      #trailer-title {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 50%;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #ccc;
+      }
+
+      #trailer-video {
+        width: 100%;
         height: 500px;
-        margin: 10px;
-        border: 1px solid black;
-        text-align: center;
       }
-
-      #unfold {
-        width: 100%;
-        padding: 25px 0;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
+      #btn-main {
+        margin-top: 40px;
       }
-
       #footer {
         display: flex;
         flex-direction: row;
@@ -145,7 +198,7 @@
         min-width: 950px;
         min-height: 140px;
         background-color: black;
-        margin-top: auto;
+        /* margin-top: auto; */
       }
       #footertxt {
         color: #a2a2a2;
@@ -174,23 +227,7 @@
         display: none;
       }
     </style>
-    <script>
-      window.onload = function () {
-        const btn = document.getElementById("btn-unfold");
-        btn.addEventListener("click", () => {
-          let cnt = 5;
-          const items = document.querySelectorAll(".item");
-          for (const item of items) {
-            if (cnt) {
-              if (item.classList.contains("hidden")) {
-                item.classList.remove("hidden");
-                cnt--;
-              }
-            }
-          }
-        });
-      };
-    </script>
+    <script></script>
   </head>
   <body>
     <div id="wrap">
@@ -216,39 +253,55 @@
         </div>
       </div>
       <div id="main">
-        <div id="main-title">
-          <h3>현재상영작</h3>
+        <div id="main-info">
+          <div id="movie-poster"><img src="../common/images/a1.jpg" /></div>
+          <div id="movie-info">
+            <div id="movie-title"><h2>백두산</h2></div>
+            <div id="movie-detail">
+              장르 재난, 드라마, 액션 2019년 12월 19일 개봉 112분<br />
+              감독 이해준, 김병서<br />
+              출연 이병헌, 하정우, 마동석, 전혜진, 배수지, 이경영, 이상원,
+              옥자연, 김시아 외
+            </div>
+          </div>
         </div>
-        <div class="item">1</div>
-        <div class="item">2</div>
-        <div class="item">3</div>
-        <div class="item">4</div>
-        <div class="item">5</div>
-        <div class="item">6</div>
-        <div class="item">7</div>
-        <div class="item">8</div>
-        <div class="item">9</div>
-        <div class="item">10</div>
-        <div class="item hidden">11</div>
-        <div class="item hidden">12</div>
-        <div class="item hidden">13</div>
-        <div class="item hidden">14</div>
-        <div class="item hidden">15</div>
-        <div class="item hidden">16</div>
-        <div class="item hidden">17</div>
-        <div class="item hidden">18</div>
-        <div class="item hidden">19</div>
-        <div class="item hidden">20</div>
-        <div class="item hidden">21</div>
-        <div class="item hidden">22</div>
-        <div id="unfold">
-          <input
-            type="button"
-            class="btn btn-default"
-            id="btn-unfold"
-            value="펼쳐보기"
-          />
+        <div id="story">
+          <div id="story-label">
+            <h3>소개</h3>
+          </div>
+          <br />
+          대한민국 관측 역사상 최대 규모의 백두산 폭발 발생. 갑작스러운 재난에
+          한반도는 순식간에 아비규환이 되고, 남과 북 모두를 집어삼킬 추가 폭발이
+          예측된다. 사상 초유의 재난을 막기 위해 ‘전유경’(전혜진)은 백두산
+          폭발을 연구해 온 지질학 교수 ‘강봉래’(마동석)의 이론에 따른 작전을
+          계획하고, 전역을 앞둔 특전사 EOD 대위 ‘조인창’(하정우)이 남과 북의
+          운명이 걸린 비밀 작전에 투입된다. 작전의 키를 쥔 북한 무력부 소속 일급
+          자원 ‘리준평’(이병헌)과 접선에 성공한 ‘인창’. 하지만 ‘준평’은 속을 알
+          수 없는 행동으로 ‘인창’을 곤란하게 만든다. 한편, ‘인창’이 북한에서
+          펼쳐지는 작전에 투입된 사실도 모른 채 서울에 홀로 남은
+          ‘최지영’(배수지)은 재난에 맞서 살아남기 위해 고군분투하고 그 사이,
+          백두산 마지막 폭발까지의 시간은 점점 가까워 가는데…!
         </div>
+        <div id="trailer">
+          <div id="trailer-title">
+            <h3>트레일러</h3>
+          </div>
+          <iframe
+            id="trailer-video"
+            src="https://www.youtube.com/embed/FKAbTcss1ow"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <input
+          type="button"
+          id="btn-main"
+          class="btn btn-default"
+          value="메인으로"
+          onclick="location.href='main.jsp'"
+        />
       </div>
       <div id="footer">
         <div id="footertxt">
