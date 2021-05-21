@@ -290,8 +290,8 @@
           <div id="header-bottom">
             <ul class="header-bottom-ul">
               <li><a href="">예매</a></li>
-              <li><a href="cur_movie.html">현재상영작</a></li>
-              <li><a href="soon-movie.html">개봉예정작</a></li>
+              <li><a href="cur_movie.jsp">현재상영작</a></li>
+              <li><a href="soon_movie.jsp">개봉예정작</a></li>
             </ul>
           </div>
         </div>
