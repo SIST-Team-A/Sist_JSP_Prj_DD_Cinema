@@ -28,7 +28,6 @@
       type="text/javascript"
       src="../common/coin/coin-slider.min.js"
     ></script>
-    
     <link
       rel="stylesheet"
       href="../common/coin/coin-slider-styles.css"
