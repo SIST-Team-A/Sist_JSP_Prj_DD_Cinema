@@ -216,7 +216,7 @@
       </div>
       <div id="main">
         <div id="main-title">
-          <h3>현재상영작</h3>
+          <h3>개봉예정작</h3>
         </div>
         <div class="item">1</div>
         <div class="item">2</div>
