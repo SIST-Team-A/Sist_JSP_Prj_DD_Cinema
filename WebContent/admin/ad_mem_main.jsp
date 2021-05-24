@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
     <!-- bootstrap -->
-    <link href="http://localhost/jsp_prj/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://localhost/real/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
     
     <link href="http://localhost/jsp_prj/common/css/adminHeaderFooter.css"  rel="stylesheet">
     
