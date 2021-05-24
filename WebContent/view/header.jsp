@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
- <link rel = "stylesheet" type = "text/css" href="http://211.63.89.143/sec_project/common/css/header.css">
+ <link rel = "stylesheet" type = "text/css" href="http://localhost/movie_reservation/common/css/header.css">
 
       <div id="header">
         <div id="header-top">
