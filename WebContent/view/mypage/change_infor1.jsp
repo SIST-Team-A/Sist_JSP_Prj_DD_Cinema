@@ -71,7 +71,7 @@ function home(){
 				</tr>
 				<tr>
 					<td><input type="button" value="정보 수정" 	class="btn btn-default  btn-lg"   id="btn" 
-					 style="background-color: #828282; color : white" onclick="changeinfor()";/> 
+					 style="background-color: #828282; color : white" onclick="changeinfor()"/> 
 						<input type="button" value="홈 " class="btn btn-default  btn-lg"   id="btn"  onclick="home();"/></td>
 				</tr>
 			</table>
