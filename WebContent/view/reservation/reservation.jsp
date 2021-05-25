@@ -1,7 +1,7 @@
 
-<%@page import="kr.co.sist.vo.MovieListVO"%>
+<%@page import="vo.MovieListVO"%>
+<%@page import="dao.SchMovieDAO"%>
 <%@page import="java.util.List"%>
-<%@page import="kr.co.sist.dao.SchMovieDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.util.Calendar"%>
