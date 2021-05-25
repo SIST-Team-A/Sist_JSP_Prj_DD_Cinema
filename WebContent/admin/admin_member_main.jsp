@@ -41,6 +41,15 @@
 			   width: 900px; 
 			   height: 750px; 
 			   z-index: 1}
+		
+		#modal .close-area {
+            display: inline;
+            float: right;
+            margin-right: 50px;
+            cursor: pointer;
+            text-shadow: 1px 1px 2px gray;
+            color: black;
+        }
 			   
 		#modal .modal_content{width: 600px; 
 							  margin: 100px auto;
@@ -93,6 +102,15 @@
 			$("#modal").fadeOut();//attr("style", "display:none");//modal
 		});//click
 		
+		$(".close-area").click(function() {
+			$("#modal").fadeOut();//attr("style", "display:none");//modal
+		});//click
+		
+		//window.addEventListener("keyup", function() {
+		//	$("#modal").fadeOut();//attr("style", "display:none");//modal
+		//});    ESC누르면 자동으로 나가
+		
+		
 	})//ready
 </script>
 </head>
@@ -113,10 +131,10 @@
 			</thead>
 			<tbody>
 			<tr>
-				<td>1234567</td>
-				<td>sist1234</td>
-				<td>홍길동</td>
-				<td>1995-12-11</td>
+				<td id="ta_num">1234567</td>
+				<td id="ta_id">sist1234</td>
+				<td id="ta_name">홍길동</td>
+				<td id="ta_birth">1995-12-11</td>
 			</tr>
 			<tr>
 				<td>1234567</td>
@@ -162,22 +180,23 @@
 		<div id="modal">
 			<div class="modal_content">
 				<div id="selectTitle">회원관리</div>
+				 <div class="close-area" id="close-area">X</div>
 				<table id="selectTa">
 					<tr>
 						<th>번호</th>
-						<td><input type="text" readonly="readonly" style="background-color: #dfdfdf"></td>
+						<td><input type="text" readonly="readonly" style="background-color: #dfdfdf" id="modal_num"></td>
 					</tr>		
 					<tr>
 						<th>아이디</th>
-						<td><input type="text" readonly="readonly" style="background-color: #dfdfdf"></td>
+						<td><input type="text" readonly="readonly" style="background-color: #dfdfdf" id="modal_id"></td>
 					</tr>		
 					<tr>
 						<th>이름</th>
-						<td><input type="text"></td>
+						<td><input type="text" id="modal_name"></td>
 					</tr>		
 					<tr>
 						<th>생년월일</th>
-						<td><input type="text"></td>
+						<td><input type="text" id="modal_birth"></td>
 					</tr>		
 					<tr>
 						<th>성별</th>
@@ -185,15 +204,15 @@
 					</tr>		
 					<tr>
 						<th>이메일</th>
-						<td><input type="text"></td>
+						<td><input type="text" id="modal_email"></td>
 					</tr>		
 					<tr>
 						<th>연락처</th>
-						<td><input type="text"></td>
+						<td><input type="text" id="modal_phone"></td>
 					</tr>		
 					<tr>
 						<th>가입일</th>
-						<td><input type="text" readonly="readonly" style="background-color: #dfdfdf"></td>
+						<td><input type="text" readonly="readonly" style="background-color: #dfdfdf" id="modal_reg_date"></td>
 					</tr>		
 				</table>
 				<div id="grBtn">
