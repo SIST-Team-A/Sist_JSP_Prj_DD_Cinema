@@ -1,3 +1,7 @@
+
+<%@page import="kr.co.sist.vo.MovieListVO"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.co.sist.dao.SchMovieDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.util.Calendar"%>
@@ -142,10 +146,18 @@
 					<li id ="list3"  class ="test"  value="그놈이다"> 그놈이다 </li>
 					</ul> -->
 					
+					<%
+						SchMovieDAO smDAO = new SchMovieDAO();
+						List<MovieListVO> list = smDAO.selectSchMovie();
+					%>
 					<select id="movieList" multiple class="form-control" style= " height:100%" onchange="movieSelectBox()">
-						<option style = "height : 30px">괴물</option>
-						<option style = "height : 30px">분노의 질주</option>
-						<option style = "height : 30px">그놈이다<option>
+					<%if(list.isEmpty()){ %>
+						<option>영화가 준비중입니다.</option>
+					<%}//end if %>
+					<%for(MovieListVO mlVO : list){ %>
+						<option style = "height : 30px" class="<%=mlVO.getMvNo() %>"><%=mlVO.getMvTitle() %></option>
+					
+					<%}//end for %>
 					</select>
 				</div>
 
@@ -164,7 +176,7 @@
 					   
 					%>
 					<select id = "dateList" multiple class="form-control" style ="height : 100%; text-align :center" onchange="dateSelectBox()">
-						<% for(int i =1; i < 31; i ++){ 
+						<% for(int i =1; i < cal.getMaximum(Calendar.DAY_OF_MONTH); i ++){ 
 							if(i < 10){
 						%> 
  							<option style = "height : 30px" value = "<%=Month %>-0<%=i%>"><%=i %>일</option>
