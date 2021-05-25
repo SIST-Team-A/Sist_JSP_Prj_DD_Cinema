@@ -1,4 +1,4 @@
-package kr.co.sist.vo;
+package vo;
 
 public class ReservationMainVO {
 	private String mvTitle, revNO;

@@ -1,4 +1,4 @@
-package kr.co.sist.vo;
+package vo;
 
 public class SeatRevVO {
 	private String seatName;

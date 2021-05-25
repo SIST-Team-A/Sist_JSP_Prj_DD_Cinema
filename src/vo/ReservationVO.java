@@ -1,4 +1,4 @@
-package kr.co.sist.vo;
+package vo;
 
 import java.util.List;
 
