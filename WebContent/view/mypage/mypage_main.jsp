@@ -8,11 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>마이페이지</title>
     <!-- bootstrap -->
-    <link href="http://localhost/jsp_prj/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://localhost/movie_reservation/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- JQuery CDN(Contents Delivery Network) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<!-- bootstrap -->
-    <script src="http://localhost/jsp_prj/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+    <script src="http://localhost/movie_reservation/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
     
 <style type="text/css">
 	#main {
@@ -46,9 +46,9 @@
 	<div id="title">My page</div>
 	<div id="navibar">
 		<ul class="nav nav-pills">
-		  <li role="presentation" class="active"><a href="http://localhost/movie_reservation/view/mypage/mypage_main.jsp">예매내역</a></li>
-		  <li role="presentation"><a href="#">정보 수정</a></li>
-		  <li role="presentation"><a href="#">비밀번호 변경</a></li>
+		  <li role="presentation"><a	href="mypage_res_detail.jsp">예매내역</a></li>
+		<li role="presentation"><a href="change_infor1.jsp">정보 수정</a></li>
+		<li role="presentation"><a	href="change_pass1.jsp">비밀번호	변경</a></li>
 		</ul>
 	</div>
 	<br/>

@@ -8,11 +8,11 @@ pageEncoding="UTF-8"%>
 <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
      <!-- 부트스트랩 -->
-    <link href="http://localhost/jsp_prj/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://localhost/movie_reservation/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
     <!--  jQuery CDN(contents Delivery Network) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<!--  bootstrap  -->
- 	<script src="http://localhost/jsp_prj/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+ 	<script src="http://localhost/movie_reservation/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
  	
      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"      rel="stylesheet"    />
      
@@ -57,11 +57,9 @@ function home(){
 			<div id="body_head">My page > 비밀번호 변경</div>
 			<div id="navibar">
 				<ul class="nav nav-pills" style="display: table; ">
-					<li role="presentation"><a
-						href="#">예매내역</a></li>
-					<li role="presentation"><a href="http://211.63.89.143/sec_project/change_infor1.jsp">정보 수정</a></li>
-					<li role="presentation"><a	href="http://211.63.89.143/sec_project/change_pass1.jsp">비밀번호
-							변경</a></li>
+					<li role="presentation"><a	href="mypage_res_detail.jsp">예매내역</a></li>
+					<li role="presentation"><a href="change_infor1.jsp">정보 수정</a></li>
+					<li role="presentation"><a	href="change_pass1.jsp">비밀번호	변경</a></li>
 				</ul>
 			</div>
 			<div style ="background-color : #E4E4E4; height : 400px; padding : 20px">
