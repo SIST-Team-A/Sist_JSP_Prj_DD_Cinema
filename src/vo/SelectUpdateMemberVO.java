@@ -1,13 +1,13 @@
 package vo;
 
-public class SelectUpdateMember {
+public class SelectUpdateMemberVO {
 	private String memId, memName, memGender, memBirth, memPhone, memEmail;
 
-	public SelectUpdateMember() {
+	public SelectUpdateMemberVO() {
 		super();
 	}
 
-	public SelectUpdateMember(String memId, String memName, String memGender, String memBirth, String memPhone,
+	public SelectUpdateMemberVO(String memId, String memName, String memGender, String memBirth, String memPhone,
 			String memEmail) {
 		super();
 		this.memId = memId;
