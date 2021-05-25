@@ -1,4 +1,4 @@
-package kr.co.sist.vo;
+package vo;
 
 public class ReservationInsertVO {
 	private String memId, revAdultCnt;

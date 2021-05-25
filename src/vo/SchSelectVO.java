@@ -1,4 +1,4 @@
-package kr.co.sist.vo;
+package vo;
 
 public class SchSelectVO {
 	private String mvNO, mvTitle, schDate, schStime, schEtime;

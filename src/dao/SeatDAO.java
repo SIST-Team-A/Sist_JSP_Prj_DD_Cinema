@@ -1,4 +1,4 @@
-package kr.co.sist.dao;
+package dao;
 
 public class SeatDAO {
 

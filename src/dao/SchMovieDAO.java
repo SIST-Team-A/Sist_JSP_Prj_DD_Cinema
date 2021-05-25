@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vo.MovieListVO;
+import vo.SchMovieDateVO;
 
 
 
@@ -29,14 +30,14 @@ public class SchMovieDAO {
 		ResultSet rs = null;
 		
 		try {
-		//1. Connection ¾ò±â
+		//1. Connection ï¿½ï¿½ï¿½
 			con = dc.getConn();
-		//2. Äõ¸®¹® »ý¼º°´Ã¼ ¾ò±â
+		//2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½
 			
 			String selectQuery = "select  distinct m.mv_title, m.mv_no from sch_movie scm, movie m where scm.mv_no = m.mv_no";
 			pstmt = con.prepareStatement(selectQuery);
-		//3. ¹ÙÀÎµå º¯¼ö¿¡ °ª ÇÒ´ç.
-		//4. Äõ¸®¹® ¼öÇà ÈÄ °á°ú ¾ò±â
+		//3. ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ò´ï¿½.
+		//4. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) { 
@@ -46,7 +47,7 @@ public class SchMovieDAO {
 
 			
 		}finally {
-		//5. ¿¬°á ²÷±â.
+		//5. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 			dc.dbClose(con, pstmt, rs);
 		}//end try~ finally
 		return list;
@@ -64,14 +65,14 @@ public class SchMovieDAO {
 		ResultSet rs = null;
 		
 		try {
-		//1. Connection ¾ò±â
+		//1. Connection ï¿½ï¿½ï¿½
 			con = dc.getConn();
-		//2. Äõ¸®¹® »ý¼º°´Ã¼ ¾ò±â
+		//2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½
 			
 			String selectQuery1 = "select scm.sch_no, scm.sch_date from sch_movie scm, movie m where (scm.mv_no = m.mv_no) and  m.mv_title = "+ mvTitle;
 			pstmt = con.prepareStatement(selectQuery1);
-		//3. ¹ÙÀÎµå º¯¼ö¿¡ °ª ÇÒ´ç.
-		//4. Äõ¸®¹® ¼öÇà ÈÄ °á°ú ¾ò±â
+		//3. ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ò´ï¿½.
+		//4. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) { 
@@ -81,7 +82,7 @@ public class SchMovieDAO {
 
 			
 		}finally {
-		//5. ¿¬°á ²÷±â.
+		//5. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 			dc.dbClose(con, pstmt, rs);
 		}//end try~ finally
 		return smdList;
