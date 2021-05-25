@@ -67,9 +67,9 @@
 			<div id="title">My page</div>
 			<div id="navibar">
 				<ul class="nav nav-pills">
-				  <li role="presentation" class="active"><a href="http://localhost/movie_reservation/view/mypage/mypage_main.jsp">예매내역</a></li>
-				  <li role="presentation"><a href="#">정보 수정</a></li>
-				  <li role="presentation"><a href="#">비밀번호 변경</a></li>
+				 <li role="presentation"><a	href="mypage_res_detail.jsp">예매내역</a></li>
+					<li role="presentation"><a href="change_infor1.jsp">정보 수정</a></li>
+					<li role="presentation"><a	href="change_pass1.jsp">비밀번호	변경</a></li>
 				</ul>
 			</div>
 			<br/>

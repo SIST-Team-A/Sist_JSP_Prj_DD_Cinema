@@ -284,8 +284,8 @@
             <div id="left"></div>
             <div id="title"><a href="">D.D Cinema</a></div>
             <div id="login">
-              <a href="">로그인</a>
-              <a href="">회원가입</a>
+              <a href="http://localhost/movie_reservation/view/login/login.jsp">로그인</a>
+            <a href="http://localhost/movie_reservation/view/login/sign_Up.jsp">회원가입</a>
             </div>
           </div>
           <div id="header-bottom">
