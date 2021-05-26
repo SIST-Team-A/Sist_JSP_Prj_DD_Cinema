@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.DbConnection;
+import vo.SchMovieDateTimeVO;
 import vo.MovieListVO;
 import vo.SchMovieDateVO;
 
@@ -30,14 +32,14 @@ public class SchMovieDAO {
 		ResultSet rs = null;
 		
 		try {
-		//1. Connection ï¿½ï¿½ï¿½
+		//1. Connection ¾ò±â
 			con = dc.getConn();
-		//2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½
+		//2. Äõ¸®¹® »ý¼º°´Ã¼ ¾ò±â
 			
 			String selectQuery = "select  distinct m.mv_title, m.mv_no from sch_movie scm, movie m where scm.mv_no = m.mv_no";
 			pstmt = con.prepareStatement(selectQuery);
-		//3. ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ò´ï¿½.
-		//4. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+		//3. ¹ÙÀÎµå º¯¼ö¿¡ °ª ÇÒ´ç.
+		//4. Äõ¸®¹® ¼öÇà ÈÄ °á°ú ¾ò±â
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) { 
@@ -47,14 +49,14 @@ public class SchMovieDAO {
 
 			
 		}finally {
-		//5. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+		//5. ¿¬°á ²÷±â.
 			dc.dbClose(con, pstmt, rs);
 		}//end try~ finally
 		return list;
 	}//selectSchMovie
 
 	
-	public List<SchMovieDateVO> selectSchDate(String mvTitle) throws SQLException{
+	public List<SchMovieDateVO> selectSchDate(String mvNo) throws SQLException{
 		List<SchMovieDateVO> smdList= new ArrayList<SchMovieDateVO>();
 		SchMovieDateVO smdVO = null;
 		
@@ -65,24 +67,24 @@ public class SchMovieDAO {
 		ResultSet rs = null;
 		
 		try {
-		//1. Connection ï¿½ï¿½ï¿½
+		//1. Connection ¾ò±â
 			con = dc.getConn();
-		//2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½
+		//2. Äõ¸®¹® »ý¼º°´Ã¼ ¾ò±â
 			
-			String selectQuery1 = "select scm.sch_no, scm.sch_date from sch_movie scm, movie m where (scm.mv_no = m.mv_no) and  m.mv_title = "+ mvTitle;
-			pstmt = con.prepareStatement(selectQuery1);
-		//3. ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ò´ï¿½.
-		//4. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+			String selectQuery = "select scm.sch_no,scm.mv_no, scm.sch_date from sch_movie scm, movie m where (scm.mv_no = m.mv_no) and  m.mv_no = '"+ mvNo+"'";
+			pstmt = con.prepareStatement(selectQuery);
+		//3. ¹ÙÀÎµå º¯¼ö¿¡ °ª ÇÒ´ç.
+		//4. Äõ¸®¹® ¼öÇà ÈÄ °á°ú ¾ò±â
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) { 
-				smdVO = new SchMovieDateVO(rs.getString("sch_no"), rs.getString("sch_date"));
+				smdVO = new SchMovieDateVO(rs.getString("sch_no"),rs.getString("mv_no") ,rs.getString("sch_date"));
 				smdList.add(smdVO);
 			}//end while
 
 			
 		}finally {
-		//5. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+		//5. ¿¬°á ²÷±â.
 			dc.dbClose(con, pstmt, rs);
 		}//end try~ finally
 		return smdList;
@@ -90,4 +92,39 @@ public class SchMovieDAO {
 		
 	}//selectSchDate
 	
+	
+	public List<SchMovieDateTimeVO> selectSchTime(String schNo) throws SQLException{
+		List<SchMovieDateTimeVO> smdtList= new ArrayList<SchMovieDateTimeVO>();
+		SchMovieDateTimeVO smdtVO = null;
+		
+		DbConnection dc = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+		//1. Connection ¾ò±â
+			con = dc.getConn();
+		//2. Äõ¸®¹® »ý¼º°´Ã¼ ¾ò±â
+			
+			String selectQuery = "select  m.mv_title, scm.sch_date, scm.sch_stime from sch_movie scm, movie m where (scm.mv_no = m.mv_no) and scm.sch_no = '"+schNo+"'";
+			pstmt = con.prepareStatement(selectQuery);
+		//3. ¹ÙÀÎµå º¯¼ö¿¡ °ª ÇÒ´ç.
+		//4. Äõ¸®¹® ¼öÇà ÈÄ °á°ú ¾ò±â
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) { 
+				smdtVO = new SchMovieDateTimeVO(rs.getString("mv_title"),rs.getString("sch_date") ,rs.getString("sch_stime"));
+				smdtList.add(smdtVO);
+			}//end while
+
+			
+		}finally {
+		//5. ¿¬°á ²÷±â.
+			dc.dbClose(con, pstmt, rs);
+		}//end try~ finally
+		return smdtList;
+		
+	}
 }//class

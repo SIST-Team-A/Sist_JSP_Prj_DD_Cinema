@@ -1,3 +1,6 @@
+<%@page import="vo.SeatVO"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.SeatDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -72,18 +75,71 @@ input, select, textarea, button {
 	#reservationBtn {width : 150px; height: 50px; background-color: #333333 ; color : #FFFFFF}
 
 </style>
+
+
+
+<%
+	String movie = request.getParameter("movie");
+	String date = request.getParameter("date");
+	String time = request.getParameter("time");
+
+
+
+	SeatDAO sDAO = new SeatDAO();
+	List<SeatVO> sList = sDAO.seatAvailability(movie, date, time);
+	String[] test1 = new String[sList.size()];
+	SeatVO sVO = new SeatVO();
+	
+	for(int i = 0 ; i < sList.size(); i ++){
+		sVO = sList.get(i);
+		test1[i] = sVO.getSeatName();
+	}
+%>
+	
 <script type="text/javascript">
 
+
 	$(function(){
+	 var arr=new Array();
+	 var seat = new Array();
+	 
+	 
+	 <% for( int i= 0 ; i < test1.length ; i++){%>
+	 	arr[<%= i %>]="<%= test1[i]%>"
+		
+	 <% }%>
+	  
+		
+		for( var i = 0; i <arr.length; i ++){
+			 $(".seatBtn").each(function(i, seat1){
+				seat[i]=$(seat1).val();
+			});//each
+			for( var j = 0; j <seat.length; j ++){
+					
+				if(arr[i] ==  seat[j]){
+					//if(arr[i] == $(".seatBtn").val()){
+						$("#"+arr[i]).css("background-color","#000000");
+						$("#"+arr[i]).val("");
+						document.getElementById(arr[i]).disabled = true;
+						
+					//	}
+				}//end if
+			}//end for
+		}//end for
+		
+		
+		
 		cnt = $("#cntInput").val();
 		$("#plusBtn").click(function(){
-			
 			cnt ++;
 			if( cnt >4){
 				alert("인원선택은 총 4명까지 가능합니다.");
 				return;
 			}
 			$("#cntInput").val(cnt);
+			
+			
+			
 			
 		});//click
 		
@@ -109,13 +165,15 @@ input, select, textarea, button {
 		});//click
 	
 		
-		seat = new Array();
+		
 		$(".seatBtn").click(function(event){
 			
 			if(($(event.target).attr("class"))!="선택됨"){
 			
 				$(event.target).css("background-color","#7B68EE");
 				$(event.target).removeClass($(event.target).attr("class")).addClass("선택됨");
+				document.getElementById($(event.target).val()).setAttribute('name','selectSeat');
+
 				seat.push($(event.target).val());
 
 				if(!(cnt >= $(".선택됨").length)){
@@ -123,6 +181,7 @@ input, select, textarea, button {
 					alert("인원수와 선택한좌석이 일치하지 않습니다.");
 					$(event.target).removeClass($(event.target).attr("class")).addClass("seatBtn");
 					$(event.target).css("background-color","#efefef");
+					document.getElementById($(event.target).val()).setAttribute('name','');
 					var idx = seat.indexOf($(event.target).val());
 					seat.splice(idx,1);
 				}//end if
@@ -131,13 +190,12 @@ input, select, textarea, button {
 			}else{
 				$(event.target).removeClass($(event.target).attr("class")).addClass("seatBtn");
 				$(event.target).css("background-color","#efefef");
+				document.getElementById($(event.target).val()).setAttribute('name','');
 				var idx = seat.indexOf($(event.target).val());
 				seat.splice(idx,1);
 			
 				
 			}//end if else
-			
-			
 		});
 		
 		$("#reservationBtn").click(function(){
@@ -149,13 +207,15 @@ input, select, textarea, button {
 					alert("인원수를 다시설정해주세요");	
 					return;
 				}//end if
-				location.href = "resultReservation.jsp";
+				document.getElementById("frm").setAttribute('action','resultReservation.jsp');
+				$("#frm").submit();
 			}
 		});//click
 		
-	
-	
+
 	});//ready
+	
+	
 	
 	function back(){
 		console.log(seat)
@@ -185,39 +245,40 @@ input, select, textarea, button {
 				 		</div>
 				 	<!-- 영화 스크린 정보 표시/div -->
 				 	 <!-- 영화 좌석 버튼 div -->
+				 	 <form action = "" id = "frm" method = "get">
 				 		<div >
 				 			<table id="tableSeat">
 				 				<tr>
 				 					<td>
 				 						<%for ( int i =1; i < 4; i ++) {%>
-				 						<input type = "button" class = "seatBtn" value = "A-<%=i %>" > 
+				 						<input type = "button" name ="" class = "seatBtn" id ="A-<%=i %>" value = "A-<%=i %>" > 
 				 						<%}//end for %>
 				 					</td>
 				 					<td style ="padding-left : 30px">
 				 						<%for ( int i =4; i < 8; i ++) {%>
-				 						<input type = "button"  class = "seatBtn" value = "A-<%=i %>" > 
+				 						<input type = "button"  name ="" class = "seatBtn" id ="A-<%=i %>" value = "A-<%=i %>" > 
 				 						<%}//end for %>
 				 					</td>
 				 					<td>
 				 						<%for ( int i =8; i < 11; i ++) {%>
-				 						<input type = "button" class = "seatBtn" value = "A-<%=i %>" > 
+				 						<input type = "button"name =""  class = "seatBtn"id ="A-<%=i %>"  value = "A-<%=i %>" > 
 				 						<%}//end for %>
 				 					</td>
 				 				</tr>
 				 				<tr>
 				 					<td>
 				 						<%for ( int i =11; i < 14; i ++) {%>
-				 						<input type = "button" class = "seatBtn" value = "A-<%=i %>" >
+				 						<input type = "button" name ="" class = "seatBtn" id ="A-<%=i %>" value = "A-<%=i %>" >
 				 						<%}//end for %>
 				 					</td>				 					
 				 					<td style ="padding-left : 30px">
 				 						<%for ( int i =14; i < 18; i ++) {%>
-				 						<input type = "button" class = "seatBtn" value = "A-<%=i %>" >
+				 						<input type = "button" name ="" class = "seatBtn"id ="A-<%=i %>"  value = "A-<%=i %>" >
 				 						<%}//end for %>
 				 					</td>				 					
 				 					<td>
 				 						<%for ( int i =18; i < 21; i ++) {%>
-				 						<input type = "button" class = "seatBtn" value = "A-<%=i %>" > 
+				 						<input type = "button" name ="" class = "seatBtn" id ="A-<%=i %>"value = "A-<%=i %>" > 
 				 						<%}//end for %>
 				 					</td>				 					
 				 				</tr>
@@ -229,7 +290,7 @@ input, select, textarea, button {
 				 			</table>
 				 		</div>
 				 	<!-- 영화 좌석버튼 /div -->
-				 		
+				 	</form>
 				 </div>
 				 
 				<!--  좌석선택  /div -->
