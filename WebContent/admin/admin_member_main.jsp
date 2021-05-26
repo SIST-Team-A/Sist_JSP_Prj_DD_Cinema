@@ -86,7 +86,19 @@
 			}); 
 			 */
 			
-			$("#modal").attr("style", "display:block");//modal
+			 var num= $("#ta_num").text();
+			 $("#modal_num").val(num);
+			 
+			 var id= $("#ta_id").text();
+			 $("#modal_id").val(id);
+			 
+			 var name= $("#ta_name").text();
+			 $("#modal_name").val(name);
+			 
+			 var birth= $("#ta_birth").text();
+			 $("#modal_birth").val(birth);
+			 
+			$("#modal").fadeIn();//attr("style", "display:block");//modal
 		});//click
 		
 		
@@ -132,7 +144,7 @@
 			<tbody>
 			<tr>
 				<td id="ta_num">1234567</td>
-				<td id="ta_id">sist1234</td>
+				<td id="ta_id" >sist1234</td>
 				<td id="ta_name">홍길동</td>
 				<td id="ta_birth">1995-12-11</td>
 			</tr>
@@ -184,7 +196,7 @@
 				<table id="selectTa">
 					<tr>
 						<th>번호</th>
-						<td><input type="text" readonly="readonly" style="background-color: #dfdfdf" id="modal_num"></td>
+						<td><input type="text" readonly="readonly" style="background-color: #dfdfdf" id="modal_num" value=""></td>
 					</tr>		
 					<tr>
 						<th>아이디</th>

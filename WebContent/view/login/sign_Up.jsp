@@ -1,5 +1,33 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="dao.MemberDAO"%>
+<%@page import="vo.InsertMemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+	
+	<%	
+	request.setCharacterEncoding("UTF-8");
+	String Id = request.getParameter("Id");
+	String Pass = request.getParameter("Pass");
+	String Name = request.getParameter("Name");
+	String Gender = request.getParameter("Gender");
+	String Birth = request.getParameter("Birth");
+	String Phone = request.getParameter("Phone");
+	String EmailId = request.getParameter("EmailId");
+	String Domain = request.getParameter("Domain");
+	
+	String email = EmailId+"@"+Domain;
+	
+	InsertMemberVO imVO=new InsertMemberVO(Id, Pass, Name, Gender, Birth,Phone,email);
+	
+	MemberDAO mDAO = new MemberDAO();
+	try{
+		mDAO.insertMember(imVO);
+	}catch(SQLException se){
+		se.printStackTrace();
+	}
+	
+	%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,29 +69,28 @@ function signup(){
 		}else if(obj.Name.value==""){
 			alert("이름 필수입력");
 			obj.Name.focus();
-		}else	if(obj.Birth.value==""){
+		}else if(obj.Birth.value==""){
 			alert("생일 필수입력");
 			obj.Birth.focus();
-		}else	if(obj.Phone.value==""){
+		}else if(obj.Phone.value==""){
 			alert("폰번호 필수입력");
 			obj.Phone.focus();
-		}else if(obj.Email.value==""){
+		}else if(obj.EmailId.value==""){
 			alert("이메일 필수입력");
-			obj.Email.focus();
-		}else	if(obj.gender.value==""){
+			obj.EmailId.focus();
+		}else if(obj.Gender.value==""){
 			alert("성별 필수입력");
-			obj.gender.focus();
+			obj.Gender.focus();
 		}else{
-			alert("회원가입을 완료 하였습니다.");
-			location.href="login.jsp" ;
+			$("#frm").submit();
 		}
-};
+	};
 </script>
 </head>
 <body>
 		<div id="wrap">
 		<%@ include file="../header.jsp" %>
-		 <form action="#" name = "frm">
+		 <form action="sign_Up.jsp" name = "frm" method = "post" id="frm">
 		<div id ="main">
 				<h3>
 					<strong>인증 정보입력 </strong>
@@ -89,8 +116,8 @@ function signup(){
 					</tr>
 					<tr>
 						<td>성별</td>
-						<td><input type="radio" name="gender" value="M"
-							checked="checked" />남자 <input type="radio" name="gender"
+						<td><input type="radio" name="Gender" value="M"
+							checked="checked" />남자 <input type="radio" name="Gender"
 							value="F" />여자</td>
 					</tr>
 					<tr>
@@ -103,8 +130,8 @@ function signup(){
 					</tr>
 					<tr>
 						<td>이메일</td>
-						<td style="width: 500px"><input type="text" name="Email"
-							placeholder="이메일" /> @ <select name="domain" size="1">
+						<td style="width: 500px"><input type="text" name="EmailId"
+							placeholder="이메일" /> @ <select name="Domain" size="1">
 								<option value="daum.net">다음</option>
 								<option value="naver.com">네이버</option>
 								<option value="google.com">지메일</option>
@@ -124,3 +151,5 @@ function signup(){
 		</div>
 </body>
 </html>
+
+	
