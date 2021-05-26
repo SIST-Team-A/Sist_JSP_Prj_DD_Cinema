@@ -15,48 +15,40 @@
     <style>   
     </style>
     <script>
- window.onload=function(){
-    const modal = document.getElementById("modal")
-    
-    function modalOn() {
-        modal.style.display = "flex";
-    }
-    
-    function modalOff() {
-        modal.style.display = "none"
-    }    
-    
-    $("#table tbody tr").click(function(){ //테이블 클릭시 모달 on
-    	modalOn();
-    	$("#modal-add").hide();  	
-    	$("#modal-motify").show();  	
-    	$("#modal-del").show();  	
-    	$("#modal-cencel").show();  	
-    });
-    
-    $("#addBtn").click(function(){ //추가버튼 누를시 모달 on
-    	modalOn();
-    	$("#modal-add").show();  	
-    	$("#modal-motify").hide();  	
-    	$("#modal-del").hide();  	
-    	$("#modal-cencel").show();  		
-    });
-    
-    $("#modal-cencel").click(function(){
-    	modalOff();
-    });
-      
-    window.addEventListener("keyup", e => { //esc누르면 모달창 끔
-    if(modal.style.display === "flex" && e.key === "Escape") {
-    	modalOff();
-    }
-    
-});
-    const closeBtn = document.getElementById("close-area") //x표누르면 모달창 끔
-    closeBtn.addEventListener("click", e => {
-    	modalOff();
-    });    
-   
+    window.onload=function(){
+        const modal = document.getElementById("modal")
+        
+        function modalOn() {
+            modal.style.display = "flex"; //modal의 style의 display를 flex로 변경
+        }
+        
+        function modalOff() {
+            modal.style.display = "none"
+        }
+          
+        $("#table tbody tr").click(function(){ //테이블 클릭시 모달 on    	
+        	modalOn();
+        	$("#modal-add").hide();  	
+        	$("#modal-motify").show();  	
+        	$("#modal-del").show();  	
+        	$("#modal-cencel").show();  	
+        });
+        
+        $("#addBtn").click(function(){ //추가버튼 누를시 모달 on
+        	modalOn();
+        	$("#modal-add").show();  	
+        	$("#modal-motify").hide();  	
+        	$("#modal-del").hide();  	
+        	$("#modal-cencel").show();  		
+        });
+        
+        $("#modal-cencel").click(function(){ //취소버튼 누를시 모달 off
+        	modalOff();
+        });
+        
+        $("#close-area").click(function(){ // X누르면 모달 off
+        	modalOff();
+        }); 
  };    
     </script>
   </head>
@@ -245,18 +237,18 @@
             </tr>
             <tr>
               <td class="td-first">개봉여부</td>
-              <td class="td-second" style="font-size:15px"><input type="radio" name="modal-radio" />개봉&emsp;<input type="radio" name="modal-radio"/>미개봉&emsp;<input type="radio" name="modal-radio"/>상영종료&emsp;</td>
-              
-            </tr>
-          
-				<tr>           
-				   <td colspan="2" id="modal-bottom-btn">
-				   <input type="button" value="추가하기 "  id="modal-add" style="border:0px"/>&emsp;
-				   <input type="button" value="수정하기 "  id="modal-motify" style="border:0px"/>&emsp;
-				   <input type="button" value="삭제하기"   id="modal-del" style="border:0px"/>&emsp;
-				   <input type="button" value="취소" id="modal-cencel" style="border:0px"/>&emsp;
-				   </td>
-				</tr>
+              <td class="td-second" style="font-size:15px">
+              <input type="radio" name="modal-radio" />개봉&emsp;<input type="radio" name="modal-radio"/>미개봉&nbsp;<input type="radio" name="modal-radio"/>상영종료
+              </td>             
+            </tr>      
+<tr>            
+   <td colspan="2" id="modal-bottom-btn">
+   <input type="button" value="추가"  id="modal-add" style="border:0px"/>
+   <input type="button" value="수정 "  id="modal-motify" style="border:0px"/>
+   <input type="button" value="삭제"   id="modal-del" style="border:0px"/>
+   <input type="button" value="취소" id="modal-cencel" style="border:0px"/>
+   </td>
+</tr>           
             
               </table> 
             </div>
@@ -264,23 +256,4 @@
     </div>
     
   </body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
+</html>   
