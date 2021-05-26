@@ -7,11 +7,11 @@ public class InsertMemberVO {
 		super();
 	}
 
-	public InsertMemberVO(String memId, String memPss, String memName, String memGender, String memBirth,
+	public InsertMemberVO(String memId, String memPass, String memName, String memGender, String memBirth,
 			String memPhone, String memEmail) {
 		super();
 		this.memId = memId;
-		this.memPass = memPss;
+		this.memPass = memPass;
 		this.memName = memName;
 		this.memGender = memGender;
 		this.memBirth = memBirth;
@@ -31,8 +31,8 @@ public class InsertMemberVO {
 		return memPass;
 	}
 
-	public void setMemPss(String memPss) {
-		this.memPass = memPss;
+	public void setMemPss(String memPass) {
+		this.memPass = memPass;
 	}
 
 	public String getMemName() {
@@ -74,8 +74,6 @@ public class InsertMemberVO {
 	public void setMemEmail(String memEmail) {
 		this.memEmail = memEmail;
 	}
-	
-	
 	
 	
 	
