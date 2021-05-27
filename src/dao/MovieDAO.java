@@ -44,8 +44,8 @@ public class MovieDAO {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, OpenOrNot);
 			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				list.add(new MovieMainVO(rs.getString("mv_no"),rs.getString("mv_poster")));
+			while (rs.next()) {
+				list.add(new MovieMainVO(rs.getString("mv_no"), rs.getString("mv_poster")));
 			}
 		} finally {
 			dc.dbClose(con, pstmt, null);
@@ -64,16 +64,27 @@ public class MovieDAO {
 		MovieSelectVO msVO = null;
 		DbConnection dc = DbConnection.getInstance();
 		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = null;
 
 		try {
 			con = dc.getConn();
+			query = "select mv_title,mv_poster,mv_director,mv_opendate,mv_st,mv_trailer,mv_runtime from movie where mv_no=?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, mvNo);
+			rs = pstmt.executeQuery();
+			rs.next();
+			msVO = new MovieSelectVO(rs.getString("mv_title"), rs.getString("mv_poster"), rs.getString("mv_director"),
+					rs.getString("mv_opendate"), rs.getString("mv_st"), rs.getString("mv_trailer"),
+					rs.getString("mv_runtime"), null);
 		} finally {
-			dc.dbClose(con, null, null);
+			dc.dbClose(con, pstmt, rs);
 		}
 
 		return msVO;
 	}
-	
+
 //	public static void main(String[] args) {
 //		MovieDAO mDAO = MovieDAO.getInstance();
 //		try {
