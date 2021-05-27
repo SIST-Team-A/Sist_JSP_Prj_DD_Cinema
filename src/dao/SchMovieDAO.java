@@ -7,80 +7,115 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.DbConnection;
+import vo.SchMovieDateTimeVO;
 import vo.MovieListVO;
 import vo.SchMovieDateVO;
 
-
 public class SchMovieDAO {
 
-	
 	public SchMovieDAO() {
-		
-	}//SchMovieDAO
-	
-	public List<MovieListVO> selectSchMovie() throws SQLException{
-		List<MovieListVO> list= new ArrayList<MovieListVO>();
+
+	}// SchMovieDAO
+
+	public List<MovieListVO> selectSchMovie() throws SQLException {
+		List<MovieListVO> list = new ArrayList<MovieListVO>();
 		MovieListVO mlVO = null;
-		
+
 		DbConnection dc = DbConnection.getInstance();
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
-		//1. Connection 占쏙옙占�
+			// 1. Connection ���
 			con = dc.getConn();
-		//2. 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙체 占쏙옙占�
-			
+			// 2. ������ ������ü ���
+
 			String selectQuery = "select  distinct m.mv_title, m.mv_no from sch_movie scm, movie m where scm.mv_no = m.mv_no";
 			pstmt = con.prepareStatement(selectQuery);
-		//3. 占쏙옙占싸듸옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占쌀댐옙.
-		//4. 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙 占쏙옙占� 占쏙옙占�
+			// 3. ���ε� ������ �� �Ҵ�.
+			// 4. ������ ���� �� ��� ���
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) { 
+
+			while (rs.next()) {
 				mlVO = new MovieListVO(rs.getString("mv_title"), rs.getString("mv_no"));
 				list.add(mlVO);
-			}//end while
+			} // end while
 
-			
-		}finally {
-		//5. 占쏙옙占쏙옙 占쏙옙占쏙옙.
+		} finally {
+			// 5. ���� ����.
 			dc.dbClose(con, pstmt, rs);
-		}//end try~ finally
+		} // end try~ finally
 		return list;
-	}//selectSchMovie
+	}// selectSchMovie
 
-	
-	public List<SchMovieDateVO> selectSchDate(String mvTitle) throws SQLException{
-		List<SchMovieDateVO> smdList= new ArrayList<SchMovieDateVO>();
+	public List<SchMovieDateVO> selectSchDate(String mvNo) throws SQLException {
+		List<SchMovieDateVO> smdList = new ArrayList<SchMovieDateVO>();
 		SchMovieDateVO smdVO = null;
-		
+
 		DbConnection dc = DbConnection.getInstance();
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
-		//1. Connection 占쏙옙占�
+			// 1. Connection ���
 			con = dc.getConn();
-		//2. 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙체 占쏙옙占�
-			String selectQuery1 = "select scm.sch_no, scm.sch_date from sch_movie scm, movie m where (scm.mv_no = m.mv_no) and  m.mv_title = "+ mvTitle;
-			pstmt = con.prepareStatement(selectQuery1);
-		//3. 占쏙옙占싸듸옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占쌀댐옙.
-		//4. 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙 占쏙옙占� 占쏙옙占�
+			// 2. ������ ������ü ���
+
+			String selectQuery = "select scm.sch_no,scm.mv_no, scm.sch_date from sch_movie scm, movie m where (scm.mv_no = m.mv_no) and  m.mv_no = '"
+					+ mvNo + "'";
+			pstmt = con.prepareStatement(selectQuery);
+			// 3. ���ε� ������ �� �Ҵ�.
+			// 4. ������ ���� �� ��� ���
 			rs = pstmt.executeQuery();
-			while(rs.next()) { 
-				smdVO = new SchMovieDateVO(rs.getString("sch_no"), rs.getString("sch_date"));
+			while (rs.next()) {
+				smdVO = new SchMovieDateVO(rs.getString("sch_no"), rs.getString("mv_no"), rs.getString("sch_date"));
 				smdList.add(smdVO);
-			}//end while
-		}finally {
-		//5. 占쏙옙占쏙옙 占쏙옙占쏙옙.
+			} // end while
+		} finally {
+			// 5. ���� ����.
 			dc.dbClose(con, pstmt, rs);
-		}//end try~ finally
+		} // end try~ finally
 		return smdList;
-	}//selectSchDate
-	
-}//class
+	}// selectSchDate
+
+	public List<SchMovieDateTimeVO> selectSchTime(String schNo) throws SQLException {
+		List<SchMovieDateTimeVO> smdtList = new ArrayList<SchMovieDateTimeVO>();
+		SchMovieDateTimeVO smdtVO = null;
+
+		DbConnection dc = DbConnection.getInstance();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			// 1. Connection ���
+			con = dc.getConn();
+			// 2. ������ ������ü ���
+
+			String selectQuery = "select  m.mv_title, scm.sch_date, scm.sch_stime from sch_movie scm, movie m where (scm.mv_no = m.mv_no) and scm.sch_no = '"
+					+ schNo + "'";
+			pstmt = con.prepareStatement(selectQuery);
+			// 3. ���ε� ������ �� �Ҵ�.
+			// 4. ������ ���� �� ��� ���
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				smdtVO = new SchMovieDateTimeVO(rs.getString("mv_title"), rs.getString("sch_date"),
+						rs.getString("sch_stime"));
+				smdtList.add(smdtVO);
+			} // end while
+
+		} finally {
+			// 5. ���� ����.
+			dc.dbClose(con, pstmt, rs);
+		} // end try~ finally
+		return smdtList;
+
+	}
+}// class
