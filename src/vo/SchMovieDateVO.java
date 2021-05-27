@@ -1,15 +1,16 @@
 package vo;
 
 public class SchMovieDateVO {
-	private String schNo, schDate;
+	private String schNo,mvNo, schDate;
 
 	public SchMovieDateVO() {
 		super();
 	}
 
-	public SchMovieDateVO(String schNo, String schDate) {
+	public SchMovieDateVO(String schNo, String mvNo, String schDate) {
 		super();
 		this.schNo = schNo;
+		this.mvNo = mvNo;
 		this.schDate = schDate;
 	}
 
@@ -17,8 +18,15 @@ public class SchMovieDateVO {
 		return schNo;
 	}
 
-	public void setSchNo(String schNo) {
-		this.schNo = schNo;
+	public void setSchNo(String mvNo) {
+		this.mvNo = schNo;
+	}
+	public String getMvNo() {
+		return mvNo;
+	}
+	
+	public void setMvNo(String mvNo) {
+		this.mvNo = mvNo;
 	}
 
 	public String getSchDate() {
