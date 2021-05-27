@@ -5,13 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 /**
- * DBCP¸¦ »ç¿ëÇÏ¿© DBConnectionÀ» ¾ò´Â ÀÏ.
+ * DBCPë¥¼ ì‚¬ìš©í•˜ì—¬ DBConnectionì„ ì–»ëŠ” ì¼.
  * @author jin
  */
 public class DbConnection {
@@ -33,11 +32,11 @@ public class DbConnection {
 		Connection con = null;
 		
 		try {
-		//1. JNDI»ç¿ë°´Ã¼ »ı¼º
-		Context ctx = new InitialContext();
-		//2. DBCP¿¡¼­ DB¿Í ¿¬°áÇÏ°í ÀÖ´Â °´Ã¼ ¾ò±â
+		//1. JNDIì‚¬ìš©ê°ì²´ ìƒì„±
+		InitialContext ctx = new InitialContext();
+		//2. DBCPì—ì„œ DBì™€ ì—°ê²°í•˜ê³  ìˆëŠ” ê°ì²´ ì–»ê¸°
 		DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/dbcp");
-		//3. DBCP¿¡¼­ ¿¬°áÇÏ°í ÀÖ´Â °´Ã¼·Î ºÎÅÍ Connection ¾ò±â
+		//3. DBCPì—ì„œ ì—°ê²°í•˜ê³  ìˆëŠ” ê°ì²´ë¡œ ë¶€í„° Connection ì–»ê¸°
 		con = ds.getConnection();
 		}catch(NamingException	ne) {
 			ne.printStackTrace();
