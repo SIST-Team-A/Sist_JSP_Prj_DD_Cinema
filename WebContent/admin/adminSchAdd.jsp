@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="dao.AdminSchMovieDAO"%>
+<%@page import="vo.AdminMovieListVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -30,8 +33,7 @@
  <!-- timepicker -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
    
-   
-<style type="text/css">
+   <style type="text/css">
 
 	
 
@@ -49,16 +51,32 @@
 }
        
 </style>
+
+<%
+	AdminSchMovieDAO asmDAO = new AdminSchMovieDAO();
+	List<AdminMovieListVO> amlList = asmDAO.selectSchMovieAll();
+	
+%>
 	<script type="text/javascript">
 	
+	 
 		function adminMovieList(){ //영화목록 onchange함수
 			schMovieList = $("#adminMovieList option:selected").val();//영화목록에서 선택한 항목을 schMovieList에 저장
 
 			$("#titleMovie").val(schMovieList);
+			
+			<% for ( AdminMovieListVO amlVO : amlList){%>
+					if("<%=amlVO.getMvTitle().replace(":","").replace(" ","")%>" == schMovieList.replace(":","").replace(" ","")){
+						$("#startMovie").val("<%=amlVO.getMvOpenDate()%>");
+					}//end if
+			<%}//end for%>
+			
+			
 		}//adminMovieList
 	
 	
 		$(function(){
+		 
 
 			    $( ".datepicker" ).datepicker({
 			     /*  showOn: "button",
@@ -87,22 +105,58 @@
 			    });
 			    
 			    
+			   
+			    
+			    
+			    
 			    
 			    $("#addBtn").click(function(){
-			    	alert("추가되었습니다.")
-			    	location.href = "adminSchMain.jsp"
+			    	
+			    	var startMovie = $("#startMovie").val().substring(5,7) * 30 + $("#startMovie").val().substring(8,10) ;
+			    	var endMovie = $("#endMovie").val().substring(5,7)* 30 + $("#endMovie").val().substring(8,10);
+			        var  dateMovie = $("#dateMovie").val().substring(5,7)* 30 + $("#dateMovie").val().substring(8,10);
+	    			var sTime = $("#sTime").val().substring(0,2) * 60 + $("#sTime").val().substring(3,5);
+	    			var eTime = $("#eTime").val().substring(0,2) * 60 + $("#eTime").val().substring(3,5);
+			        //개봉일보다 상영종료일이 더 앞선 날짜일경우
+			
+			        if( startMovie > endMovie){
+			        	alert("개봉일보다 상영종료일이 먼저일수는 없습니다.");
+			        	$("#endMovie").val("");
+			        	return;
+			        	
+			        }else if(!(startMovie <= dateMovie && endMovie >= dateMovie)){
+			        	alert("상영일은 개봉일과 상영종료일 사이여야합니다.");
+			        	$("#dateMovie").val("");
+			        	return;
+			    	}else if(sTime >= eTime){
+			        	alert("상영시간을 확인해 주세요");
+			        	$("#eTime").val("09:00");
+			        	return;
+			    		
+			    	}else{
+					   	$("#frm").submit();
+					    alert("추가되었습니다.")
+			    	}//end if~else
+						
+						
+						
 			    });
 		});//ready
 		
 		
 		
-		
+/* 	
+	    	
+		 */
+
 		
 		
 		
 	</script>
 	
 </head>
+
+
 <body>
 
 	<div id="wrap" >
@@ -122,39 +176,40 @@
 					<strong>영화목록</strong>
 				</div>
 					<select id="adminMovieList" multiple class="form-control" style = "height : 90%"  onchange="adminMovieList()">
-						<option>1</option>
-						<option>2</option>
-						<option>3</option>
-						<option>4</option>
-						<option>5</option>
+						<%for (AdminMovieListVO amlVO : amlList){ %>
+						<option id = "<%=amlVO.getMvNo()%>"> <%= amlVO.getMvTitle()%></option>
+						<%} %>
+						
 					</select>
 				</div>
 				<!-- 테이블 -->
+			<form action = "adminSchMain.jsp" id ="frm" method="post">
 				<div style="float :left; width : 400px; height : 450px; padding-left : 20px">
 					<table style = "width : 90%; height : 100%; ">
 						<tr>
 							<td>영화제목</td>
-							<td><input type ="text" id="titleMovie"  readonly="readonly" class="inputBox" style = "background-color :#dfdfdf" ></td>
+							<td><input type ="text" id="titleMovie"  name ="titleMovie" readonly="readonly" class="inputBox" style = "background-color :#dfdfdf ;width :240px" ></td>
 						</tr>
 						<tr>
 							<td>개봉일</td>
-							<td><input type ="text" id="startMovie" readonly="readonly" style = "background-color :#dfdfdf"> <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></td>
+							<td><input type ="text" id="startMovie" name = "startMovie"readonly="readonly" style = "background-color :#dfdfdf"> <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></td>
 						</tr>
 						<tr>
 							<td>상영종료일</td>
-							<td><input type ="text" id = "endMovie"class="datepicker" > <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></td>
+							<td><input type ="text" id = "endMovie" name = "endMovie"class="datepicker" > <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></td>
 						</tr>
 						<tr>
 							<td>상영일</td>
-							<td> <input type ="text" id = "dateMovie"class="datepicker"> <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></td>
+							<td> <input type ="text" id = "dateMovie" name = "dateMovie"class="datepicker"> <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></td>
 						</tr>
 						<tr>
 							<td>상영시간</td>
-							<td> <input type ="text" class="timepicker"  id="sTime" style ="width  :100px;" > ~ <input type = "text" id="eTime"class="timepicker"  style ="width  :100px; "></td>
+							<td> <input type ="text" class="timepicker"  id="sTime" name ="sTime"style ="width  :100px;" > ~ <input type = "text" id="eTime" name="eTime"class="timepicker"  style ="width  :100px; "></td>
 						</tr>
 					
 					</table>
 				</div>
+			</form>
 				
 			</div>
 			<div >
@@ -169,3 +224,4 @@
 
 </body>
 </html>
+
