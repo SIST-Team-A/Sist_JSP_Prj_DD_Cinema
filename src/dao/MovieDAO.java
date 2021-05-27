@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import vo.ActorVO;
 import vo.MovieMainVO;
 import vo.MovieSelectVO;
 
@@ -48,7 +50,7 @@ public class MovieDAO {
 				list.add(new MovieMainVO(rs.getString("mv_no"), rs.getString("mv_poster")));
 			}
 		} finally {
-			dc.dbClose(con, pstmt, null);
+			dc.dbClose(con, pstmt, rs);
 		}
 
 		return list;
@@ -77,13 +79,40 @@ public class MovieDAO {
 			rs.next();
 			msVO = new MovieSelectVO(rs.getString("mv_title"), rs.getString("mv_poster"), rs.getString("mv_director"),
 					rs.getString("mv_opendate"), rs.getString("mv_st"), rs.getString("mv_trailer"),
-					rs.getString("mv_runtime"), null);
+					rs.getString("mv_runtime"), selectActor(mvNo));
 		} finally {
 			dc.dbClose(con, pstmt, rs);
 		}
 
 		return msVO;
 	}
+	
+	public List<ActorVO> selectActor(String mvNo) throws SQLException {
+		MovieSelectVO msVO = null;
+		DbConnection dc = DbConnection.getInstance();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = null;
+		List<ActorVO> list = new ArrayList<ActorVO>();
+		
+		try {
+			con = dc.getConn();
+			query = "select * from actor where mv_no = ?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, mvNo);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+			list.add(new ActorVO(rs.getString("act_name"),rs.getString("act_mainorsub")));
+			}
+		} finally {
+			dc.dbClose(con, pstmt, rs);
+		}
+		
+		return list;
+	}
+	
+	
 
 //	public static void main(String[] args) {
 //		MovieDAO mDAO = MovieDAO.getInstance();
