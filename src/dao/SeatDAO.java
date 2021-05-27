@@ -12,40 +12,39 @@ import vo.SeatVO;
 public class SeatDAO {
 
 	public SeatDAO() {
-		
-	}//SeatDAO
-	
-	public List<SeatVO> seatAvailability(String movie, String date, String time) throws SQLException{
-		List<SeatVO> slist= new ArrayList<SeatVO>();
-		
+
+	}// SeatDAO
+
+	public List<SeatVO> seatAvailability(String movie, String date, String time) throws SQLException {
+		List<SeatVO> slist = new ArrayList<SeatVO>();
+
 		DbConnection dc = DbConnection.getInstance();
-		
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
-		try {
-		//1. Connection ¾ò±â
-			con = dc.getConn();
-		//2. Äõ¸®¹® »ý¼º°´Ã¼ ¾ò±â
-			
-			String selectQuery = "select s.seat_name, s.seat_tf from seat s, movie m, sch_movie sm where (s.sch_no = sm.sch_no and sm.mv_no = m.mv_no) and m.mv_title ='"+movie+"'and sm.sch_date ='"+date+"' and sm.sch_stime='"+time+"' and s.seat_tf='T'";
-			pstmt = con.prepareStatement(selectQuery);
-			
-		//3. ¹ÙÀÎµå º¯¼ö¿¡ °ª ÇÒ´ç.
-		//4. Äõ¸®¹® ¼öÇà ÈÄ °á°ú ¾ò±â
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) { 
-				slist.add(new SeatVO(rs.getString("seat_name"), rs.getString("seat_tf")));
-			}//end while
 
-			
-		}finally {
-		//5. ¿¬°á ²÷±â.
+		try {
+			// 1. Connection ï¿½ï¿½ï¿½
+			con = dc.getConn();
+			// 2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½
+
+			String selectQuery = "select s.seat_name, s.seat_tf from seat s, movie m, sch_movie sm where (s.sch_no = sm.sch_no and sm.mv_no = m.mv_no) and m.mv_title ='"
+					+ movie + "'and sm.sch_date ='" + date + "' and sm.sch_stime='" + time + "' and s.seat_tf='T'";
+			pstmt = con.prepareStatement(selectQuery);
+
+			// 3. ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ò´ï¿½.
+			// 4. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				slist.add(new SeatVO(rs.getString("seat_name"), rs.getString("seat_tf")));
+			} // end while
+
+		} finally {
+			// 5. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 			dc.dbClose(con, pstmt, rs);
-		}//end try~ finally
+		} // end try~ finally
 		return slist;
-	}//seatAvailability
-	
-}//class
+	}// seatAvailability
+}// class
