@@ -6,6 +6,4 @@ public class SeatDAO {
 		
 	}//SeatDAO
 	
-	
-	
 }//class

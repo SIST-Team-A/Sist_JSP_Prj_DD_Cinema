@@ -11,7 +11,6 @@ import vo.MovieListVO;
 import vo.SchMovieDateVO;
 
 
-
 public class SchMovieDAO {
 
 	
@@ -30,14 +29,14 @@ public class SchMovieDAO {
 		ResultSet rs = null;
 		
 		try {
-		//1. Connection ���
+		//1. Connection 占쏙옙占�
 			con = dc.getConn();
-		//2. ������ ������ü ���
+		//2. 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙체 占쏙옙占�
 			
 			String selectQuery = "select  distinct m.mv_title, m.mv_no from sch_movie scm, movie m where scm.mv_no = m.mv_no";
 			pstmt = con.prepareStatement(selectQuery);
-		//3. ���ε� ������ �� �Ҵ�.
-		//4. ������ ���� �� ��� ���
+		//3. 占쏙옙占싸듸옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占쌀댐옙.
+		//4. 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙 占쏙옙占� 占쏙옙占�
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) { 
@@ -47,7 +46,7 @@ public class SchMovieDAO {
 
 			
 		}finally {
-		//5. ���� ����.
+		//5. 占쏙옙占쏙옙 占쏙옙占쏙옙.
 			dc.dbClose(con, pstmt, rs);
 		}//end try~ finally
 		return list;
@@ -65,29 +64,23 @@ public class SchMovieDAO {
 		ResultSet rs = null;
 		
 		try {
-		//1. Connection ���
+		//1. Connection 占쏙옙占�
 			con = dc.getConn();
-		//2. ������ ������ü ���
-			
+		//2. 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙체 占쏙옙占�
 			String selectQuery1 = "select scm.sch_no, scm.sch_date from sch_movie scm, movie m where (scm.mv_no = m.mv_no) and  m.mv_title = "+ mvTitle;
 			pstmt = con.prepareStatement(selectQuery1);
-		//3. ���ε� ������ �� �Ҵ�.
-		//4. ������ ���� �� ��� ���
+		//3. 占쏙옙占싸듸옙 占쏙옙占쏙옙占쏙옙 占쏙옙 占쌀댐옙.
+		//4. 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙 占쏙옙占� 占쏙옙占�
 			rs = pstmt.executeQuery();
-			
 			while(rs.next()) { 
 				smdVO = new SchMovieDateVO(rs.getString("sch_no"), rs.getString("sch_date"));
 				smdList.add(smdVO);
 			}//end while
-
-			
 		}finally {
-		//5. ���� ����.
+		//5. 占쏙옙占쏙옙 占쏙옙占쏙옙.
 			dc.dbClose(con, pstmt, rs);
 		}//end try~ finally
 		return smdList;
-		
-		
 	}//selectSchDate
 	
 }//class
