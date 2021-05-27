@@ -6,7 +6,6 @@
 	String mvNo = request.getParameter("mvNo");
 	MovieDAO mvDAO = MovieDAO.getInstance();
 	MovieSelectVO mvSelectVO = mvDAO.selectMovie(mvNo);
-	
 	%>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,6 +37,7 @@
       body {
         margin: 0;
         overflow-x: hidden;
+        overflow-y: overlay;
       }
       div {
         /* border: 1px solid black; */

@@ -1,5 +1,12 @@
+<%@page import="vo.MovieMainVO"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.MovieDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%
+	MovieDAO mvDAO = MovieDAO.getInstance();
+	List<MovieMainVO> list = mvDAO.selectMainPoster("N");
+	%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -127,6 +134,11 @@
         border: 1px solid black;
         text-align: center;
       }
+      
+      .item img{
+      	width: 300px;
+        height: 500px;
+      }
 
       #unfold {
         width: 100%;
@@ -219,28 +231,10 @@
         <div id="main-title">
           <h3>개봉예정작</h3>
         </div>
-        <div class="item">1</div>
-        <div class="item">2</div>
-        <div class="item">3</div>
-        <div class="item">4</div>
-        <div class="item">5</div>
-        <div class="item">6</div>
-        <div class="item">7</div>
-        <div class="item">8</div>
-        <div class="item">9</div>
-        <div class="item">10</div>
-        <div class="item hidden">11</div>
-        <div class="item hidden">12</div>
-        <div class="item hidden">13</div>
-        <div class="item hidden">14</div>
-        <div class="item hidden">15</div>
-        <div class="item hidden">16</div>
-        <div class="item hidden">17</div>
-        <div class="item hidden">18</div>
-        <div class="item hidden">19</div>
-        <div class="item hidden">20</div>
-        <div class="item hidden">21</div>
-        <div class="item hidden">22</div>
+        <%for(int i = 0; i<list.size();i++){ %>
+        <div class="item"><a href="movie_info.jsp?mvNo=<%= list.get(i).getMvNo() %>"><img src="<%= list.get(i).getMvPoster() %>"/></a></div>
+        <% } %>
+        <!-- <div class="item hidden">22</div> -->
         <div id="unfold">
           <input
             type="button"
