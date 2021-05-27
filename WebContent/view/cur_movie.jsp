@@ -1,5 +1,12 @@
+<%@page import="vo.MovieMainVO"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.MovieDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%
+	MovieDAO mDAO = MovieDAO.getInstance();
+	List<MovieMainVO> list = mDAO.selectMainPoster("O");
+	%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -219,7 +226,10 @@
         <div id="main-title">
           <h3>현재상영작</h3>
         </div>
-        <div class="item">1</div>
+        <div class="item"><%for(int i = 0; i<list.size();i++){ %>
+        <%=list.get(i).getMvNo() %><%= list.get(i).getMvPoster() %>
+        <% } %>
+        </div>
         <div class="item">2</div>
         <div class="item">3</div>
         <div class="item">4</div>
