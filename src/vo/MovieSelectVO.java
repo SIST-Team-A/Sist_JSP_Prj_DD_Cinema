@@ -4,23 +4,26 @@ import java.util.List;
 
 public class MovieSelectVO {
 	private String mvTitle;
-	private String mvPostermvDirector;
+	private String mvPoster;
+	private String mvDirector;
 	private String mvOpenDate;
 	private String mvSt;
 	private String mvTrailler;
+	private String mvRuntime;
 	private List<ActorVO> actList;
 
 	public MovieSelectVO() {
 	}
 
-	public MovieSelectVO(String mvTitle, String mvPostermvDirector, String mvOpenDate, String mvSt, String mvTrailler,
-			List<ActorVO> actList) {
-		super();
+	public MovieSelectVO(String mvTitle, String mvPoster, String mvDirector, String mvOpenDate, String mvSt,
+			String mvTrailler, String mvRuntime, List<ActorVO> actList) {
 		this.mvTitle = mvTitle;
-		this.mvPostermvDirector = mvPostermvDirector;
+		this.mvPoster = mvPoster;
+		this.mvDirector = mvDirector;
 		this.mvOpenDate = mvOpenDate;
 		this.mvSt = mvSt;
 		this.mvTrailler = mvTrailler;
+		this.mvRuntime = mvRuntime;
 		this.actList = actList;
 	}
 
@@ -32,12 +35,20 @@ public class MovieSelectVO {
 		this.mvTitle = mvTitle;
 	}
 
-	public String getMvPostermvDirector() {
-		return mvPostermvDirector;
+	public String getMvPoster() {
+		return mvPoster;
 	}
 
-	public void setMvPostermvDirector(String mvPostermvDirector) {
-		this.mvPostermvDirector = mvPostermvDirector;
+	public void setMvPoster(String mvPoster) {
+		this.mvPoster = mvPoster;
+	}
+
+	public String getMvDirector() {
+		return mvDirector;
+	}
+
+	public void setMvDirector(String mvDirector) {
+		this.mvDirector = mvDirector;
 	}
 
 	public String getMvOpenDate() {
@@ -62,6 +73,14 @@ public class MovieSelectVO {
 
 	public void setMvTrailler(String mvTrailler) {
 		this.mvTrailler = mvTrailler;
+	}
+
+	public String getMvRuntime() {
+		return mvRuntime;
+	}
+
+	public void setMvRuntime(String mvRuntime) {
+		this.mvRuntime = mvRuntime;
 	}
 
 	public List<ActorVO> getActList() {
