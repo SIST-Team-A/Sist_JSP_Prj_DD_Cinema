@@ -83,49 +83,37 @@ public class MovieDAO {
 		} finally {
 			dc.dbClose(con, pstmt, rs);
 		}
-
 		return msVO;
 	}
-	
+
+	/**
+	 * 영화번호를 받아 배우 리스트를 반환.
+	 * 
+	 * @param mvNo
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<ActorVO> selectActor(String mvNo) throws SQLException {
-		MovieSelectVO msVO = null;
 		DbConnection dc = DbConnection.getInstance();
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String query = null;
 		List<ActorVO> list = new ArrayList<ActorVO>();
-		
+
 		try {
 			con = dc.getConn();
 			query = "select * from actor where mv_no = ?";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, mvNo);
 			rs = pstmt.executeQuery();
-			while(rs.next()) {
-			list.add(new ActorVO(rs.getString("act_name"),rs.getString("act_mainorsub")));
+			while (rs.next()) {
+				list.add(new ActorVO(rs.getString("act_name"), rs.getString("act_mainorsub")));
 			}
 		} finally {
 			dc.dbClose(con, pstmt, rs);
 		}
-		
+
 		return list;
 	}
-	
-	
-
-//	public static void main(String[] args) {
-//		MovieDAO mDAO = MovieDAO.getInstance();
-//		try {
-//			List<MovieMainVO> list = mDAO.selectMainPoster("O");
-//			for(MovieMainVO temp : list) {
-//				System.out.println(temp.getMvNo());
-//				System.out.println(temp.getMvPoster());
-//			}
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-
 }

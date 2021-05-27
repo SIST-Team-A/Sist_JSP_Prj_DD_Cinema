@@ -37,6 +37,7 @@
       body {
         margin: 0px;
         overflow-x: hidden;
+        overflow-y: overlay;
       }
       div {
         /* border: 1px solid black; */
