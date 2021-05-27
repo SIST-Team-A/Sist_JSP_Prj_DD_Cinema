@@ -5,16 +5,16 @@ public class AdminSchMovieMainVO {
 	private String mvTitle;
 	private String schDate;
 	private String schStime;
-	private String scheEtime;
+	private String schEtime;
 	
 	public AdminSchMovieMainVO() {
 	}
-	public AdminSchMovieMainVO(String schNo, String mvTitle, String schDate, String schStime, String scheEtime) {
+	public AdminSchMovieMainVO(String schNo, String mvTitle, String schDate, String schStime, String schEtime) {
 		this.schNo = schNo;
 		this.mvTitle = mvTitle;
 		this.schDate = schDate;
 		this.schStime = schStime;
-		this.scheEtime = scheEtime;
+		this.schEtime = schEtime;
 	}
 	public String getSchNo() {
 		return schNo;
@@ -40,11 +40,11 @@ public class AdminSchMovieMainVO {
 	public void setSchStime(String schStime) {
 		this.schStime = schStime;
 	}
-	public String getScheEtime() {
-		return scheEtime;
+	public String getSchEtime() {
+		return schEtime;
 	}
-	public void setScheEtime(String scheEtime) {
-		this.scheEtime = scheEtime;
+	public void setSchEtime(String schEtime) {
+		this.schEtime = schEtime;
 	}
 	
 }

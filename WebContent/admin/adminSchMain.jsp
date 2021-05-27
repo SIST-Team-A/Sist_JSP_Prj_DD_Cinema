@@ -1,5 +1,34 @@
+<%@page import="java.util.List"%>
+<%@page import="vo.AdminSchMovieMainVO"%>
+<%@page import="vo.AdminMovieCloseUpdateVO"%>
+<%@page import="vo.AdminSchMovieInsertVO"%>
+<%@page import="dao.AdminSchMovieDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+     <%
+ 
+    	request.setCharacterEncoding("UTF-8");
+    	String mvTitle = (request.getParameter("titleMovie") == null) ? "" :request.getParameter("titleMovie");
+    	String mvOpenDate = (request.getParameter("startMovie") == null) ? "" : request.getParameter("startMovie");
+		String mvCloseDate = (request.getParameter("endMovie") == null) ? "" : request.getParameter("endMovie");
+		String schDate = (request.getParameter("dateMovie") == null) ? "" : request.getParameter("dateMovie");
+		String schStime = (request.getParameter("sTime") == null) ? "" : request.getParameter("sTime");
+		String schEtime = (request.getParameter("eTime") == null) ? "" : request.getParameter("eTime");
+		
+		 AdminSchMovieDAO asmDAO = new AdminSchMovieDAO();
+		if(!mvTitle.equals("") && !mvOpenDate.equals("") && !mvCloseDate.equals("") && !schDate.equals("") && !schStime.equals("") && !schEtime.equals("") ){
+			
+			AdminSchMovieInsertVO asmiVO = new AdminSchMovieInsertVO(mvTitle, mvOpenDate, schDate, schStime, schEtime);
+			boolean insertFlag = asmDAO.insertSchMovie(asmiVO);
+			AdminMovieCloseUpdateVO amcuVO =  new AdminMovieCloseUpdateVO(mvTitle, mvOpenDate, mvCloseDate);
+			boolean updateFlag = asmDAO.updateMovieClose(amcuVO);
+			
+			for( int i = 1; i < 21; i ++){
+				
+			}
+		}
+  %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,10 +43,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <!-- botstrap -->
     <script src="../common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
-
     <style type="text/css">
  
     </style>
+    
+    <%
+ 
+    	List<AdminSchMovieMainVO> asmmList = asmDAO.selectSchMoavieMainAll();
+    	
+    %>
     <script type="text/javascript">
     $(function(){
     	
@@ -48,69 +82,16 @@
               <td class="title-bar">영화시작시간</td>
               <td class="title-bar">영화종료시간</td>
             </tr>
+            
+            <% for ( AdminSchMovieMainVO asmmVO : asmmList){ %>
             <tr>
-              <td class="movie-num">1</td>
-              <td class="movie-title">2</td>
-              <td class="director">3</td>
-              <td class="cast">4</td>
-              <td class="audience">5</td>
+              <td class="movie-num"><%=asmmVO.getSchNo() %></td>
+              <td class="movie-title"><%=asmmVO.getMvTitle() %></td>
+              <td class="director"><%=asmmVO.getSchDate() %></td>
+              <td class="cast"><%=asmmVO.getSchStime() %></td>
+              <td class="audience"><%=asmmVO.getSchEtime() %></td>
             </tr>
-            <tr>
-              <td class="movie-num">1</td>
-              <td class="movie-title">2</td>
-              <td class="director">3</td>
-              <td class="cast">4</td>
-              <td class="audience">5</td>
-            </tr>
-            <tr>
-              <td class="num">1</td>
-              <td class="movie-title">2</td>
-              <td class="director">3</td>
-              <td class="cast">4</td>
-              <td class="audience">5</td>
-            </tr>
-            <tr>
-              <td class="num">1</td>
-              <td class="movie-title">2</td>
-              <td class="director">3</td>
-              <td class="cast">4</td>
-              <td class="audience">5</td>
-            </tr>
-            <tr>
-              <td class="num">1</td>
-              <td class="movie-title">2</td>
-              <td class="director">3</td>
-              <td class="cast">4</td>
-              <td class="audience">5</td>
-            </tr>
-            <tr>
-              <td class="num">1</td>
-              <td class="movie-title">2</td>
-              <td class="director">3</td>
-              <td class="cast">4</td>
-              <td class="audience">5</td>
-            </tr>
-            <tr>
-              <td class="num">1</td>
-              <td class="movie-title">2</td>
-              <td class="director">3</td>
-              <td class="cast">4</td>
-              <td class="audience">5</td>
-            </tr>
-            <tr>
-              <td class="num">1</td>
-              <td class="movie-title">2</td>
-              <td class="director">3</td>
-              <td class="cast">4</td>
-              <td class="audience">5</td>
-            </tr>
-            <tr>
-              <td class="num">1</td>
-              <td class="movie-title">2</td>
-              <td class="director">3</td>
-              <td class="cast">4</td>
-              <td class="audience">5</td>
-            </tr>
+            <%} %>
           </table>
         </div>
         <div style = "text-align: right;  ">
