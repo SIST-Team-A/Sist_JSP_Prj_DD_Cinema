@@ -1,3 +1,5 @@
+<%@page import="vo.ActorVO"%>
+<%@page import="java.util.List"%>
 <%@page import="vo.MovieSelectVO"%>
 <%@page import="dao.MovieDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,6 +8,7 @@
 	String mvNo = request.getParameter("mvNo");
 	MovieDAO mvDAO = MovieDAO.getInstance();
 	MovieSelectVO mvSelectVO = mvDAO.selectMovie(mvNo);
+	List<ActorVO> list = mvSelectVO.getActList(); 
 	%>
 <!DOCTYPE html>
 <html lang="en">
@@ -276,7 +279,13 @@
             <div id="movie-detail">
               장르 : <%=mvSelectVO.getMvOpenDate() %> 개봉, <%=mvSelectVO.getMvRuntime()%><br />
               감독 : <%=mvSelectVO.getMvDirector()%><br />
-              출연 :
+              출연 : <% for(int i = 0; i<list.size(); i++){
+            	  if(i!=list.size()-1){%> 
+              		<%=list.get(i).getActName()%><%=list.get(i).getActMainOrSub().equals("M")?"(주연), ":"(조연), "%>
+              		<%}else{ %>
+              		<%=list.get(i).getActName()%><%=list.get(i).getActMainOrSub().equals("M")?"(주연)":"(조연)"%>
+              		<%} %>
+              		<%} %>
             </div>
           </div>
         </div>
