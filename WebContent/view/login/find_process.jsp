@@ -22,7 +22,12 @@
 	boolean result = mDAO.memberPassFind(mpfVO);
 	if(result==true){
 		%>
-		location.href='find_pass_reset.jsp';
+		<jsp:forward page="find_pass_reset.jsp">
+		<jsp:param name="PASS_name" value = "<%=Name%>"/>
+		<jsp:param name="PASS_id" value = "<%=Id%>"/>
+		<jsp:param name="PASS_email" value = "<%=Pass%>"/>
+		</jsp:forward>
+		/* location.href='find_pass_reset.jsp'; */
 		<%
 	}else{
 		%>
