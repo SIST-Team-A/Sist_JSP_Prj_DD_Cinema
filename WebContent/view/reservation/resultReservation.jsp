@@ -34,9 +34,6 @@
 <!DOCTYPE html>
 
 
-<%for(int i = 0; i < selectSeat.length; i++){%>
-	<%=movie %>/<%=movieDate %>/<%=movieTime %>/<%=selectSeat[i] %><br/>
-<% }%>
 <html>
 <head>
 <meta charset="UTF-8">
