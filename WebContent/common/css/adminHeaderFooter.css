@@ -208,7 +208,7 @@ ul {
 	margin-bottom: 30px;
 }
 
-#table-bar {
+#table-bar { /* 클릭해도 반응 안하게 만드는 거 (테이블 상단) */
 	pointer-events: none;
 }
 

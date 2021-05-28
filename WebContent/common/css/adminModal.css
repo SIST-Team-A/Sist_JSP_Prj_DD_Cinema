@@ -25,7 +25,7 @@
 	-webkit-backdrop-filter: blur(13.5px);
 	border-radius: 10px;
 	border: 1px solid rgba(255, 255, 255, 0.18);
-	width: 650px;
+	width: 750px;
 	height: 800px;
 }
 
@@ -48,15 +48,13 @@
 	color: black;
 }
 
-/*   #modal #content { /*모달 뒤틀리면 여기 확인 */
 #content {
 	margin-top: 50px;
-	/* padding: 0px 25px; */
 	color: black;
 	
 }
 
-#modal-text-num {
+#modal-text-num { /* 모달 텍스트 readonly인 곳 색 변경 */
 	background-color: #E2E5E8;
 }
 
@@ -87,11 +85,11 @@
 	text-align: center;
 }
 
-#modal-lead {
+#modal-lead { /* 주연 */
 	padding-left: 47px;
 }
 
-#modal-sub {
+#modal-sub { /* 조연 */
 	padding-left: 47px;
 }
 
