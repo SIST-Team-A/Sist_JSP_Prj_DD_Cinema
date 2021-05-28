@@ -28,4 +28,9 @@ public class ActorVO {
 		this.actMainOrSub = actMainOrSub;
 	}
 
+	@Override
+	public String toString() {
+		return actName;
+	}
+
 }

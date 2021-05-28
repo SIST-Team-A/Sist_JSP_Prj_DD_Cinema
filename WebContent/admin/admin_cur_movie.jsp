@@ -1,23 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ page import="dao.AdminMovieDAO" %>
+ <% 
+   AdminMovieDAO amdao=AdminMovieDAO.getInstance();
+ 	int count0=0;
+ 	int count1=0;
+ 	int count2=0;
+ 	int count3=0;
+ 	int count4=0;
+ 	int count5=0;
+  %>
+  
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>  
-    <link href="../common/css/adminHeaderFooter.css" rel="stylesheet"/>
-    <link href="../common/css/adminModal.css" rel="stylesheet"/>
+    <title>Document</title>
+   
+    <link href="http://localhost/prj2_hm/common/css/adminHeaderFooter.css" rel="stylesheet"/>
+    <link href="http://localhost/prj2_hm/common/css/adminModal.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     	
   <style></style>
     
     <script>
+    
+    
  window.onload=function(){
     const modal = document.getElementById("modal")
-    
     function modalOn() {
         modal.style.display = "flex";
     }
@@ -25,27 +38,29 @@
     function modalOff() {
         modal.style.display = "none"
     }
-      
-    $("#table tbody tr").click(function(){ //테이블 클릭시 모달 on    	
-    	modalOn();
-    	$("#modal-add").hide();  	
-    	$("#modal-motify").show();  	
-    	$("#modal-del").show();  	
-    	$("#modal-cencel").show();  	
-    });
     
-    $("#modal-cencel").click(function(){ //취소버튼 누를시 모달 off
-    	modalOff();
-    });
+    function showPopup(){
+		var xPos = (document.body.offsetWidth/2) - (370/2); // 가운데 정렬
+		xPos += window.screenLeft; // 듀얼 모니터일 때
+		var yPos = (document.body.offsetHeight/2) - (500/2);
+		window.open("", "popupwin", "width=750, height=1200,left="+xPos+", top="+yPos+", menubar=yes, status=yes, titlebar=yes, resizable=yes"); 	
+    }
     
-    $("#close-area").click(function(){ // X누르면 모달 off
-    	modalOff();
-    }); 
+    <% for(int i=0; i<amdao.selectMovieAll("O").size();i++){%>
+   $("#table tbody #tr<%=count3++%>").click(function(){
+		alert($("#test<%=count4++%>").val());
+		showPopup();
+		$("#myform<%=count5++%>").submit();
+   });  
+   <%}%>
+    
+  
  };    
     </script>    
     
   </head>
   <body>
+
     <div id="wrap">
       <div id="header">
         <div id="header-top">
@@ -73,7 +88,7 @@
         <div id="table-header">현재상영영화</div>
         <div id="table-area">
           <table id="table">
-          <tbody></tbody>
+          <tbody>
             <tr id="table-bar">
               <td class="title-bar">번호</td>
               <td class="title-bar">영화제목</td>
@@ -81,69 +96,17 @@
               <td class="title-bar">출연</td>
               <td class="title-bar">관객수</td>
             </tr>
-            <tr>
-              <td class="movie-num"></td>
-              <td class="movie-title"></td>
-              <td class="director"></td>
-              <td class="cast"></td>
-              <td class="audience"></td>
-            </tr>
-            <tr>
-              <td class="movie-num"></td>
-              <td class="movie-title"></td>
-              <td class="director"></td>
-              <td class="cast"></td>
-              <td class="audience"></td>
-            </tr>
-            <tr>
-              <td class="num"></td>
-              <td class="movie-title"></td>
-              <td class="director"></td>
-              <td class="cast"></td>
-              <td class="audience"></td>
-            </tr>
-            <tr>
-              <td class="movie-num"></td>
-              <td class="movie-title"></td>
-              <td class="director"></td>
-              <td class="cast"></td>
-              <td class="audience"></td>
-            </tr>
-            <tr>
-              <td class="movie-num"></td>
-              <td class="movie-title"></td>
-              <td class="director"></td>
-              <td class="cast"></td>
-              <td class="audience"></td>
-            </tr>
-            <tr>
-              <td class="movie-num"></td>
-              <td class="movie-title"></td>
-              <td class="director"></td>
-              <td class="cast"></td>
-              <td class="audience"></td>
-            </tr>
-            <tr>
-              <td class="movie-num"></td>
-              <td class="movie-title"></td>
-              <td class="director"></td>
-              <td class="cast"></td>
-              <td class="audience"></td>
-            </tr>
-            <tr>
-              <td class="movie-num"></td>
-              <td class="movie-title"></td>
-              <td class="director"></td>
-              <td class="cast"></td>
-              <td class="audience"></td>
-            </tr>
-            <tr>
-              <td class="movie-num"></td>
-              <td class="movie-title"></td>
-              <td class="director"></td>
-              <td class="cast"></td>
-              <td class="audience"></td>
-            </tr>
+        	<% for(int i=0; i<amdao.selectMovieAll("O").size();i++){%>
+             <form id="myform<%=count0++ %>" method="post" action="admin_popup1.jsp" target="popupwin">               
+      		<tr id="tr<%=count1++ %>">
+      			<td class="movie-num"><input type="text" id="test<%=count2++ %>" name="test" value="<%=amdao.selectMovieAll("O").get(i).getMvNo() %>"readonly="readonly" style=" width:80px; height:10px; text-align: center; border: 0px solid #333 "/></td>                             
+      			<td class="movie-title"><%=amdao.selectMovieAll("O").get(i).getMvTitle()%></td>
+      			<td class="director"><%=amdao.selectMovieAll("O").get(i).getMvDirector()%></td>
+      			<td class="cast"><%=amdao.selectMovieAll("O").get(i).getActName() %></td>
+      			<td class="audience"><%=amdao.selectMovieAll("O").get(i).getMvAttCnt() %></td>
+      		</tr>    	
+      		</form>
+      		<%}%>   		
             </tbody>
           </table>
         </div>
@@ -162,87 +125,6 @@
       </div>
     </div>
     
-        <!-- 모달 -->
-    <div id="container">
-        <div id="lorem-ipsum"></div>
-    </div>
-    <div id="modal" class="modal-overlay">
-        <div class="modal-window">
-            <div class="title">
-                <h2>개봉예정작관리</h2>
-            </div>
-            <div class="close-area" id="close-area">X</div>
-            <div id="content">             
-             <table id="modal-table">
-            <tr>
-              <td class="td-first">번호</td>
-              <td class="td-second"><input type="text" value="" readonly="readonly" class="modal-text" id="modal-text-num"/></td>
-              
-            </tr>
-            <tr>     	 
-              <td class="td-first">포스터</td>
-              <td class="td-second"><input type="text" value="" class="modal-text"/></td>
-            </tr>
-            <tr>
-              <td class="td-first">제목</td>
-              <td class="td-second"><input type="text" value="" class="modal-text"/></td>
-
-            </tr>
-            <tr>
-              <td class="td-first">감독</td>
-              <td class="td-second"><input type="text" value="" class="modal-text"/></td>
-
-            </tr>
-            <tr>
-              <td class="td-first">주연</td>
-              <td class="td-second" id="modal-lead"><input type="text" value="" class="modal-text"/>
-              <input type="button" value="+" class="modal-plus"/></td>
-
-            </tr>
-            <tr>
-              <td class="td-first">조연</td>
-              <td class="td-second" id="modal-sub"><input type="text" value="" class="modal-text"/>
-              <input type="button" value="+" class="modal-plus"/></td>
-
-            </tr>
-            <tr>
-              <td class="td-first">줄거리</td>
-              <td class="td-second"><input type="text" value="" class="modal-text" style="height:100px"/></td>
-            </tr>
-            <tr>
-              <td class="td-first">러닝타임</td>
-              <td class="td-second"><input type="text" value="" class="modal-text"/></td>
-
-            </tr>
-            <tr>
-              <td class="td-first">트레일러</td>
-              <td class="td-second"><input type="text" value="" class="modal-text"/></td>
-
-            </tr>
-            <tr>
-              <td class="td-first">개봉일자</td>
-              <td class="td-second"><input type="text" value="" class="modal-text"/></td>
-  
-            </tr>
-            <tr>
-              <td class="td-first">개봉여부</td>
-              <td class="td-second" style="font-size:15px">
-              <input type="radio" name="modal-radio" />개봉&emsp;<input type="radio" name="modal-radio"/>미개봉&nbsp;<input type="radio" name="modal-radio"/>상영종료
-              </td>             
-            </tr>      
-<tr>            
-   <td colspan="2" id="modal-bottom-btn">
-   <input type="button" value="추가"  id="modal-add" style="border:0px"/>
-   <input type="button" value="수정"  id="modal-motify" style="border:0px"/>
-   <input type="button" value="삭제"   id="modal-del" style="border:0px"/>
-   <input type="button" value="취소" id="modal-cencel" style="border:0px"/>
-   </td>
-</tr>           
-              </table> 
-            </div>
-        </div>
-    </div>
-    
+ 
   </body>
 </html>
-   
