@@ -28,5 +28,6 @@ public class ReservationMainVO {
 	public void setRevNo(String revNo) {
 		this.revNo = revNo;
 	}
-}
+
 	
+}
