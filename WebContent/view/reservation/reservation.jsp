@@ -21,13 +21,13 @@
     <title>영화예매하기</title>
 
     <!-- 부트스트랩 -->
-    <link href="http://localhost/jsp_prj/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://localhost/movie_reservation/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
    	 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet"/>
     <!--  jQuery CDN(c
     ontents Delivery Network) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<!--  bootstrap  -->
- <script src="http://localhost/jsp_prj/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+ <script src="http://localhost/movie_reservation/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
 <style type="text/css">
 
 	#main {
@@ -70,79 +70,6 @@
 
 	option { height : 30px}
 </style>
-<%-- <%
-	SchMovieDAO smDAO = new SchMovieDAO();
-	String movie =request.getParameter("movie");
-	List<SchMovieDateVO> smdList = smDAO.selectSchDate(movie);
-
-	String movieDate = null;
-	
-		for(SchMovieDateVO smdVO : smdList){
-			movieDate= smdVO.getSchDate();
-		}//end for
-
-%> --%>
-
-<!-- <script type="text/javascript">
-	 	var reservation = new Array();
-		function movieSelectBox(){
-			var movie = $("#movieList option:selected").val();
-/* 			
-				
-		 	if(reservation[0]==null){
-				reservation.push(movie);
-			}else{
-				if(reservation[0] != $("#movieList option:selected").val()){
-					reservation[0] = $("#movieList option:selected").val();
-				}//end if
-			}//end if ~ else 
-				
-			url = "#?movie="+reservation[0];	
-			
-			 */
-			
-		}//movieSelectBox
-		
-		
-		function dateSelectBox(){
-			var date = $("#dateList option:selected").val()
-			/*  if(reservation[1]==null){
-				reservation.push(date);
-			}else{
-				if(reservation[1] != $("#dateList option:selected").val()){
-					reservation[1] = $("#dateList option:selected").val();
-				}//end if
-			}//end if ~ else 
-			if(url == null){
-				alert("영화를먼저 선택해주세요.");
-				return;
-			}else{
-				
-				
-				
-			
-			} //end if~else*/
-		}//dateSelectBox 
-		
-		
-		function timeSelectBox(){
-			var time = $("#timeList option:selected").val()
-		/*  if(reservation[2]==null){
-				reservation.push(time);
-			}else{
-				if(reservation[2] != $("#timeList option:selected").val()){
-					reservation[2] = $("#timeList option:selected").val();
-				}//end if
-			}//end if ~ else 
-			if(url == null){
-				alert("영화와 날짜를 먼저 선택해주세요.");
-				return;
-			}else{
-				
-			url += "?time="+reservation[2];
-			}//end if~else */
-		}//timeSelectBox
-	-->	
 	<%
 		SchMovieDAO smDAO = new SchMovieDAO();
 			List<MovieListVO> list = smDAO.selectSchMovie();
@@ -278,7 +205,6 @@ List<SchMovieDateTimeVO> smdtList = new ArrayList<SchMovieDateTimeVO>();
 			})
 		
 			$("#seatBtn").click(function(){
-				//window.location.href = "seat.jsp";//+url.replaceAll("#","");
 				$("#frm").submit();
 			});//click
 		});//ready
@@ -310,7 +236,7 @@ List<SchMovieDateTimeVO> smdtList = new ArrayList<SchMovieDateTimeVO>();
 				</div>
 			</div>
 			<!-- 내용 -->
-			<form action = "seat.jsp" method ="get"	id = "frm" >
+			<form action = "http://localhost/movie_reservation/view/reservation/seat.jsp" method ="get"	id = "frm" >
 			<div >
 				<!-- container 900(w) x 700(h)-->
 				<div id="movie-select">

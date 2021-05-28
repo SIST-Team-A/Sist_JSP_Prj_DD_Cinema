@@ -1,16 +1,16 @@
 package vo;
 
 public class SeatVO {
-	private String seatName, seatTOrF;
+	private String seatName,seatTf;
 
 	public SeatVO() {
 		super();
 	}
 
-	public SeatVO(String seatName, String seatTOrF) {
+	public SeatVO(String seatName, String seatTf) {
 		super();
 		this.seatName = seatName;
-		this.seatTOrF = seatTOrF;
+		this.seatTf = seatTf;
 	}
 
 	public String getSeatName() {
@@ -21,13 +21,13 @@ public class SeatVO {
 		this.seatName = seatName;
 	}
 
-	public String getSeatTOrF() {
-		return seatTOrF;
+	public String getSeatTf() {
+		return seatTf;
 	}
 
-	public void setSeatTOrF(String seatTOrF) {
-		this.seatTOrF = seatTOrF;
+	public void setSeatTf(String seatTf) {
+		this.seatTf = seatTf;
 	}
 	
 	
-}//class
+}

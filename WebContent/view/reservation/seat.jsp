@@ -13,7 +13,7 @@
     <title>좌석선택</title>
 
     <!-- 부트스트랩 -->
-    <link href="http://localhost/jsp_prj/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://localhost/movie_reservation/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
     
     	 <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
@@ -22,7 +22,7 @@
     <!--  jQuery CDN(contents Delivery Network) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<!--  bootstrap  -->
- <script src="http://localhost/jsp_prj/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+ <script src="http://localhost/movie_reservation/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
 
  <style type="text/css">
  
@@ -75,10 +75,8 @@ input, select, textarea, button {
 	#reservationBtn {width : 150px; height: 50px; background-color: #333333 ; color : #FFFFFF}
 
 </style>
-
-
-
 <%
+	request.setCharacterEncoding("UTF-8");
 	String movie = request.getParameter("movie");
 	String date = request.getParameter("date");
 	String time = request.getParameter("time");
@@ -138,7 +136,7 @@ input, select, textarea, button {
 			}
 			$("#cntInput").val(cnt);
 			
-			
+
 			
 			
 		});//click
@@ -161,44 +159,53 @@ input, select, textarea, button {
 			$("#cntInput").val(cnt);
 			
 		
-		
+			
 		});//click
 	
 		
 		
+		selectSeat = new Array();
 		$(".seatBtn").click(function(event){
 			
 			if(($(event.target).attr("class"))!="선택됨"){
 			
 				$(event.target).css("background-color","#7B68EE");
 				$(event.target).removeClass($(event.target).attr("class")).addClass("선택됨");
-				document.getElementById($(event.target).val()).setAttribute('name','selectSeat');
-
-				seat.push($(event.target).val());
+				//document.getElementById($(event.target).val()).setAttribute('name','selectSeat');
+				selectSeat.push($(event.target).val());
+				$("#frm").append("<input type='hidden' name='selectSeat' class = '"+$(event.target).val()+"'value='"+$(event.target).val()+"'>")//hidden속성 생성
+				
 
 				if(!(cnt >= $(".선택됨").length)){
 				
 					alert("인원수와 선택한좌석이 일치하지 않습니다.");
 					$(event.target).removeClass($(event.target).attr("class")).addClass("seatBtn");
 					$(event.target).css("background-color","#efefef");
-					document.getElementById($(event.target).val()).setAttribute('name','');
-					var idx = seat.indexOf($(event.target).val());
-					seat.splice(idx,1);
+					//document.getElementById($(event.target).val()).setAttribute('name','');
+					var idx = selectSeat.indexOf($(event.target).val());
+					selectSeat.splice(idx,1);
+					$("."+$(event.target).val()).remove();
 				}//end if
 					
 			
 			}else{
 				$(event.target).removeClass($(event.target).attr("class")).addClass("seatBtn");
 				$(event.target).css("background-color","#efefef");
-				document.getElementById($(event.target).val()).setAttribute('name','');
-				var idx = seat.indexOf($(event.target).val());
-				seat.splice(idx,1);
+				//document.getElementById($(event.target).val()).setAttribute('name','');
+				var idx = selectSeat.indexOf($(event.target).val());
+				selectSeat.splice(idx,1);
+				$("."+$(event.target).val()).remove(); //hidden 속성제거
 			
 				
 			}//end if else
+			
+				
+		
 		});
 		
 		$("#reservationBtn").click(function(){
+			
+			
 			if($(".선택됨").length != cnt ){
 				alert("인원수와 좌석을 맞춰주세요");
 		
@@ -212,14 +219,16 @@ input, select, textarea, button {
 			}
 		});//click
 		
+		$("#backBtn").click(function(){
+
+		
+		})
+			
+		
 
 	});//ready
 	
-	
-	
-	function back(){
-		console.log(seat)
-	}//test
+
 </script>
 </head>
 <body>
@@ -236,7 +245,7 @@ input, select, textarea, button {
 		<div id ="main">
 		
 			<div>
-				<h4>예매 > <a href="http://localhost/jsp_prj/day0514/reservation.jsp" >영화선택 </a> > <strong>좌석선택</strong></h4>
+				<h4>예매 > <a href="http://localhost/movie_reservation/view/reservation/reservation.jsp" >영화선택 </a> > <strong>좌석선택</strong></h4>
 				<!-- 좌석선택 div -->
 				 <div id ="selectSeat">
 				 	<!-- 영화 스크린 정보 표시 -->
@@ -245,40 +254,44 @@ input, select, textarea, button {
 				 		</div>
 				 	<!-- 영화 스크린 정보 표시/div -->
 				 	 <!-- 영화 좌석 버튼 div -->
-				 	 <form action = "" id = "frm" method = "get">
-				 		<div >
+				 	 <form action = "http://localhost/movie_reservation/view/reservation/resultReservation.jsp" id = "frm" method = "post">
+				 		 <input type="hidden" name ="movie" value="<%=movie %>">
+				 		 <input type="hidden" name ="date" value="<%=date %>">
+				 		 <input type="hidden" name ="time" value="<%=time %>">	
+				 		<div id = "divTab">
 				 			<table id="tableSeat">
 				 				<tr>
 				 					<td>
 				 						<%for ( int i =1; i < 4; i ++) {%>
-				 						<input type = "button" name ="" class = "seatBtn" id ="A-<%=i %>" value = "A-<%=i %>" > 
+				 						<input type = "button"  class = "seatBtn" id ="A-<%=i %>" value = "A-<%=i %>" > 
+				 						
 				 						<%}//end for %>
 				 					</td>
 				 					<td style ="padding-left : 30px">
 				 						<%for ( int i =4; i < 8; i ++) {%>
-				 						<input type = "button"  name ="" class = "seatBtn" id ="A-<%=i %>" value = "A-<%=i %>" > 
+				 						<input type = "button"   class = "seatBtn" id ="A-<%=i %>" value = "A-<%=i %>" > 
 				 						<%}//end for %>
 				 					</td>
 				 					<td>
 				 						<%for ( int i =8; i < 11; i ++) {%>
-				 						<input type = "button"name =""  class = "seatBtn"id ="A-<%=i %>"  value = "A-<%=i %>" > 
+				 						<input type = "button"   class = "seatBtn"id ="A-<%=i %>"  value = "A-<%=i %>" > 
 				 						<%}//end for %>
 				 					</td>
 				 				</tr>
 				 				<tr>
 				 					<td>
 				 						<%for ( int i =11; i < 14; i ++) {%>
-				 						<input type = "button" name ="" class = "seatBtn" id ="A-<%=i %>" value = "A-<%=i %>" >
+				 						<input type = "button" class = "seatBtn" id ="A-<%=i %>" value = "A-<%=i %>" >
 				 						<%}//end for %>
 				 					</td>				 					
 				 					<td style ="padding-left : 30px">
 				 						<%for ( int i =14; i < 18; i ++) {%>
-				 						<input type = "button" name ="" class = "seatBtn"id ="A-<%=i %>"  value = "A-<%=i %>" >
+				 						<input type = "button"  class = "seatBtn"id ="A-<%=i %>"  value = "A-<%=i %>" >
 				 						<%}//end for %>
 				 					</td>				 					
 				 					<td>
 				 						<%for ( int i =18; i < 21; i ++) {%>
-				 						<input type = "button" name ="" class = "seatBtn" id ="A-<%=i %>"value = "A-<%=i %>" > 
+				 						<input type = "button"  class = "seatBtn" id ="A-<%=i %>"value = "A-<%=i %>" > 
 				 						<%}//end for %>
 				 					</td>				 					
 				 				</tr>
@@ -306,7 +319,7 @@ input, select, textarea, button {
 			<input type="text" readonly="readonly" style = "width :20px; height:20px; background-color :#7B68EE"> :선택한 좌석 &nbsp;
 			<input type="text" readonly="readonly" style = "width :20px; height:20px; background-color :#000000"> :예매된 좌석
 			
-				<input type="button" value ="뒤로가기" id = "backBtn"class="btn" onclick= "back()" > &nbsp;
+				<input type="button" value ="뒤로가기" id = "backBtn"class="btn"  > &nbsp;
 				<button id = "reservationBtn" class="btn" >예매하기</button>
 			</div>
 

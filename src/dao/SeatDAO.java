@@ -7,44 +7,97 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.SeatDAO;
+import vo.AddSeatVO;
 import vo.SeatVO;
 
 public class SeatDAO {
 
+	private static SeatDAO sDAO;
 	public SeatDAO() {
-
-	}// SeatDAO
-
-	public List<SeatVO> seatAvailability(String movie, String date, String time) throws SQLException {
-		List<SeatVO> slist = new ArrayList<SeatVO>();
-
+		
+	}//SeatDAO
+	public static SeatDAO getInstance() {
+		if(sDAO == null) {
+			sDAO = new SeatDAO();
+			
+		}//end if
+		
+		return sDAO;
+	}//getInstance
+	
+	/**
+	 * 
+	 * seat.jsp ÆÄÀÏÀÌ¶û ¿¬µ¿, ÁÂ¼®¿¡¼­ seat_tf°¡ FÀÎ ÁÂ¼®À» Ã£À½
+	 * reservation.jsp¿¡¼­ ¼±ÅÃÇÑ ¿µÈ­,³¯Â¥,½Ã°£À» ¼±ÅÃÇØ¼­ ½ºÄÉÁì¿¡ ÀÖ³ªÈ®ÀÎ
+	 * @param movie ¼±ÅÃÇÑ ¿µÈ­
+	 * @param date ¼±ÅÃÇÑ ³¯Â¥
+	 * @param time ¼±ÅÃÇÑ ½Ã°£
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<SeatVO> seatAvailability(String movie, String date, String time) throws SQLException{
+		List<SeatVO> slist= new ArrayList<SeatVO>();
+		
 		DbConnection dc = DbConnection.getInstance();
-
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
+		
 		try {
-			// 1. Connection ï¿½ï¿½ï¿½
+		//1. Connection ¾ò±â
 			con = dc.getConn();
-			// 2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½
-
-			String selectQuery = "select s.seat_name, s.seat_tf from seat s, movie m, sch_movie sm where (s.sch_no = sm.sch_no and sm.mv_no = m.mv_no) and m.mv_title ='"
-					+ movie + "'and sm.sch_date ='" + date + "' and sm.sch_stime='" + time + "' and s.seat_tf='T'";
+		//2. Äõ¸®¹® »ý¼º°´Ã¼ ¾ò±â
+			
+			String selectQuery = "select s.seat_name, s.seat_tf from seat s, movie m, sch_movie sm where (s.sch_no = sm.sch_no and sm.mv_no = m.mv_no) and m.mv_title ='"+movie+"'and sm.sch_date ='"+date+"' and sm.sch_stime='"+time+"' and s.seat_tf='T'";
 			pstmt = con.prepareStatement(selectQuery);
-
-			// 3. ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ò´ï¿½.
-			// 4. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+			
+		//3. ¹ÙÀÎµå º¯¼ö¿¡ °ª ÇÒ´ç.
+		//4. Äõ¸®¹® ¼öÇà ÈÄ °á°ú ¾ò±â
 			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
+			
+			while(rs.next()) { 
 				slist.add(new SeatVO(rs.getString("seat_name"), rs.getString("seat_tf")));
-			} // end while
+			}//end while
 
-		} finally {
-			// 5. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+			
+		}finally {
+		//5. ¿¬°á ²÷±â.
 			dc.dbClose(con, pstmt, rs);
-		} // end try~ finally
+		}//end try~ finally
 		return slist;
-	}// seatAvailability
-}// class
+	}//seatAvailability
+	
+	
+	public int insertAddSeat(AddSeatVO asVO, String i) throws SQLException{
+		int cnt = 0;
+		DbConnection dc = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+		//1. Connection ¾ò±â
+			con = dc.getConn();
+
+			String insertQuery = " insert into seat values(concat('s_',lpad(seq_seat.nextval,8,0)), (select sch_no from sch_movie where  sch_date = ? and sch_stime = ? and sch_etime = ? and mv_no in (select mv_no from movie where mv_title = ? and  mv_opendate= ? ) ), NULL,concat('A-',?), 'F')";
+
+			pstmt = con.prepareStatement(insertQuery);
+		//3. ¹ÙÀÎµå º¯¼ö¿¡ °ª ÇÒ´ç.
+			pstmt.setString(1, asVO.getSchDate());
+			pstmt.setString(2, asVO.getSchStime());
+			pstmt.setString(3, asVO.getSchEtime());
+			pstmt.setString(4, asVO.getMvTitle());
+			pstmt.setString(5, asVO.getMvOpenDate());
+			pstmt.setString(6, i);
+		//4. Äõ¸®¹® ¼öÇà ÈÄ °á°ú ¾ò±â
+			cnt = pstmt.executeUpdate();
+			System.out.println(insertQuery);
+		}finally {
+		//5. ¿¬°á ²÷±â.
+			dc.dbClose(con, pstmt, null);
+		}//end try~ finally
+		return cnt;
+	}//insertAddSeat
+}//class

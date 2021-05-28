@@ -1,6 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+    
+    <%
+   		request.setCharacterEncoding("UTF-8");
+    
+    	String movie = request.getParameter("movie");	
+		String movieDate = request.getParameter("date");
+		String movieTime = request.getParameter("time");
+		
+		String[] selectSeat = request.getParameterValues("selectSeat");
+    %>
+   
 <!DOCTYPE html>
+
+
+<%for(int i = 0; i < selectSeat.length; i++){%>
+	<%=movie %>/<%=movieDate %>/<%=movieTime %>/<%=selectSeat[i] %><br/>
+<% }%>
 <html>
 <head>
 <meta charset="UTF-8">
