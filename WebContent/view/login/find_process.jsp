@@ -12,20 +12,20 @@
 <script type="text/javascript">
 	<%
 	request.setCharacterEncoding("UTF-8");
-	String Name = request.getParameter("PASS_name");
-	String Id = request.getParameter("PASS_id");
-	String Pass = request.getParameter("PASS_email");
+	String name = request.getParameter("PASS_name");
+	String id = request.getParameter("PASS_id");
+	String email = request.getParameter("PASS_email");
 	
-	MemberPassFindVO mpfVO = new MemberPassFindVO(Name,Id,Pass);
+	MemberPassFindVO mpfVO = new MemberPassFindVO(name,id,email);
 	
 	MemberDAO mDAO = new MemberDAO();
 	boolean result = mDAO.memberPassFind(mpfVO);
 	if(result==true){
 		%>
 		<jsp:forward page="find_pass_reset.jsp">
-		<jsp:param name="PASS_name" value = "<%=Name%>"/>
-		<jsp:param name="PASS_id" value = "<%=Id%>"/>
-		<jsp:param name="PASS_email" value = "<%=Pass%>"/>
+			<jsp:param name="PASS_name" value = "<%=name%>"/>
+			<jsp:param name="PASS_id" value = "<%=id%>"/>
+			<jsp:param name="PASS_email" value = "<%=email%>"/>
 		</jsp:forward>
 		/* location.href='find_pass_reset.jsp'; */
 		<%
