@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import vo.InsertMemberVO;
 import vo.MemberLoginVO;
 import vo.MemberPassFindVO;
+import vo.MemberPassUpdateVO;
 
 public class MemberDAO {
 	
@@ -136,7 +137,7 @@ public class MemberDAO {
 		return result;
 	}
 	
-	public boolean memberPassReset(MemberLoginVO mlVO) throws SQLException{
+	public boolean memberPassReset(MemberPassUpdateVO mpuVO) throws SQLException{
 		boolean result = false;
 		
 		Connection con = null;
@@ -148,15 +149,16 @@ public class MemberDAO {
 		try {
 			con=dc.getConn();
 			
-			String selectQuery = "update member set mem_pass=? where mem_name=? and mem_id=? and mem_email=? ";
+			String selectQuery = "update member set mem_pass= ? where mem_name= ? and mem_id= ? and mem_email= ? ";
 			pstmt = con.prepareStatement(selectQuery);
 			
-			//pstmt.setString(1, mlVO.getMemName());
-			//pstmt.setString(2, mlVO.getMemName());
-			//pstmt.setString(3, mlVO.getMemId());
-			//pstmt.setString(4, mlVO.getMemEmail());
+			pstmt.setString(1, mpuVO.getMemNewPass());
+			pstmt.setString(2, mpuVO.getMemName());
+			pstmt.setString(3, mpuVO.getMemId());
+			pstmt.setString(4, mpuVO.getMemEmail());
 			
 			rs = pstmt.executeQuery();
+			
 			if(rs.next()) {
 				result=true;
 			}//end if
