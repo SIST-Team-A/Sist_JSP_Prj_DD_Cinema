@@ -1,3 +1,5 @@
+<%@page import="vo.AddSeatVO"%>
+<%@page import="dao.SeatDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="vo.AdminSchMovieMainVO"%>
 <%@page import="vo.AdminMovieCloseUpdateVO"%>
@@ -5,8 +7,7 @@
 <%@page import="dao.AdminSchMovieDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-     <%
+ <%
  
     	request.setCharacterEncoding("UTF-8");
     	String mvTitle = (request.getParameter("titleMovie") == null) ? "" :request.getParameter("titleMovie");
@@ -17,6 +18,7 @@
 		String schEtime = (request.getParameter("eTime") == null) ? "" : request.getParameter("eTime");
 		
 		 AdminSchMovieDAO asmDAO = new AdminSchMovieDAO();
+		 SeatDAO sDAO = new SeatDAO();
 		if(!mvTitle.equals("") && !mvOpenDate.equals("") && !mvCloseDate.equals("") && !schDate.equals("") && !schStime.equals("") && !schEtime.equals("") ){
 			
 			AdminSchMovieInsertVO asmiVO = new AdminSchMovieInsertVO(mvTitle, mvOpenDate, schDate, schStime, schEtime);
@@ -24,10 +26,12 @@
 			AdminMovieCloseUpdateVO amcuVO =  new AdminMovieCloseUpdateVO(mvTitle, mvOpenDate, mvCloseDate);
 			boolean updateFlag = asmDAO.updateMovieClose(amcuVO);
 			
+			AddSeatVO asVO = new AddSeatVO(mvTitle, mvOpenDate, schDate, schStime, schEtime);
 			for( int i = 1; i < 21; i ++){
-				
+				int cnt = sDAO.insertAddSeat(asVO, String.valueOf(i));
 			}
 		}
+	
   %>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,4 +108,3 @@
     </div>
   </body>
 </html>
-

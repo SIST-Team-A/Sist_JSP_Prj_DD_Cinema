@@ -245,7 +245,7 @@ input, select, textarea, button {
 		<div id ="main">
 		
 			<div>
-				<h4>예매 > <a href="http://localhost/movie_reservation/view/reservation/reservation.jsp" >영화선택 </a> > <strong>좌석선택</strong></h4>
+				<h4>예매 > <a href="http://localhost/jsp_prj/day0514/reservation.jsp" >영화선택 </a> > <strong>좌석선택</strong></h4>
 				<!-- 좌석선택 div -->
 				 <div id ="selectSeat">
 				 	<!-- 영화 스크린 정보 표시 -->
@@ -254,7 +254,7 @@ input, select, textarea, button {
 				 		</div>
 				 	<!-- 영화 스크린 정보 표시/div -->
 				 	 <!-- 영화 좌석 버튼 div -->
-				 	 <form action = "http://localhost/movie_reservation/view/reservation/resultReservation.jsp" id = "frm" method = "post">
+				 	 <form action = "resultReservation.jsp" id = "frm" method = "post">
 				 		 <input type="hidden" name ="movie" value="<%=movie %>">
 				 		 <input type="hidden" name ="date" value="<%=date %>">
 				 		 <input type="hidden" name ="time" value="<%=time %>">	

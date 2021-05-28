@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.SeatDAO;
+import vo.SeatUpdateVO;
 import vo.AddSeatVO;
 import vo.SeatVO;
 
 public class SeatDAO {
-
 	private static SeatDAO sDAO;
 	public SeatDAO() {
 		
@@ -100,4 +100,40 @@ public class SeatDAO {
 		}//end try~ finally
 		return cnt;
 	}//insertAddSeat
+	
+	public boolean updateSeat(SeatUpdateVO suVO) throws SQLException{
+		boolean flag = false;
+		int cnt = 0;
+		DbConnection dc = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			//1. Connection 얻기
+				con = dc.getConn();
+			//2. 쿼리문 생성객체 얻기
+				
+				String updateQuery = "update seat set rev_no= ?, seat_tf = 'T' where  sch_no in  (select sch_no from sch_movie where  mv_no in (select mv_no from movie where mv_title = ?) and sch_date = ? and sch_stime = ?) and seat_name = ?";
+				pstmt = con.prepareStatement(updateQuery);
+			//3. 바인드 변수에 값 할당.
+				pstmt.setString(1, suVO.getRevNo());
+				pstmt.setString(2, suVO.getMvTitle());
+				pstmt.setString(3, suVO.getSchDate());
+				pstmt.setString(4, suVO.getSchStime());
+				pstmt.setString(5, suVO.getSeatName());
+			//4. 쿼리문 수행 후 결과 얻기
+				cnt =  pstmt.executeUpdate();
+				
+				if(cnt == 1) {
+					flag = true;
+				}
+				
+			}finally {
+			//5. 연결 끊기.
+				dc.dbClose(con, pstmt, null);
+			}//end try~ finally
+		
+		return flag;
+	}
 }//class

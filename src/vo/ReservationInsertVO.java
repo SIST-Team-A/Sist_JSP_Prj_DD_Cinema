@@ -1,13 +1,14 @@
 package vo;
 
 public class ReservationInsertVO {
-	private String memId, revAdultCnt;
+	private String memId;
+	private int revAdultCnt;
 
 	public ReservationInsertVO() {
 		super();
 	}
 
-	public ReservationInsertVO(String memId, String revAdultCnt) {
+	public ReservationInsertVO(String memId, int revAdultCnt) {
 		super();
 		this.memId = memId;
 		this.revAdultCnt = revAdultCnt;
@@ -21,13 +22,12 @@ public class ReservationInsertVO {
 		this.memId = memId;
 	}
 
-	public String getRevAdultCnt() {
+	public int getRevAdultCnt() {
 		return revAdultCnt;
 	}
 
-	public void setRevAdultCnt(String revAdultCnt) {
+	public void setRevAdultCnt(int revAdultCnt) {
 		this.revAdultCnt = revAdultCnt;
 	}
-	
-	
+
 }

@@ -1,3 +1,9 @@
+<%@page import="vo.SeatRevVO"%>
+<%@page import="vo.SeatUpdateVO"%>
+<%@page import="dao.SeatDAO"%>
+<%@page import="dao.ReservationDAO"%>
+<%@page import="vo.ReservationInsertVO"%>
+<%@page import="vo.ReservationVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -10,6 +16,19 @@
 		String movieTime = request.getParameter("time");
 		
 		String[] selectSeat = request.getParameterValues("selectSeat");
+		
+		ReservationInsertVO riVO = new ReservationInsertVO("lee3",selectSeat.length);
+		ReservationDAO rDAO = new ReservationDAO ();
+		boolean revInsert = rDAO.insertReservation(riVO);
+		String rev_no = rDAO.selectRevNO();
+		
+		
+		SeatDAO sDAO = new SeatDAO();
+		SeatUpdateVO suVO = null;
+		for(int i = 0; i < selectSeat.length; i++){
+			suVO = new SeatUpdateVO(movie, movieDate, movieTime, selectSeat[i], rev_no);
+			boolean seatUpdate = sDAO.updateSeat(suVO);
+		}		
     %>
    
 <!DOCTYPE html>
@@ -59,7 +78,22 @@
 </script>
 </head>
 <body>
+<%
+	ReservationVO rVO = rDAO.selectReservation(rev_no,movie,movieDate,movieTime);
+%>
 
+<% 
+	/* Calendar cal = Calendar.getInstance();
+	DateFormat df = new SimpleDateFormat("YYYY년 MM월");
+    String Month = df.format(cal.getTime()); */
+    
+    String date = rVO.getSchDate();
+    String year = date.substring(0,4) + "년";
+    String month = date.substring(5,7) + "월";
+    String day = date.substring(8,10) + "일";
+   
+    
+%>
 	<div id="wrap">
 		<!-- wrap 900(w) x 1000(h) -->
 		
@@ -69,7 +103,7 @@
 		<div id ="main" >
 			<div  >
 		
-			<table id="ressultReservation-table">
+			<table id="resultReservation-table">
 			<thead  style = "">
 				<tr>
 					<td colspan="3" style = "height : 40px"> <h1>예매가 완료 되었습니다.</h1></td>
@@ -82,24 +116,35 @@
 				</tr>
 				<tr>
 					<td class = "resultReservation-table-td" ><h4><strong>예매 번호</strong></h4></td>
-					<td>r_00000001</td>
+					<td><%=rVO.getRevNo() %></td>
 				</tr>
 				<tr>
 					<td class = "resultReservation-table-td" ><h4><strong>영화</strong></h4></td>
-					<td>백두산?</td>
+					<td><%=rVO.getMvTitle() %></td>
 				</tr>
 				
 				<tr>
 					<td class = "resultReservation-table-td" ><h4><strong>영화일자</strong></h4></td>
-					<td>2021년 5월 <strong>21일 15:00 ~ 17:00</strong></td>
+					<td><%=year %> <%=month %> <strong><%=day %> <%=rVO.getSchStime() %> ~ <%=rVO.getSchEtime() %></strong></td>
 				</tr>
 				<tr>
 					<td class = "resultReservation-table-td"><h4><strong>인원수</strong></h4></td>
-					<td>성인 2 명</td>
+					<td><%=rVO.getRevAdultCnt() %> 명</td>
 				</tr>
 				<tr>
 					<td class = "resultReservation-table-td" ><h4><strong>좌석번호</strong></h4></td>
-					<td>A-1, A-2</td>
+					<td>
+					<%
+					String seat = null;
+					for ( SeatRevVO srVO :rVO.getSeatList()){ 
+					%>
+					
+						<%= srVO.getSeatName() %> 
+						
+					<%
+					}//end for
+					%>
+					</td>
 				</tr>
 	
 			</tbody>		

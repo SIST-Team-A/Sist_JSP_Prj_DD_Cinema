@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.AdminSchMovieDAO;
 import vo.AdminMovieCloseUpdateVO;
 import vo.AdminMovieListVO;
 import vo.AdminSchMovieInsertVO;
