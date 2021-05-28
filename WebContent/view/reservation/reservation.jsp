@@ -192,7 +192,7 @@ List<SchMovieDateTimeVO> smdtList = new ArrayList<SchMovieDateTimeVO>();
 	        
 	        for ( var i = 0; i < schStime.length; i++){
 	        	if(sDate[i] == date){
-	        		$("#timeList").append("<option value ='"+schStime[i]+"'>"+schStime[i]+"[남은좌석 : ] </option>");
+	        		$("#timeList").append("<option value ='"+schStime[i]+"'>"+schStime[i]+" </option>");
 	        	}//end if
 	        }//end for
 	        
@@ -205,6 +205,7 @@ List<SchMovieDateTimeVO> smdtList = new ArrayList<SchMovieDateTimeVO>();
 			})
 		
 			$("#seatBtn").click(function(){
+				//window.location.href = "seat.jsp";//+url.replaceAll("#","");
 				$("#frm").submit();
 			});//click
 		});//ready
@@ -236,7 +237,7 @@ List<SchMovieDateTimeVO> smdtList = new ArrayList<SchMovieDateTimeVO>();
 				</div>
 			</div>
 			<!-- 내용 -->
-			<form action = "http://localhost/movie_reservation/view/reservation/seat.jsp" method ="get"	id = "frm" >
+			<form action = "seat.jsp" method ="get"	id = "frm" >
 			<div >
 				<!-- container 900(w) x 700(h)-->
 				<div id="movie-select">

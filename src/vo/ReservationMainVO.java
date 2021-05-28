@@ -1,16 +1,16 @@
 package vo;
 
 public class ReservationMainVO {
-	private String mvTitle, revNO;
+	private String mvTitle, revNo;
 
 	public ReservationMainVO() {
 		super();
 	}
 
-	public ReservationMainVO(String mvTitle, String revNO) {
+	public ReservationMainVO(String mvTitle, String revNo) {
 		super();
 		this.mvTitle = mvTitle;
-		this.revNO = revNO;
+		this.revNo = revNo;
 	}
 
 	public String getMvTitle() {
@@ -21,12 +21,12 @@ public class ReservationMainVO {
 		this.mvTitle = mvTitle;
 	}
 
-	public String getRevNO() {
-		return revNO;
+	public String getRevNo() {
+		return revNo;
 	}
 
-	public void setRevNO(String revNO) {
-		this.revNO = revNO;
+	public void setRevNo(String revNo) {
+		this.revNo = revNo;
 	}
-	
 }
+	
