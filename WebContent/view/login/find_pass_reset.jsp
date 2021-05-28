@@ -31,22 +31,23 @@ td{height : 60px; width:600px; font-size: 20px;   }
 </style>
 
 <script type="text/javascript">
+$
+
 function changepass(){
 	
 	if($("#pass").val() == $("#con_pass").val()){
 		<%
-		String Name = request.getParameter("PASS_name");
-		String Id = request.getParameter("PASS_id");
-		String Email = request.getParameter("PASS_email");
-		
-		String newPass = request.getParameter("pass");
-		String newConPass = request.getParameter("con_pass");
-		
-		
-		
-		
+		request.setCharacterEncoding("UTF-8");
+		String name = request.getParameter("PASS_name");
+		String id = request.getParameter("PASS_id");
+		String email = request.getParameter("PASS_email");
 		%>
+		$("#frm").append("<input type='hidden' name='getName' value='<%=name%>'>");	
+		$("#frm").append("<input type='hidden' name='getId' value='<%=id%>'>")		
+		$("#frm").append("<input type='hidden' name='getEmail' value='<%=email%>'>")		
+		
 		alert("비밀번호가 변경되었습니다.");
+		$("#frm").submit();
 		//window.close();  
 	}else{
 		alert("잘못된 정보입니다. 다시 입력 해 주세요 !");
@@ -58,11 +59,9 @@ function changepass(){
 </script>
 </head>
 <body>
-	<%=Name %>
-	<%=newPass %>
-	<%=newConPass %>
+	
 		<div id="wrap">
-		 <form action="find_pass_reset.jsp" id = "frm">
+		 <form action="find_pass_reset_process.jsp" id = "frm" method="post">
 		<div id ="main">
 			<div style ="background-color : #E4E4E4; height : 400px; width : 600px; padding : 20px">
 			<table >
