@@ -5,7 +5,7 @@
 <%
 request.setCharacterEncoding("UTF-8");
 AdminMovieDAO amdao=AdminMovieDAO.getInstance();
-MovieUpdateInsertVO muiVO=new MovieUpdateInsertVO();
+MovieUpdateInsertVO muiVO= new MovieUpdateInsertVO();
 %>
 <!DOCTYPE html>
 <html>
@@ -86,7 +86,6 @@ window.onload=function(){
             <tr>
               <td class="td-first">번호</td>
               <td class="td-second"><input type="text" id="test" name="mv-no" value="" class="table-text" /></td>
-              
             </tr>
             
             <tr>     	 
@@ -121,44 +120,47 @@ window.onload=function(){
             
 
             </tr>
+            
             <tr>
               <td class="td-first">조연</td>
               <td class="td-second" id="table-sub"><input type="text" name="mv-sub" value="" class="table-text" />
-             
-
             </tr>
+            
             <tr>
               <td class="td-first">줄거리</td>
               <td class="td-second"><input type="text" name="mv-story"  value="" class="table-text" style="height:100px" /></td>
             </tr>
+            
             <tr>
               <td class="td-first">러닝타임</td>
               <td class="td-second"><input type="text" name="mv-runtime" value="" class="table-text" /></td>
-
             </tr>
+            
             <tr>
               <td class="td-first">트레일러</td>
               <td class="td-second"><input type="text" name="mv-trailer"   value="" class="table-text" /></td>
-
             </tr>
+            
             <tr>
               <td class="td-first">개봉일자</td>
               <td class="td-second"><input type="text" name="mv-opendate" value="" class="table-text" /></td>
-  
             </tr>
+            
             <tr>
               <td class="td-first">개봉여부</td>
               <td class="td-second" style="font-size:15px">
-              <input type="radio" name="opennot" />개봉&emsp;<input type="radio" name="opennot"/>미개봉&nbsp;<input type="radio" name="opennot"/>상영종료
+              <input type="radio" name="opennot" value="O"/>개봉&emsp;<input type="radio" name="opennot" value="N"/>미개봉&nbsp;
               </td>             
-            </tr>      
+            </tr>
+                  
 			<tr id="tr-bottom">            
 			   <td colspan="2">
 		 		<!--  <input type="hidden" name="addData" value="asd"> -->
 			   <input type="button" value="추가"  id="addBtn" onclick="mvInsert()"/>
 			   <input type="button" value="취소" id="cencelBtn"  onclick="closeWindow()"/>
 			   </td>
-			</tr>           
+			</tr>
+			           
               </table> 
 	</form>
 </div>

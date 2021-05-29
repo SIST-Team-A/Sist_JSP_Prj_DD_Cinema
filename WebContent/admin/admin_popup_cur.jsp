@@ -9,21 +9,42 @@
 request.setCharacterEncoding("UTF-8");
 AdminMovieDAO amdao = AdminMovieDAO.getInstance();
 String mvNO = request.getParameter("test");
-List<AdminMovieSelectVO> amsList=new ArrayList<AdminMovieSelectVO>();
-amsList=amdao.selectMovie(mvNO);
+AdminMovieSelectVO amsVO = new AdminMovieSelectVO();
+amsVO = amdao.selectMovie(mvNO);
 
 %>
 <!-- 주연 조연 구분 코드 -->
 <%
+List<String> leadList = new ArrayList<String>();
+List<String> subList = new ArrayList<String>();
 StringBuilder lead = new StringBuilder();
 StringBuilder sub = new StringBuilder();
 
 
-for (int i = 0; i < amsList.get(0).getActorList().size(); i++) {
-	if (amsList.get(0).getActorList().get(i).getActMainOrSub().equals("M")) {
-		lead.append(amsList.get(0).getActorList().get(i).getActName() + " ");
+for (int i = 0; i < amsVO.getActorList().size(); i++) {
+	if (amsVO.getActorList().get(i).getActMainOrSub().equals("M")) {
+		/* lead.append(amsVO.getActorList().get(i).getActName() + ", "); */
+		leadList.add(amsVO.getActorList().get(i).getActName());
 	} else {
-		sub.append(amsList.get(0).getActorList().get(i).getActName() + " ");
+		/* sub.append(amsVO.getActorList().get(i).getActName() + ", "); */
+		subList.add(amsVO.getActorList().get(i).getActName());
+	}
+}
+
+for(int i = 0; i<leadList.size();i++){
+	if(i<leadList.size()-1){
+	lead.append(leadList.get(i)+ ", ");
+	}
+	else{
+	lead.append(leadList.get(i)+ "");
+	}
+}
+for(int i = 0; i<subList.size();i++){
+	if(i<subList.size()-1){
+	sub.append(subList.get(i)+ ", ");
+	}
+	else{
+	sub.append(subList.get(i)+ "");
 	}
 }
 
@@ -31,7 +52,7 @@ String opennot1="";
 String opennot2="";
 //String opennot3=""; //이거는 상영종료 넣을꺼면 사용
 
-if(amsList.get(0).getMvOpenOrNot().equals("O")){
+if(amsVO.getMvOpenOrNot().equals("O")){
 	opennot1="checked";
 	opennot2="";
 }else{
@@ -139,27 +160,27 @@ function del(){
             
             <tr>     	 
               <td class="td-first">상영작포스터</td>
-              <td class="td-second"><input type="text"  name="mv-poster" id="mv-poster-cur" value="<%=amsList.get(0).getMvPoster()%>" class="table-text" /></td>
+              <td class="td-second"><input type="text"  name="mv-poster" id="mv-poster-cur" value="<%=amsVO.getMvPoster()%>" class="table-text" /></td>
             </tr>
             
             <tr>     	 
               <td class="td-first">개봉예정포스터</td>
-              <td class="td-second"><input type="text" name="mv-poster-soon" id="mv-poster-soon" value="<%=amsList.get(0).getMvPosterSoon() %>" class="table-text" /></td>
+              <td class="td-second"><input type="text" name="mv-poster-soon" id="mv-poster-soon" value="<%=amsVO.getMvPosterSoon() %>" class="table-text" /></td>
             </tr>
             
             <tr>
               <td class="td-first">제목</td>
-              <td class="td-second"><input type="text" name="mv-title" id="mv-title" value="<%=amsList.get(0).getMvTitle()%>" class="table-text" /></td>
+              <td class="td-second"><input type="text" name="mv-title" id="mv-title" value="<%=amsVO.getMvTitle()%>" class="table-text" /></td>
             </tr>
             
             <tr>
               <td class="td-first">장르</td>
-              <td class="td-second"><input type="text"  name="mv-genre" id="mv-genre" value="<%=amdao.selectMovie(mvNO).get(0).getMvGenre() %>" class="table-text" /></td>
+              <td class="td-second"><input type="text"  name="mv-genre" id="mv-genre" value="<%=amsVO.getMvGenre() %>" class="table-text" /></td>
             </tr>
             
             <tr>
               <td class="td-first">감독</td>
-              <td class="td-second"><input type="text" name="mv-director" id="mv-director" value="<%=amsList.get(0).getMvDirector()%>" class="table-text" /></td>
+              <td class="td-second"><input type="text" name="mv-director" id="mv-director" value="<%=amsVO.getMvDirector()%>" class="table-text" /></td>
 
             </tr>         
               		
@@ -177,27 +198,27 @@ function del(){
             </tr>
             <tr>
               <td class="td-first">줄거리</td>
-              <td class="td-second"><input type="text"  name="mv-story" id="mv-story" value="<%=amsList.get(0).getMvSt()%>" class="table-text" style="height:100px" /></td>
+              <td class="td-second"><input type="text"  name="mv-story" id="mv-story" value="<%=amsVO.getMvSt()%>" class="table-text" style="height:100px" /></td>
             </tr>
             <tr>
               <td class="td-first">러닝타임</td>
-              <td class="td-second"><input type="text" name="mv-runtime" id="mv-runtime" value="<%=amsList.get(0).getMvRuntime()%>" class="table-text" /></td>
+              <td class="td-second"><input type="text" name="mv-runtime" id="mv-runtime" value="<%=amsVO.getMvRuntime()%>" class="table-text" /></td>
 
             </tr>
             <tr>
               <td class="td-first">트레일러</td>
-              <td class="td-second"><input type="text"  name="mv-trailer" id="mv-trailer" value="<%=amsList.get(0).getMvTrailer()%>" class="table-text" /></td>
+              <td class="td-second"><input type="text"  name="mv-trailer" id="mv-trailer" value="<%=amsVO.getMvTrailer()%>" class="table-text" /></td>
 
             </tr>
             <tr>
               <td class="td-first">개봉일자</td>
-              <td class="td-second"><input type="text" name="mv-opendate" id="mv-opendate" value="<%=amsList.get(0).getMvOpenDate()%>" class="table-text" /></td>
+              <td class="td-second"><input type="text" name="mv-opendate" id="mv-opendate" value="<%=amsVO.getMvOpenDate()%>" class="table-text" /></td>
   
             </tr>
             <tr>
               <td class="td-first">개봉여부</td>
               <td class="td-second" style="font-size:15px">
-              	<input type="radio" id="mv-open-radio" name="opennot" <%=opennot1 %>/>개봉&emsp;<input type="radio"  id="mv-noopen-radio" name="opennot" <%=opennot2 %>/>미개봉&nbsp;<input type="radio"  id="mv-close-radio" name="opennot"/>상영종료
+              	<input type="radio" id="mv-open-radio" name="opennot" value="O" <%=opennot1 %>/>개봉&emsp;<input type="radio"  id="mv-noopen-radio" name="opennot" value="N" <%=opennot2 %>/>미개봉&nbsp;<input type="radio"  id="mv-close-radio" name="opennot" value=""/>상영종료
          	  </td>             
             </tr>
                
@@ -210,7 +231,6 @@ function del(){
 					   <input type="button" value="삭제"  id="deleteBtn" onclick="del()"></td>
 				   </form>
 			  		  <td> <input type="button" value="취소" id="cencelBtn" onclick="closeWindow()"></td>
-			   
 			</tr>           
               </table> 
 

@@ -6,7 +6,7 @@
      <%@ page import="dao.AdminMovieDAO" %>
      <% 
      AdminMovieDAO amdao=AdminMovieDAO.getInstance();
-     List<AdminMovieMainVO> soonList=new ArrayList<AdminMovieMainVO>(); 
+     List<AdminMovieMainVO> soonList =new ArrayList<AdminMovieMainVO>(); 
  	int count0=0;
  	int count1=0;
  	int count2=0;
@@ -21,8 +21,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>    
-    <link href="http://localhost/prj2_hm/common/css/adminHeaderFooter.css" rel="stylesheet"/>
-    <link href="http://localhost/prj2_hm/common/css/adminModal.css" rel="stylesheet"/>
+    <link href="../common/css/adminHeaderFooter.css" rel="stylesheet"/>
+    <link href="../common/css/adminModal.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   
@@ -93,7 +93,6 @@
               <td class="title-bar">영화제목</td>
               <td class="title-bar">감독</td>
               <td class="title-bar">출연</td>
-              <td class="title-bar">조회</td>
             </tr>
                  	<%soonList=amdao.selectMovieAll("N");
                 for(int i=0; i<soonList.size();i++){%>
@@ -106,7 +105,6 @@
       			<%=soonList.get(i).getActName().get(j).getActName() %>
       			<% }%>
       			</td>
-      			<td class="audience"><%=soonList.get(i).getMvAttCnt() %></td>
       		</tr>    	
       		</form>
       		<%}%>   
