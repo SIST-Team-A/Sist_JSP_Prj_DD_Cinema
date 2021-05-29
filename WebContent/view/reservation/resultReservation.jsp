@@ -42,7 +42,7 @@
     <title>예매확인</title>
 
     <!-- 부트스트랩 -->
-    <link href="http://localhost/jsp_prj/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://localhost/movie_reservation/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
     
     	 <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
@@ -51,7 +51,7 @@
     <!--  jQuery CDN(contents Delivery Network) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<!--  bootstrap  -->
- <script src="http://localhost/jsp_prj/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+ <script src="http://localhost/movie_reservation/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
 <style type="text/css">
 	#main {
         /* margin: auto 0; */
@@ -64,13 +64,15 @@
 	
 	td{font-size: 15px}
 	
-	#ressultReservation-table{margin-left : 60px; width: 600px; height: 500px;text-align: center}
+	#resultReservation-table{margin-left : 60px; width: 600px; height: 500px;text-align: center}
 	.resultReservation-table-td{text-align : right; width: 200px}
 	
 	#resultReservation-mainBtn{width : 150px; height: 50px; background-color: #dfdfdf ; color : #000000;}
  </style>
 <script type="text/javascript">
-
+	function mainBtn(){
+		window.location.href = "../main.jsp";
+	}//mainBtn
 
 </script>
 </head>
@@ -150,7 +152,7 @@
 			
 			<!-- 버튼위치 -->
 			<div style = "text-align:right">
-				<input id = "resultReservation-mainBtn" type="button" value ="메인으로" class="btn" /> 
+				<input id = "resultReservation-mainBtn" type="button" value ="메인으로" class="btn" onclick = "mainBtn()"/> 
 			</div>
 		</div>
 		</div>
