@@ -64,7 +64,7 @@
 	
 	td{font-size: 15px}
 	
-	#ressultReservation-table{margin-left : 60px; width: 600px; height: 500px;text-align: center}
+	#resultReservation-table{margin-left : 60px; width: 600px; height: 500px;text-align: center}
 	.resultReservation-table-td{text-align : right; width: 200px}
 	
 	#resultReservation-mainBtn{width : 150px; height: 50px; background-color: #dfdfdf ; color : #000000;}
