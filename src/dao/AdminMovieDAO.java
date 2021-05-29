@@ -155,6 +155,9 @@ public class AdminMovieDAO {
 
 		try {
 			con = dc.getConn();
+			
+			deleteActor(muiVO.getMvNo());
+			insertActor(muiVO.getMvNo(), muiVO.getActLeadArr(), muiVO.getActSubArr());
 
 			String updateQuery = "update movie set mv_title=?,mv_poster=?,mv_director=?,mv_st=?,mv_trailer=?,mv_opendate=?,mv_runtime=?,mv_openornot=?, mv_regdate=sysdate, mv_genre=?, mv_soon_poster=? where mv_no='"
 					+ muiVO.getMvNo() + "'";
