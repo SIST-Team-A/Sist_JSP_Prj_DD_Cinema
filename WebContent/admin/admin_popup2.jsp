@@ -1,8 +1,12 @@
+<%@page import="vo.MovieUpdateInsertVO"%>
 <%@page import="dao.AdminMovieDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 request.setCharacterEncoding("UTF-8");
+AdminMovieDAO amdao=AdminMovieDAO.getInstance();
+MovieUpdateInsertVO muiVO=new MovieUpdateInsertVO();
+
 %>
 <!DOCTYPE html>
 <html>
@@ -70,30 +74,38 @@ function closeWindow(){
 	opener.location.reload();
 }
 
+
+function mvInsert(){
+	document.getElementById("Frm").submit();
+}
+
+window.onload=function(){	
+};
+
 </script>
 </head>
 <body>
 
 <div id="wrap">
-   
+  <form action="mv_insert.jsp"  id="Frm" method="post"><!-- 폼으로 삭제요청 --> 
    <table id="popup-table">
              <tr id="tr-header">
                 <td colspan="2"><h3>개봉예정작관리</h3></td>
             </tr>
             <tr>
               <td class="td-first">번호</td>
-              <td class="td-second"><input type="text" value="" readonly="readonly" class="table-text" /></td>
+              <td class="td-second"><input type="text" id="test" name="dlgkrals" value="넘겨지는데" readonly="readonly" class="table-text" /></td>
               
             </tr>
             
             <tr>     	 
               <td class="td-first">포스터</td>
-              <td class="td-second"><input type="text" value="" class="table-text" /></td>
+              <td class="td-second"><input type="text" name="alsgkrdl"value="" class="table-text" /></td>
             </tr>
             
             <tr>     	 
               <td class="td-first">포스터2</td>
-              <td class="td-second"><input type="text" value="" class="table-text" /></td>
+              <td class="td-second"><input type="text" name="dlgkrals" value="" class="table-text" /></td>
             </tr>
             
             <tr>
@@ -115,13 +127,13 @@ function closeWindow(){
             <tr>
               <td class="td-first">주연</td>
               <td class="td-second" id="table-lead"><input type="text" value="" class="table-text" />
-              <input type="button" value="+" class=""/></td>
+            
 
             </tr>
             <tr>
               <td class="td-first">조연</td>
               <td class="td-second" id="table-sub"><input type="text" value="" class="table-text" />
-              <input type="button" value="+" class=""/></td>
+             
 
             </tr>
             <tr>
@@ -151,12 +163,13 @@ function closeWindow(){
             </tr>      
 			<tr id="tr-bottom">            
 			   <td colspan="2" id="">
-			   <input type="button" value="추가"  id="addBtn" />
+		 		<!--  <input type="hidden" name="addData" value="asd"> -->
+			   <input type="button" value="추가"  id="addBtn" onclick="mvInsert()"/>
 			   <input type="button" value="취소" id="cencelBtn"  onclick="closeWindow()"/>
 			   </td>
 			</tr>           
               </table> 
-	
+	</form>
 </div>
 
 </body>

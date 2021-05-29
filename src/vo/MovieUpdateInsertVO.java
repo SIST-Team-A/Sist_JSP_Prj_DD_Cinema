@@ -5,8 +5,6 @@ public class MovieUpdateInsertVO {
 	private String mvPoster;
 	private String mvTitle;
 	private String mvDirector;
-	private String[] actorNamearr;
-	private String[] actorRoleArr;
 	private String mvSt;
 	private String mvRuntime;
 	private String mvTrailler;
@@ -15,16 +13,13 @@ public class MovieUpdateInsertVO {
 	public MovieUpdateInsertVO() {
 		super();
 	}
-	public MovieUpdateInsertVO(String mvNo, String mvPoster, String mvTitle, String mvDirector, String[] actorNamearr,
-			String[] actorRoleArr, String mvSt, String mvRuntime, String mvTrailler, String mvOpenDate,
-			String mvOpenOrNot) {
+	public MovieUpdateInsertVO(String mvNo, String mvPoster, String mvTitle, String mvDirector, String mvSt,
+			String mvRuntime, String mvTrailler, String mvOpenDate, String mvOpenOrNot) {
 		super();
 		this.mvNo = mvNo;
 		this.mvPoster = mvPoster;
 		this.mvTitle = mvTitle;
 		this.mvDirector = mvDirector;
-		this.actorNamearr = actorNamearr;
-		this.actorRoleArr = actorRoleArr;
 		this.mvSt = mvSt;
 		this.mvRuntime = mvRuntime;
 		this.mvTrailler = mvTrailler;
@@ -54,18 +49,6 @@ public class MovieUpdateInsertVO {
 	}
 	public void setMvDirector(String mvDirector) {
 		this.mvDirector = mvDirector;
-	}
-	public String[] getActorNamearr() {
-		return actorNamearr;
-	}
-	public void setActorNamearr(String[] actorNamearr) {
-		this.actorNamearr = actorNamearr;
-	}
-	public String[] getActorRoleArr() {
-		return actorRoleArr;
-	}
-	public void setActorRoleArr(String[] actorRoleArr) {
-		this.actorRoleArr = actorRoleArr;
 	}
 	public String getMvSt() {
 		return mvSt;
@@ -97,5 +80,5 @@ public class MovieUpdateInsertVO {
 	public void setMvOpenOrNot(String mvOpenOrNot) {
 		this.mvOpenOrNot = mvOpenOrNot;
 	}
-	
+
 }

@@ -114,7 +114,7 @@ function del(){
 
 
 	
-<form action="mv_del.jsp" id="Frm" method="post"> <!-- 폼으로 삭제요청 -->           
+<form action="mv_update.jsp" id="Frm" method="post"> <!-- 폼으로 삭제요청 -->           
   <table id="popup-table">
              <tr id="tr-header">
                 <td colspan="2"><h3>개봉예정작관리</h3></td>
