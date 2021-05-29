@@ -1,5 +1,23 @@
+<%@page import="vo.AdminMemberVO"%>
+<%@page import="dao.AdminMemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@page import="java.util.ArrayList"%>
+<%@page import="vo.AdminMemberMainVO"%>
+<%@page import="java.util.List"%>
+	
+	<%
+	request.setCharacterEncoding("UTF-8");
+
+	AdminMemberDAO amDAO = new AdminMemberDAO();
+	List<AdminMemberMainVO> list = new ArrayList<AdminMemberMainVO>();
+	list = amDAO.selectMemberAll();
+	
+	
+	
+	%>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,40 +88,44 @@
 		#selectTa{width: 500px;border-spacing: 40px;border-collapse: separate;}
 		#grBtn{text-align: center;}
 	
+	
+	
 </style>
 
 
 
 <script type="text/javascript">
 	
+	
+	
+	
 	$(function() {
 		
 		$("table tbody tr").click(function() {
-			
-			/* 
-			기존의 팝업창
-			window.open("ad_mem_select.jsp","pop","width=420px,height=640px,top="+(window.screenTop+100)+",left="+(window.screenLeft+100));
-			}); 
-			 */
-			
-			 var num= $("#ta_num").text();
-			 $("#modal_num").val(num);
-			 
-			 var id= $("#ta_id").text();
+			<%--  var id= $("#ta_id").text();
 			 $("#modal_id").val(id);
+			 
+			 var num= <%=amDAO.selectMember() %>
+			 $("#modal_num").val(num);
 			 
 			 var name= $("#ta_name").text();
 			 $("#modal_name").val(name);
 			 
 			 var birth= $("#ta_birth").text();
 			 $("#modal_birth").val(birth);
-			 
+			  --%>
 			$("#modal").fadeIn();//attr("style", "display:block");//modal
+			
 		});//click
 		
 		
 		$("#modal_edit_btn").click(function() {
-			confirm("수정하시겠습니까?");
+			var edit=confirm("수정하시겠습니까?");
+			if(edit){
+				$("#modal_frm").submit();
+			}else{
+				return;
+			}
 		});//click
 		
 		$("#modal_delete_btn").click(function() {
@@ -142,49 +164,17 @@
 			</tr>
 			</thead>
 			<tbody>
+		<%for(int i=0;i<list.size();i++){ %>
 			<tr>
-				<td id="ta_num">1234567</td>
-				<td id="ta_id" >sist1234</td>
-				<td id="ta_name">홍길동</td>
-				<td id="ta_birth">1995-12-11</td>
+				<td id="ta_num"><%= list.get(i).getMemNo()%></td>
+				<td id="ta_id"><%= list.get(i).getMemId()%></td>
+				<td id="ta_name"><%= list.get(i).getMemName()%></td>
+				<td id="ta_birth"><%= list.get(i).getMemBirth()%></td>
 			</tr>
+			<%
+			} 
+			%>
 			<tr>
-				<td>1234567</td>
-				<td>sist1234</td>
-				<td>홍길동</td>
-				<td>1995-12-11</td>
-			</tr>
-			<tr>
-				<td>1234567</td>
-				<td>sist1234</td>
-				<td>홍길동</td>
-				<td>1995-12-11</td>
-			</tr>
-			<tr>
-				<td>1234567</td>
-				<td>sist1234</td>
-				<td>홍길동</td>
-				<td>1995-12-11</td>
-			</tr>
-			<tr>
-				<td>1234567</td>
-				<td>sist1234</td>
-				<td>홍길동</td>
-				<td>1995-12-11</td>
-			</tr>
-			<tr>
-				<td>1234567</td>
-				<td>sist1234</td>
-				<td>홍길동</td>
-				<td>1995-12-11</td>
-			</tr>
-			<tr>
-				<td>1234567</td>
-				<td>sist1234</td>
-				<td>홍길동</td>
-				<td>1995-12-11</td>
-			</tr>
-			
 			</tbody>
 		</table>
 		
@@ -193,40 +183,43 @@
 			<div class="modal_content">
 				<div id="selectTitle">회원관리</div>
 				 <div class="close-area" id="close-area">X</div>
+				 <form action="#" id="modal_frm">
+				
 				<table id="selectTa">
 					<tr>
 						<th>번호</th>
-						<td><input type="text" readonly="readonly" style="background-color: #dfdfdf" id="modal_num" value=""></td>
+						<td><input type="text" readonly="readonly" style="background-color: #dfdfdf" id="modal_num" name="modal_num" value=""></td>
 					</tr>		
 					<tr>
 						<th>아이디</th>
-						<td><input type="text" readonly="readonly" style="background-color: #dfdfdf" id="modal_id"></td>
+						<td><input type="text" readonly="readonly" style="background-color: #dfdfdf" id="modal_id" name="modal_id"></td>
 					</tr>		
 					<tr>
 						<th>이름</th>
-						<td><input type="text" id="modal_name"></td>
+						<td><input type="text" id="modal_name" name="modal_name"></td>
 					</tr>		
 					<tr>
 						<th>생년월일</th>
-						<td><input type="text" id="modal_birth"></td>
+						<td><input type="text" id="modal_birth" name="modal_birth"></td>
 					</tr>		
 					<tr>
 						<th>성별</th>
-						<td><input type="radio" name="gender">남 <input type="radio" name="gender">여</td>
+						<td><input type="radio" name="gender" value="M">남 <input type="radio" name="gender" value="W">여</td>
 					</tr>		
 					<tr>
 						<th>이메일</th>
-						<td><input type="text" id="modal_email"></td>
+						<td><input type="text" id="modal_email" name="modal_email"></td>
 					</tr>		
 					<tr>
 						<th>연락처</th>
-						<td><input type="text" id="modal_phone"></td>
+						<td><input type="text" id="modal_phone" name="modal_phone"></td>
 					</tr>		
 					<tr>
 						<th>가입일</th>
-						<td><input type="text" readonly="readonly" style="background-color: #dfdfdf" id="modal_reg_date"></td>
+						<td><input type="text" readonly="readonly" style="background-color: #dfdfdf" id="modal_reg_date" name="modal_reg_date"></td>
 					</tr>		
 				</table>
+				 </form>
 				<div id="grBtn">
 					<input type="button" class="btn btn-primary btn-lg" value="수정" id="modal_edit_btn"/>
 					<input type="button" class="btn btn-danger btn-lg" value="삭제" id="modal_delete_btn"/>
@@ -238,10 +231,5 @@
 		</div>
 	 <%@ include file="adminFooter.jsp" %>
 	</div>
-	
-	
-	
-	
-	
 </body>
 </html>
