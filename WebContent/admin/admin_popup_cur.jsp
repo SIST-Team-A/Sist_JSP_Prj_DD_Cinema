@@ -1,3 +1,6 @@
+<%@page import="vo.AdminMovieSelectVO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page import="vo.MovieUpdateInsertVO"%>
 <%@page import="dao.AdminMovieDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,6 +9,9 @@
 request.setCharacterEncoding("UTF-8");
 AdminMovieDAO amdao = AdminMovieDAO.getInstance();
 String mvNO = request.getParameter("test");
+List<AdminMovieSelectVO> amsList=new ArrayList<AdminMovieSelectVO>();
+amsList=amdao.selectMovie(mvNO);
+
 %>
 <!-- 주연 조연 구분 코드 -->
 <%
@@ -13,11 +19,11 @@ StringBuilder lead = new StringBuilder();
 StringBuilder sub = new StringBuilder();
 
 
-for (int i = 0; i < amdao.selectMovie(mvNO).get(0).getActorList().size(); i++) {
-	if (amdao.selectMovie(mvNO).get(0).getActorList().get(i).getActMainOrSub().equals("M")) {
-		lead.append(amdao.selectMovie(mvNO).get(0).getActorList().get(i).getActName() + " ");
+for (int i = 0; i < amsList.get(0).getActorList().size(); i++) {
+	if (amsList.get(0).getActorList().get(i).getActMainOrSub().equals("M")) {
+		lead.append(amsList.get(0).getActorList().get(i).getActName() + " ");
 	} else {
-		sub.append(amdao.selectMovie(mvNO).get(0).getActorList().get(i).getActName() + " ");
+		sub.append(amsList.get(0).getActorList().get(i).getActName() + " ");
 	}
 }
 
@@ -25,7 +31,7 @@ String opennot1="";
 String opennot2="";
 //String opennot3=""; //이거는 상영종료 넣을꺼면 사용
 
-if(amdao.selectMovie(mvNO).get(0).getMvOpenOrNot().equals("O")){
+if(amsList.get(0).getMvOpenOrNot().equals("O")){
 	opennot1="checked";
 	opennot2="";
 }else{
@@ -88,13 +94,7 @@ text-align: center;
 width:500px;
 }
 
-/* #table-lead{
-padding-left:28px;
-}
 
-#table-sub{
-padding-left:28px;
-} */
 </style>
 
 <script type="text/javascript">
@@ -104,7 +104,7 @@ function closeWindow(){
 	opener.location.reload();
 }
 
-function inser(){
+function updat(){
 
 	if(confirm("정말로 수정 하시겠습니까?")){
 		document.getElementById('Frm1').submit();		
@@ -139,27 +139,27 @@ function del(){
             
             <tr>     	 
               <td class="td-first">상영작포스터</td>
-              <td class="td-second"><input type="text"  name="mv-poster-cur" id="mv-poster-cur" value="<%=amdao.selectMovie(mvNO).get(0).getMvPoster()%>" class="table-text" /></td>
+              <td class="td-second"><input type="text"  name="mv-poster" id="mv-poster-cur" value="<%=amsList.get(0).getMvPoster()%>" class="table-text" /></td>
             </tr>
             
             <tr>     	 
-              <td class="td-first">예정작포스터</td>
-              <td class="td-second"><input type="text" name="mv-poster-soon" id="mv-poster-soon" value="" class="table-text" /></td>
+              <td class="td-first">개봉예정포스터</td>
+              <td class="td-second"><input type="text" name="mv-poster-soon" id="mv-poster-soon" value="<%=amsList.get(0).getMvPosterSoon() %>" class="table-text" /></td>
             </tr>
             
             <tr>
               <td class="td-first">제목</td>
-              <td class="td-second"><input type="text" name="mv-title" id="mv-title" value="<%=amdao.selectMovie(mvNO).get(0).getMvTitle()%>" class="table-text" /></td>
+              <td class="td-second"><input type="text" name="mv-title" id="mv-title" value="<%=amsList.get(0).getMvTitle()%>" class="table-text" /></td>
             </tr>
             
             <tr>
               <td class="td-first">장르</td>
-              <td class="td-second"><input type="text"  name="mv-genre" id="mv-genre" value="" class="table-text" /></td>
+              <td class="td-second"><input type="text"  name="mv-genre" id="mv-genre" value="<%=amdao.selectMovie(mvNO).get(0).getMvGenre() %>" class="table-text" /></td>
             </tr>
             
             <tr>
               <td class="td-first">감독</td>
-              <td class="td-second"><input type="text" name="mv-director" id="mv-director" value="<%=amdao.selectMovie(mvNO).get(0).getMvDirector()%>" class="table-text" /></td>
+              <td class="td-second"><input type="text" name="mv-director" id="mv-director" value="<%=amsList.get(0).getMvDirector()%>" class="table-text" /></td>
 
             </tr>         
               		
@@ -177,21 +177,21 @@ function del(){
             </tr>
             <tr>
               <td class="td-first">줄거리</td>
-              <td class="td-second"><input type="text"  name="mv-story" id="mv-story" value="<%=amdao.selectMovie(mvNO).get(0).getMvSt()%>" class="table-text" style="height:100px" /></td>
+              <td class="td-second"><input type="text"  name="mv-story" id="mv-story" value="<%=amsList.get(0).getMvSt()%>" class="table-text" style="height:100px" /></td>
             </tr>
             <tr>
               <td class="td-first">러닝타임</td>
-              <td class="td-second"><input type="text" name="mv-runtime" id="mv-runtime" value="<%=amdao.selectMovie(mvNO).get(0).getMvRuntime()%>" class="table-text" /></td>
+              <td class="td-second"><input type="text" name="mv-runtime" id="mv-runtime" value="<%=amsList.get(0).getMvRuntime()%>" class="table-text" /></td>
 
             </tr>
             <tr>
               <td class="td-first">트레일러</td>
-              <td class="td-second"><input type="text"  name="mv-trailer" id="mv-trailer" value="<%=amdao.selectMovie(mvNO).get(0).getMvTrailer()%>" class="table-text" /></td>
+              <td class="td-second"><input type="text"  name="mv-trailer" id="mv-trailer" value="<%=amsList.get(0).getMvTrailer()%>" class="table-text" /></td>
 
             </tr>
             <tr>
               <td class="td-first">개봉일자</td>
-              <td class="td-second"><input type="text" name="mv-opendate" id="mv-opendate" value="<%=amdao.selectMovie(mvNO).get(0).getMvOpenDate()%>" class="table-text" /></td>
+              <td class="td-second"><input type="text" name="mv-opendate" id="mv-opendate" value="<%=amsList.get(0).getMvOpenDate()%>" class="table-text" /></td>
   
             </tr>
             <tr>
@@ -203,7 +203,7 @@ function del(){
                
 			<tr id="tr-bottom">
 			   		<td>
-			  		   <input type="button" value="수정"  id="motifyBtn" onclick="inser()"/></td>
+			  		   <input type="button" value="수정"  id="motifyBtn" onclick="updat()"/></td>
 			  		   </form>
 			   		<form action="mv_del.jsp" id="Frm2" method="post"><!-- 폼으로 삭제요청 -->
 					<td><input type="hidden" name="delNum" value="<%=mvNO%>">
