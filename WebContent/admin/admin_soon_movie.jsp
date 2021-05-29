@@ -39,7 +39,7 @@
     }
     
     function showPopup(){
-		var xPos = (document.body.offsetWidth/2) - (370/2); // 가운데 정렬
+		var xPos = (document.body.offsetWidth/2) - (750/2); // 가운데 정렬
 		xPos += window.screenLeft; // 듀얼 모니터일 때
 		var yPos = (document.body.offsetHeight/2) - (500/2);
 		window.open("", "popupwin", "width=750, height=1200,left="+xPos+", top="+yPos+", menubar=yes, status=yes, titlebar=yes, resizable=yes"); 	
@@ -54,7 +54,7 @@
    <%}%>
    
     $("#addBtn").click(function(){
-    	var xPos = (document.body.offsetWidth/2) - (370/2); // 가운데 정렬
+    	var xPos = (document.body.offsetWidth/2) - (750/2); // 가운데 정렬
 		xPos += window.screenLeft; // 듀얼 모니터일 때
 		var yPos = (document.body.offsetHeight/2) - (500/2);
 		window.open("admin_popup2.jsp", "aaa", "width=750, height=1200,left="+xPos+", top="+yPos+", menubar=yes, status=yes, titlebar=yes, resizable=yes"); 	 	

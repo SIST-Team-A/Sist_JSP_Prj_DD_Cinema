@@ -32,8 +32,6 @@ if(amdao.selectMovie(mvNO).get(0).getMvOpenOrNot().equals("O")){
 }
 %>
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,15 +48,15 @@ if(amdao.selectMovie(mvNO).get(0).getMvOpenOrNot().equals("O")){
 
 #wrap{
 margin: 50px auto;
-width:500px;
-height:700px;
+width:700px;
+height:850px;
 border: 1px solid #333;
 }
 
 #popup-table{
 margin:0 auto;
-width:500px;
-height:700px;
+width:700px;
+height:850px;
 
 }
 
@@ -76,12 +74,12 @@ text-align: center;
 }
 
 .td-second{
-width:200px;
+width:500px;
 text-align: center;
 }
 
 .table-text{
-width:250px;
+width:500px;
 }
 
 #table-lead{
@@ -94,9 +92,20 @@ padding-left:28px;
 </style>
 
 <script type="text/javascript">
+
 function closeWindow(){
 	self.close();
+	opener.location.reload();
 }
+
+function del(){
+	if(confirm("정말로 삭제 하시겠습니까?")){
+		document.getElementById('Frm').submit();		
+	}else{
+		return;
+	}
+}
+
 </script>
 </head>
 <body>
@@ -105,7 +114,7 @@ function closeWindow(){
 
 
 	
-           
+<form action="mv_del.jsp" id="Frm" method="post"> <!-- 폼으로 삭제요청 -->           
   <table id="popup-table">
              <tr id="tr-header">
                 <td colspan="2"><h3>개봉예정작관리</h3></td>
@@ -120,11 +129,22 @@ function closeWindow(){
               <td class="td-first">포스터</td>
               <td class="td-second"><input type="text" value="<%=amdao.selectMovie(mvNO).get(0).getMvPoster()%>" class="table-text" /></td>
             </tr>
+            
+            <tr>     	 
+              <td class="td-first">포스터2</td>
+              <td class="td-second"><input type="text" value="" class="table-text" /></td>
+            </tr>
+            
             <tr>
               <td class="td-first">제목</td>
               <td class="td-second"><input type="text" value="<%=amdao.selectMovie(mvNO).get(0).getMvTitle()%>" class="table-text" /></td>
-
             </tr>
+            
+            <tr>
+              <td class="td-first">장르</td>
+              <td class="td-second"><input type="text" value="" class="table-text" /></td>
+            </tr>
+            
             <tr>
               <td class="td-first">감독</td>
               <td class="td-second"><input type="text" value="<%=amdao.selectMovie(mvNO).get(0).getMvDirector()%>" class="table-text" /></td>
@@ -169,14 +189,15 @@ function closeWindow(){
               </td>             
             </tr>      
 			<tr id="tr-bottom">            
-			   <td colspan="2" id="">
-			   <input type="button" value="수정"  id="motifyBtn" />
-			   <input type="button" value="삭제"   id="deleteBtn" />
-			   <input type="button" value="취소" id="cencelBtn" onclick="closeWindow()"/>
+			   <td colspan="2" id="">	   
+			   		   <input type="button" value="수정"  id="motifyBtn" />
+					   <input type="hidden" name="delNum" value="<%=mvNO%>">
+					   <input type="button" value="삭제"  id="deleteBtn" onclick="document.getElementById('Frm').submit();">
+			  		   <input type="button" value="취소" id="cencelBtn" onclick="closeWindow()">
 			   </td>
 			</tr>           
               </table> 
-	
+	</form>
 </div>
 
 </body>
