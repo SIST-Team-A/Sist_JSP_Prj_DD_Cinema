@@ -7,17 +7,15 @@ public class AdminMovieMainVO {
 	private String mvTitle;
 	private String mvDirector;
 	private List<ActorVO> actName;
-	private String mvAttCnt;
 
 	public AdminMovieMainVO() {
 	}
 
-	public AdminMovieMainVO(String mvNo, String mvTitle, String mvDirector, List<ActorVO> actName, String mvAttCnt) {
+	public AdminMovieMainVO(String mvNo, String mvTitle, String mvDirector, List<ActorVO> actName) {
 		this.mvNo = mvNo;
 		this.mvTitle = mvTitle;
 		this.mvDirector = mvDirector;
 		this.actName = actName;
-		this.mvAttCnt = mvAttCnt;
 	}
 
 	public String getMvNo() {
@@ -50,14 +48,6 @@ public class AdminMovieMainVO {
 
 	public void setActName(List<ActorVO> actName) {
 		this.actName = actName;
-	}
-
-	public String getMvAttCnt() {
-		return mvAttCnt;
-	}
-
-	public void setMvAttCnt(String mvAttCnt) {
-		this.mvAttCnt = mvAttCnt;
 	}
 
 }

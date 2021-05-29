@@ -24,9 +24,6 @@
 </style>
 
 <script type="text/javascript">
-window.onload=function(){
-	alert("넘어왔네");
-}
 </script>
 </head>
 <body>
@@ -50,13 +47,13 @@ String mvTrailer=request.getParameter("mv-trailer");
 String mvOpendate=request.getParameter("mv-opendate");
 String mvOpenornot=request.getParameter("opennot");
 	 
-	if(mvOpenornot.equals("on")){
+	/* if(mvOpenornot.equals("on")){
 		mvOpenornot="O";
 	}else{
-		mvOpenornot="N";	
-	}
+		mvOpenornot="N";
+	} */
 	
-	MovieUpdateInsertVO muiVO=new MovieUpdateInsertVO(mvNo,mvPoster,mvPosterSoon,mvTitle,mvDirector,mvLead,mvSub,mvSt,mvRuntime,mvTrailer,mvOpendate,mvOpenornot,mvGenre);
+	MovieUpdateInsertVO muiVO = new MovieUpdateInsertVO(mvNo,mvPoster,mvPosterSoon,mvTitle,mvDirector,mvLead,mvSub,mvSt,mvRuntime,mvTrailer,mvOpendate,mvOpenornot,mvGenre);
  	amdao.updateMovie(muiVO); 
 %>
 <%=mvOpenornot %>
