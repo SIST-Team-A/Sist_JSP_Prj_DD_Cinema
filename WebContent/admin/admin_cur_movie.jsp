@@ -30,15 +30,7 @@
     
     
  window.onload=function(){
-    const modal = document.getElementById("modal")
-    function modalOn() {
-        modal.style.display = "flex";
-    }
-    
-    function modalOff() {
-        modal.style.display = "none"
-    }
-    
+
     function showPopup(){
 		var xPos = (document.body.offsetWidth/2) - (750/2); // 가운데 정렬
 		xPos += window.screenLeft; // 듀얼 모니터일 때
