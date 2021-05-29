@@ -277,7 +277,7 @@
           <div id="movie-info">
             <div id="movie-title"><h2><%=mvSelectVO.getMvTitle() %></h2></div>
             <div id="movie-detail">
-              장르 : / <%=mvSelectVO.getMvOpenDate() %> 개봉 / <%=mvSelectVO.getMvRuntime()%><br />
+              장르 : <%=mvSelectVO.getMvGenre() %>/ <%=mvSelectVO.getMvOpenDate() %> 개봉 / <%=mvSelectVO.getMvRuntime()%><br />
               감독 : <%=mvSelectVO.getMvDirector()%><br />
               출연 : <% for(int i = 0; i<list.size(); i++){
             	  if(i!=list.size()-1){%> 

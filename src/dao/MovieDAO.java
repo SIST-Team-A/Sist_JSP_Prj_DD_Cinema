@@ -72,14 +72,14 @@ public class MovieDAO {
 
 		try {
 			con = dc.getConn();
-			query = "select mv_title,mv_poster,mv_director,mv_opendate,mv_st,mv_trailer,mv_runtime from movie where mv_no=?";
+			query = "select mv_title,mv_poster,mv_genre,mv_director,mv_opendate,mv_st,mv_trailer,mv_runtime from movie where mv_no=?";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, mvNo);
 			rs = pstmt.executeQuery();
 			rs.next();
-			msVO = new MovieSelectVO(rs.getString("mv_title"), rs.getString("mv_poster"), rs.getString("mv_director"),
-					rs.getString("mv_opendate"), rs.getString("mv_st"), rs.getString("mv_trailer"),
-					rs.getString("mv_runtime"), selectActor(mvNo));
+			msVO = new MovieSelectVO(rs.getString("mv_title"), rs.getString("mv_poster"), rs.getString("mv_genre"),
+					rs.getString("mv_director"), rs.getString("mv_opendate"), rs.getString("mv_st"),
+					rs.getString("mv_trailer"), rs.getString("mv_runtime"), selectActor(mvNo));
 		} finally {
 			dc.dbClose(con, pstmt, rs);
 		}
