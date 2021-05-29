@@ -63,15 +63,20 @@ public class AdminMemberDAO {
 		return admVO;
 	}
 
-public boolean delectMember(String memNO) throws SQLException{
+public boolean delectMember(String memId) throws SQLException{
 	boolean flage=false ;
+	
 	Connection con = null;
 	PreparedStatement pstmt=null;
 	ResultSet rs = null;
+	
 	DbConnection dc = DbConnection.getInstance();
+	
 	try {
 		con=dc.getConn();
-		String deletMember = "DELETE FROM MEMBER WHERE MEM_NO = "+memNO;
+		
+		String deletMember = "DELETE FROM MEMBER WHERE MEM_ID = "+memId;
+		
 		pstmt = con.prepareStatement(deletMember);
 		rs = pstmt.executeQuery();
 		pstmt.executeUpdate();
@@ -85,31 +90,41 @@ public boolean delectMember(String memNO) throws SQLException{
 	return  flage;
 }
 
-public boolean updateMember(AdminUpdateMemberVO aumVO ) throws SQLException{
-	boolean flage=false ;
+public boolean updateMember(AdminUpdateMemberVO aumVO) throws SQLException{
+	
+	boolean result = false;
+	
 	Connection con = null;
 	PreparedStatement pstmt=null;
 	ResultSet rs = null;
+	
 	DbConnection dc = DbConnection.getInstance();
 	try {
 		con=dc.getConn();
-		String updateMember = "UPDATE MEMBER SET (MEM_ID,MEM_NAME,MEM_BIRTH,MEM_GENDER,MEM_EMAIL,MEM_PHONE) = (?,?,?,?,?,?) ";
+		//String updateMember = "UPDATE MEMBER SET MEM_NAME = 'QWE', WHERE MEM_ID = 'han' ";
+		String updateMember = "UPDATE MEMBER SET MEM_NAME = ?, MEM_BIRTH = ?, MEM_GENDER = ?, MEM_EMAIL =?, MEM_PHONE = ? where MEM_ID = ? " ;
+		
 		pstmt = con.prepareStatement(updateMember);
+		
+		pstmt.setString(1, aumVO.getMemName());
+		pstmt.setString(2, aumVO.getMemBirth());
+		pstmt.setString(3, aumVO.getMemGender());
+		pstmt.setString(4, aumVO.getMemEmail());
+		pstmt.setString(5, aumVO.getMemPhone());
+		pstmt.setString(6, aumVO.getMemId());
+		
 		rs = pstmt.executeQuery();
-		pstmt.setString(1, aumVO.getMemId());
-		pstmt.setString(2, aumVO.getMemName());
-		pstmt.setString(3, aumVO.getMemBirth());
-		pstmt.setString(4, aumVO.getMemGender());
-		pstmt.setString(5, aumVO.getMemEmail());
-		pstmt.setString(6, aumVO.getMemPhone());
-		pstmt.executeUpdate();
+		
 		
 		while (rs.next()) {
-			flage=true;
+			result=true;
 		} // end while
 	} finally {
-		dc.dbClose(con, pstmt, null);
+			dc.dbClose(con, pstmt,rs);
+
 	}//end finally
-	return  flage;
+	
+	return result;
 }
+
 }
