@@ -20,15 +20,15 @@ request.setCharacterEncoding("UTF-8");
 
 #wrap{
 margin: 50px auto;
-width:500px;
-height:700px;
+width:700px;
+height:850px;
 border: 1px solid #333;
 }
 
 #popup-table{
 margin:0 auto;
-width:500px;
-height:700px;
+width:700px;
+height:850px;
 
 }
 
@@ -46,12 +46,12 @@ text-align: center;
 }
 
 .td-second{
-width:200px;
+width:500px;
 text-align: center;
 }
 
 .table-text{
-width:250px;
+width:500px;
 }
 
 #table-lead{
@@ -64,9 +64,12 @@ padding-left:28px;
 </style>
 
 <script type="text/javascript">
+
 function closeWindow(){
 	self.close();
+	opener.location.reload();
 }
+
 </script>
 </head>
 <body>
@@ -87,11 +90,22 @@ function closeWindow(){
               <td class="td-first">포스터</td>
               <td class="td-second"><input type="text" value="" class="table-text" /></td>
             </tr>
+            
+            <tr>     	 
+              <td class="td-first">포스터2</td>
+              <td class="td-second"><input type="text" value="" class="table-text" /></td>
+            </tr>
+            
             <tr>
               <td class="td-first">제목</td>
               <td class="td-second"><input type="text" value="" class="table-text" /></td>
-
             </tr>
+            
+            <tr>
+              <td class="td-first">장르</td>
+              <td class="td-second"><input type="text" value="" class="table-text" /></td>
+            </tr>
+            
             <tr>
               <td class="td-first">감독</td>
               <td class="td-second"><input type="text" value="" class="table-text" /></td>

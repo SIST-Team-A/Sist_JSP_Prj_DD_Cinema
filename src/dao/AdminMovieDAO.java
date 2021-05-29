@@ -134,27 +134,26 @@ public class AdminMovieDAO {
 		try {
 			con=dc.getConn();
 			
-			String insertQuery="";
+			String insertQuery="insert into movie values(?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt=con.prepareStatement(insertQuery);
 		
 //			pstmt.setString(1, muiVO.getMvNo());
 //			pstmt.setString(2, muiVO.getMvPoster());
 //			pstmt.setString(3, muiVO.getMvTitle());
 //			pstmt.setString(4, muiVO.getMvDirector());
-//			pstmt.setString(5, muiVO.getActorNameArr());
-//			pstmt.setString(6, muiVO.getActorRoleArr());
+//			pstmt.setArray(5, muiVO.getActorNamearr());
+//			pstmt.setArray(6, muiVO.getActorRoleArr());
 //			pstmt.setString(7, muiVO.getMvSt());
 //			pstmt.setString(8, muiVO.getMvRuntime());
 //			pstmt.setString(9, muiVO.getMvTrailler());
 //			pstmt.setString(10, muiVO.getMvOpenDate());
-//			pstmt.setString(111, muiVO.getMvOpenOrNot());
+//			pstmt.setString(11, muiVO.getMvOpenOrNot());
 		
 			pstmt.executeUpdate();
 		}finally {
 			//7. 연결끊기
 			dc.dbClose(con, pstmt, null);
-		}//end finally     
-		
+		}//end finally     		
 	}
 	
 	public boolean deleteMovie(String mvNO) throws SQLException{
@@ -172,7 +171,7 @@ public class AdminMovieDAO {
 		//2. 커넥션 얻기
 			con=dc.getConn();
 		//3. 쿼리문생성객체 얻기
-			String deleteQurey="delete from movie where='"+mvNO+"'";
+			String deleteQurey="delete from movie where mv_no='"+mvNO+"'";
 			pstmt=con.prepareStatement(deleteQurey);
 		//4. 바인드변수에 값 설정
 		//5. 쿼리문 수행 후 결과 얻기
