@@ -1,8 +1,12 @@
-  <%@ page language="java" contentType="text/html; charset=UTF-8"
+  <%@page import="vo.AdminMovieMainVO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ page import="dao.AdminMovieDAO" %>
  <% 
    AdminMovieDAO amdao=AdminMovieDAO.getInstance();
+   List<AdminMovieMainVO> curList=new ArrayList<AdminMovieMainVO>(); 
  	int count0=0;
  	int count1=0;
  	int count2=0;
@@ -88,14 +92,20 @@
               <td class="title-bar">출연</td>
               <td class="title-bar">관객수</td>
             </tr>
-        	<% for(int i=0; i<amdao.selectMovieAll("O").size();i++){%>
-             <form id="myform<%=count0++ %>" method="post" action="admin_popup1.jsp" target="popupwin">               
+        	<% 
+        	
+        	curList=amdao.selectMovieAll("O");
+        	for(int i=0; i<amdao.selectMovieAll("O").size();i++){%>
+             <form id="myform<%=count0++ %>" method="post" action="admin_popup_cur.jsp" target="popupwin">               
       		<tr id="tr<%=count1++ %>">
-      			<td class="movie-num"><input type="text" id="test<%=count2++ %>" name="test" value="<%=amdao.selectMovieAll("O").get(i).getMvNo() %>"readonly="readonly" style=" width:80px; height:10px; text-align: center; border: 0px solid #333 "/></td>                             
-      			<td class="movie-title"><%=amdao.selectMovieAll("O").get(i).getMvTitle()%></td>
-      			<td class="director"><%=amdao.selectMovieAll("O").get(i).getMvDirector()%></td>
-      			<td class="cast"><%=amdao.selectMovieAll("O").get(i).getActName() %></td>
-      			<td class="audience"><%=amdao.selectMovieAll("O").get(i).getMvAttCnt() %></td>
+      			<td class="movie-num"><input type="text" id="test<%=count2++ %>" name="test" value="<%=curList.get(i).getMvNo() %>"readonly="readonly" style=" width:80px; height:10px; text-align: center; border: 0px solid #333 "/></td>                             
+      			<td class="movie-title"><%=curList.get(i).getMvTitle()%></td>
+      			<td class="director"><%=curList.get(i).getMvDirector()%></td>
+      			<td class="cast"><%for(int j=0; j<curList.get(i).getActName().size(); j++){ %>
+      			<%=curList.get(i).getActName().get(j).getActName() %>
+      			<% }%>
+      			</td>
+      			<td class="audience"><%=curList.get(i).getMvAttCnt() %></td>
       		</tr>    	
       		</form>
       		<%}%>   		

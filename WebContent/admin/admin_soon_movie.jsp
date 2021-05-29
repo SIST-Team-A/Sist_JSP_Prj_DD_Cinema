@@ -1,8 +1,12 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="vo.AdminMovieMainVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ page import="dao.AdminMovieDAO" %>
      <% 
-   AdminMovieDAO amdao=AdminMovieDAO.getInstance();
+     AdminMovieDAO amdao=AdminMovieDAO.getInstance();
+     List<AdminMovieMainVO> soonList=new ArrayList<AdminMovieMainVO>(); 
  	int count0=0;
  	int count1=0;
  	int count2=0;
@@ -27,7 +31,6 @@
  
     <script>
     
-    
  window.onload=function(){
 
     function showPopup(){
@@ -49,7 +52,7 @@
     	var xPos = (document.body.offsetWidth/2) - (750/2); // 가운데 정렬
 		xPos += window.screenLeft; // 듀얼 모니터일 때
 		var yPos = (document.body.offsetHeight/2) - (500/2);
-		window.open("admin_popup2.jsp", "aaa", "width=750, height=1200,left="+xPos+", top="+yPos+", menubar=yes, status=yes, titlebar=yes, resizable=yes"); 	 	
+		window.open("admin_popup_add.jsp", "aaa", "width=750, height=1200,left="+xPos+", top="+yPos+", menubar=yes, status=yes, titlebar=yes, resizable=yes"); 	 	
     });
    
  };    
@@ -92,18 +95,21 @@
               <td class="title-bar">출연</td>
               <td class="title-bar">조회</td>
             </tr>
-         
-         <% for(int i=0; i<amdao.selectMovieAll("N").size();i++){%>
-             <form id="myform<%=count0++ %>" method="post" action="admin_popup3.jsp" target="popupwin">               
+                 	<%soonList=amdao.selectMovieAll("N");
+                for(int i=0; i<soonList.size();i++){%>
+             <form id="myform<%=count0++ %>" method="post" action="admin_popup_soon.jsp" target="popupwin">               
       		<tr id="tr<%=count1++ %>">
-      			<td class="movie-num"><input type="text" id="test<%=count2++ %>" name="test" value="<%=amdao.selectMovieAll("N").get(i).getMvNo() %>"readonly="readonly" style=" width:80px; height:10px; text-align: center; border: 0px solid #333 "/></td>                             
-      			<td class="movie-title"><%=amdao.selectMovieAll("N").get(i).getMvTitle()%></td>
-      			<td class="director"><%=amdao.selectMovieAll("N").get(i).getMvDirector()%></td>
-      			<td class="cast"><%=amdao.selectMovieAll("N").get(i).getActName() %></td>
-      			<td class="audience"><%=amdao.selectMovieAll("N").get(i).getMvAttCnt() %></td>
+      			<td class="movie-num"><input type="text" id="test<%=count2++ %>" name="test" value="<%=soonList.get(i).getMvNo() %>"readonly="readonly" style=" width:80px; height:10px; text-align: center; border: 0px solid #333 "/></td>                             
+      			<td class="movie-title"><%=soonList.get(i).getMvTitle()%></td>
+      			<td class="director"><%=soonList.get(i).getMvDirector()%></td>
+      			<td class="cast"><%for(int j=0; j<soonList.get(i).getActName().size(); j++){ %>
+      			<%=soonList.get(i).getActName().get(j).getActName() %>
+      			<% }%>
+      			</td>
+      			<td class="audience"><%=soonList.get(i).getMvAttCnt() %></td>
       		</tr>    	
       		</form>
-      		<%}%>
+      		<%}%>   
          </tbody>
           </table>
         </div>

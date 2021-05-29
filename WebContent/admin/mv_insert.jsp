@@ -1,7 +1,8 @@
+<%@page import="vo.MovieUpdateInsertVO"%>
 <%@page import="dao.AdminMovieDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%request.setCharacterEncoding("UTF-8");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,7 @@
 </style>
 <script type="text/javascript">
 window.onload=function(){
-	alert("넘어왔네");
+	alert("ㅎㅇ");
 }
 
 </script>
@@ -33,10 +34,30 @@ window.onload=function(){
 <div>
 <%
 AdminMovieDAO amdao=AdminMovieDAO.getInstance();
-String a=request.getParameter("dlgkrals");
+String mvNo=request.getParameter("mv-no");
+String mvPoster=request.getParameter("mv-poster");
+String mvPosterSoon=request.getParameter("mv-poster-soon");
+String mvTitle=request.getParameter("mv-title");
+String mvGenre=request.getParameter("mv-genre");
+String mvDirector=request.getParameter("mv-director");
+String[] mvLead=request.getParameter("mv-lead").split(",");
+String[] mvSub=request.getParameter("mv-sub").split(",");
+String mvSt=request.getParameter("mv-story");
+String mvRuntime=request.getParameter("mv-runtime");
+String mvTrailer=request.getParameter("mv-trailer");
+String mvOpendate=request.getParameter("mv-opendate");
+String mvOpenornot=request.getParameter("opennot");
 
+if(mvOpenornot.equals("on")){
+	mvOpenornot="O";
+}else{
+	mvOpenornot="N";	
+} 
+
+MovieUpdateInsertVO muiVO=new MovieUpdateInsertVO(mvNo,mvPoster,mvPosterSoon,mvTitle,mvDirector,mvLead,mvSub,mvSt,mvRuntime,mvTrailer,mvOpendate,mvOpenornot,mvGenre);
+amdao.insertMovie(muiVO); 
 %>
-<%=a %>
+<%=mvPoster %>
 </div>
 
 </body>
