@@ -5,6 +5,7 @@ import java.util.List;
 public class MovieSelectVO {
 	private String mvTitle;
 	private String mvPoster;
+	private String mvGenre;
 	private String mvDirector;
 	private String mvOpenDate;
 	private String mvSt;
@@ -12,13 +13,11 @@ public class MovieSelectVO {
 	private String mvRuntime;
 	private List<ActorVO> actList;
 
-	public MovieSelectVO() {
-	}
-
-	public MovieSelectVO(String mvTitle, String mvPoster, String mvDirector, String mvOpenDate, String mvSt,
-			String mvTrailler, String mvRuntime, List<ActorVO> actList) {
+	public MovieSelectVO(String mvTitle, String mvPoster, String mvGenre, String mvDirector, String mvOpenDate,
+			String mvSt, String mvTrailler, String mvRuntime, List<ActorVO> actList) {
 		this.mvTitle = mvTitle;
 		this.mvPoster = mvPoster;
+		this.mvGenre = mvGenre;
 		this.mvDirector = mvDirector;
 		this.mvOpenDate = mvOpenDate;
 		this.mvSt = mvSt;
@@ -41,6 +40,14 @@ public class MovieSelectVO {
 
 	public void setMvPoster(String mvPoster) {
 		this.mvPoster = mvPoster;
+	}
+
+	public String getMvGenre() {
+		return mvGenre;
+	}
+
+	public void setMvGenre(String mvGenre) {
+		this.mvGenre = mvGenre;
 	}
 
 	public String getMvDirector() {
