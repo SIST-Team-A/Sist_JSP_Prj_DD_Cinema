@@ -85,7 +85,7 @@ public boolean delectMember(String memId) throws SQLException{
 			flage=true;
 		} // end while
 	} finally {
-		dc.dbClose(con, pstmt, null);
+		dc.dbClose(con, pstmt, null); 
 	}//end finally
 	return  flage;
 }
