@@ -23,17 +23,15 @@ StringBuilder sub = new StringBuilder();
 
 for (int i = 0; i < amsVO.getActorList().size(); i++) {
 	if (amsVO.getActorList().get(i).getActMainOrSub().equals("M")) {
-		/* lead.append(amsVO.getActorList().get(i).getActName() + ", "); */
 		leadList.add(amsVO.getActorList().get(i).getActName());
 	} else {
-		/* sub.append(amsVO.getActorList().get(i).getActName() + ", "); */
 		subList.add(amsVO.getActorList().get(i).getActName());
 	}
 }
 
 for(int i = 0; i<leadList.size();i++){
 	if(i<leadList.size()-1){
-	lead.append(leadList.get(i)+ ", ");
+	lead.append(leadList.get(i)+ ",");
 	}
 	else{
 	lead.append(leadList.get(i)+ "");
@@ -41,7 +39,7 @@ for(int i = 0; i<leadList.size();i++){
 }
 for(int i = 0; i<subList.size();i++){
 	if(i<subList.size()-1){
-	sub.append(subList.get(i)+ ", ");
+	sub.append(subList.get(i)+ ",");
 	}
 	else{
 	sub.append(subList.get(i)+ "");

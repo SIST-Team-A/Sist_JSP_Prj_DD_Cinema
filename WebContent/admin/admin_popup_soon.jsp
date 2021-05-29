@@ -13,14 +13,34 @@
 
 <!-- 주연 조연 구분 코드 -->
 <%
+List<String> leadList = new ArrayList<String>();
+List<String> subList = new ArrayList<String>();
 StringBuilder lead = new StringBuilder();
 StringBuilder sub = new StringBuilder();
 
+
 for (int i = 0; i < amsVO.getActorList().size(); i++) {
 	if (amsVO.getActorList().get(i).getActMainOrSub().equals("M")) {
-		lead.append(amsVO.getActorList().get(i).getActName() + " ");
+		leadList.add(amsVO.getActorList().get(i).getActName());
 	} else {
-		sub.append(amsVO.getActorList().get(i).getActName() + " ");
+		subList.add(amsVO.getActorList().get(i).getActName());
+	}
+}
+
+for(int i = 0; i<leadList.size();i++){
+	if(i<leadList.size()-1){
+	lead.append(leadList.get(i)+ ",");
+	}
+	else{
+	lead.append(leadList.get(i)+ "");
+	}
+}
+for(int i = 0; i<subList.size();i++){
+	if(i<subList.size()-1){
+	sub.append(subList.get(i)+ ",");
+	}
+	else{
+	sub.append(subList.get(i)+ "");
 	}
 }
 /* 개봉 미개봉 상영종료 코드*/
