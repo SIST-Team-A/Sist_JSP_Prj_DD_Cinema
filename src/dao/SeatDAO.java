@@ -93,7 +93,6 @@ public class SeatDAO {
 			pstmt.setString(6, i);
 		//4. 쿼리문 수행 후 결과 얻기
 			cnt = pstmt.executeUpdate();
-			System.out.println(insertQuery);
 		}finally {
 		//5. 연결 끊기.
 			dc.dbClose(con, pstmt, null);
@@ -134,6 +133,34 @@ public class SeatDAO {
 				dc.dbClose(con, pstmt, null);
 			}//end try~ finally
 		
+		return flag;
+	}
+	
+	public boolean deleteSeat(String SchNo) throws SQLException{
+		boolean flag = false;
+		DbConnection dc = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			//1. Connection 얻기
+				con = dc.getConn();
+			//2. 쿼리문 생성객체 얻기
+				
+				String deleteQuery = "delete from seat where sch_no = ?";
+				pstmt = con.prepareStatement(deleteQuery);
+			//3. 바인드 변수에 값 할당.
+				pstmt.setString(1, SchNo);
+			//4. 쿼리문 수행 후 결과 얻기
+				if( pstmt.executeUpdate() == 1) {
+				
+					flag = true;
+				}//end if
+			}finally {
+			//5. 연결 끊기.
+				dc.dbClose(con, pstmt, null);
+			}//end try~ fin
 		return flag;
 	}
 }//class
