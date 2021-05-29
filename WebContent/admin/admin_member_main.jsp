@@ -101,21 +101,30 @@
 	
 	$(function() {
 		
-		$("table tbody tr").click(function() {
-			<%--  var id= $("#ta_id").text();
-			 $("#modal_id").val(id);
-			 
-			 var num= <%=amDAO.selectMember() %>
-			 $("#modal_num").val(num);
-			 
-			 var name= $("#ta_name").text();
-			 $("#modal_name").val(name);
-			 
-			 var birth= $("#ta_birth").text();
-			 $("#modal_birth").val(birth);
-			  --%>
-			$("#modal").fadeIn();//attr("style", "display:block");//modal
+		$("table tbody tr").click(function(e) {
+			let targetId = e.target.parentElement.id;
+			$.ajax({
+				type:"get",
+				async:true,
+				url:"admin_member_json.jsp",
+				data:{id:$("#"+targetId+" .ta_id").text()},
+				dataType:"json",
+				success:function(json){
+					$("#modal_num").val(json.num);
+					$("#modal_id").val(json.id);
+					$("#modal_name").val(json.name);
+					$("#modal_birth").val(json.birth);
+					$("input:radio[name='gender'][value="+json.gender+"]").prop("checked",true);
+					$("#modal_email").val(json.email);
+					$("#modal_phone").val(json.phone);
+					$("#modal_reg_date").val(json.regdate);
+				},
+				error:function(){
+					alert("정보를 가져오던 중 문제가 발생하였습니다.");
+				}
+			});
 			
+			$("#modal").fadeIn();//attr("style", "display:block");//modal
 		});//click
 		
 		
@@ -165,11 +174,11 @@
 			</thead>
 			<tbody>
 		<%for(int i=0;i<list.size();i++){ %>
-			<tr>
-				<td id="ta_num"><%= list.get(i).getMemNo()%></td>
-				<td id="ta_id"><%= list.get(i).getMemId()%></td>
-				<td id="ta_name"><%= list.get(i).getMemName()%></td>
-				<td id="ta_birth"><%= list.get(i).getMemBirth()%></td>
+			<tr id="tr_<%=i%>">
+				<td class="ta_num"><%= list.get(i).getMemNo()%></td>
+				<td class="ta_id"><%= list.get(i).getMemId()%></td>
+				<td class="ta_name"><%= list.get(i).getMemName()%></td>
+				<td class="ta_birth"><%= list.get(i).getMemBirth()%></td>
 			</tr>
 			<%
 			} 
