@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.AdminSchMovieDAO;
+import vo.AdminSchMovieSelectVO;
 import vo.AdminMovieCloseUpdateVO;
 import vo.AdminMovieListVO;
 import vo.AdminSchMovieInsertVO;
@@ -185,6 +186,66 @@ public class AdminSchMovieDAO {
 			dc.dbClose(con, pstmt, null);
 		}//end try~ finally
 		
+		return flag;
+	}
+
+	public AdminSchMovieSelectVO selcetSchMovie(String schNo) throws SQLException{
+		AdminSchMovieSelectVO asmsVO= null;
+		
+		DbConnection dc = DbConnection.getInstance();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = dc.getConn();
+			
+			
+			String selectQuery = "select m.mv_no,  m.mv_title, m.mv_opendate, m.mv_closedate, sm.sch_date, sm.sch_stime, sm.sch_etime from movie m, sch_movie sm where m.mv_no = sm.mv_no and sm.sch_no = ?";
+			pstmt = con.prepareStatement(selectQuery);
+		//3. 바인드 변수에 값 할당.
+			pstmt.setString(1, schNo);
+
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				asmsVO = new AdminSchMovieSelectVO(rs.getString("mv_no"), rs.getString("mv_title"), rs.getString("mv_opendate"), rs.getString("mv_closedate"), rs.getString("sch_date"), rs.getString("sch_stime"), rs.getString("sch_etime"));
+				
+			}
+		}finally {
+			
+			dc.dbClose(con, pstmt, rs);
+		}//end try~finally
+		return asmsVO;
+	}
+	
+	public boolean deleteAdminSchMovie(String SchNo) throws SQLException{
+		boolean flag=  false;
+
+		DbConnection dc =DbConnection.getInstance();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+		//1. Connection 얻기
+			con = dc.getConn();
+		//2. 쿼리문 생성객체 얻기
+			
+			String deleteQuery = "delete from sch_movie where sch_no = ?";
+			pstmt = con.prepareStatement(deleteQuery);
+		//3. 바인드 변수에 값 할당.
+			pstmt.setString(1, SchNo);
+		//4. 쿼리문 수행 후 결과 얻기
+		
+			
+			if(pstmt.executeUpdate() == 1) {
+				flag = true;
+			}
+			
+		}finally {
+		//5. 연결 끊기.
+			dc.dbClose(con, pstmt, null);
+		}//end try~ finally
 		return flag;
 	}
 }//class

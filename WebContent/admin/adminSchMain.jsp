@@ -9,9 +9,11 @@
     pageEncoding="UTF-8"%>
  <%
  
-    	request.setCharacterEncoding("UTF-8");
-    	String mvTitle = (request.getParameter("titleMovie") == null) ? "" :request.getParameter("titleMovie");
-    	String mvOpenDate = (request.getParameter("startMovie") == null) ? "" : request.getParameter("startMovie");
+
+
+   	request.setCharacterEncoding("UTF-8");
+   	String mvTitle = (request.getParameter("titleMovie") == null) ? "" :request.getParameter("titleMovie");
+   	String mvOpenDate = (request.getParameter("startMovie") == null) ? "" : request.getParameter("startMovie");
 		String mvCloseDate = (request.getParameter("endMovie") == null) ? "" : request.getParameter("endMovie");
 		String schDate = (request.getParameter("dateMovie") == null) ? "" : request.getParameter("dateMovie");
 		String schStime = (request.getParameter("sTime") == null) ? "" : request.getParameter("sTime");
@@ -31,8 +33,19 @@
 				int cnt = sDAO.insertAddSeat(asVO, String.valueOf(i));
 			}
 		}
+		
+   	String SchNo = (request.getParameter("SchNo") == null) ? "" : request.getParameter("SchNo");
+   	
+   	if(!(SchNo).equals("")){
+   		
+			boolean flag = sDAO.deleteSeat(SchNo);
+			boolean flag1 = asmDAO.deleteAdminSchMovie(SchNo);
+   	}
+		
 	
-  %>
+	
+ %>
+ 
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -47,10 +60,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <!-- botstrap -->
     <script src="../common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
-    <style type="text/css">
  
-    </style>
-    
     <%
  
     	List<AdminSchMovieMainVO> asmmList = asmDAO.selectSchMoavieMainAll();
@@ -64,7 +74,7 @@
 		})
 		
 		$(".movie-title").click(function(){
-			location.href="adminSchModify.jsp";
+			$("#frm").submit();
 		})
     }); //ready
     
@@ -77,6 +87,7 @@
       <div id="main">
         <div id="table-header">영화 스케줄 관리</div>
         <div>
+        <form id = "frm" action = "adminSchModify.jsp" >
         <div id="table-area">
           <table id="table">
             <tr>
@@ -89,8 +100,8 @@
             
             <% for ( AdminSchMovieMainVO asmmVO : asmmList){ %>
             <tr>
-              <td class="movie-num"><%=asmmVO.getSchNo() %></td>
-              <td class="movie-title"><%=asmmVO.getMvTitle() %></td>
+              <td class="movie-num" name="SchNo" value="<%=asmmVO.getSchNo() %>"><%=asmmVO.getSchNo() %></td>
+              <td class="movie-title"><a href ="adminSchModify.jsp?SchNo=<%=asmmVO.getSchNo() %>"><%=asmmVO.getMvTitle() %></a></td>
               <td class="director"><%=asmmVO.getSchDate() %></td>
               <td class="cast"><%=asmmVO.getSchStime() %></td>
               <td class="audience"><%=asmmVO.getSchEtime() %></td>
@@ -98,6 +109,7 @@
             <%} %>
           </table>
         </div>
+        </form>
         <div style = "text-align: right;  ">
 				<button id = "addBtn" style ="width : 150px; height: 50px; background-color: #333333 ; color : #FFFFFF">추가하기</button>
 		</div>
