@@ -14,8 +14,6 @@
 	List<AdminMemberMainVO> list = new ArrayList<AdminMemberMainVO>();
 	list = amDAO.selectMemberAll();
 	
-	
-	
 	%>
 	
 <!DOCTYPE html>
@@ -132,13 +130,20 @@
 			var edit=confirm("수정하시겠습니까?");
 			if(edit){
 				$("#modal_frm").submit();
+				
 			}else{
 				return;
 			}
 		});//click
 		
 		$("#modal_delete_btn").click(function() {
-			confirm("삭제하시겠습니까?");
+			var del = confirm("삭제하시겠습니까?");
+			if(dal){
+				$("#modal_frm").submit();
+			}else{
+				return;
+			}
+			
 		});//click
 		
 		$("#modal_close_btn").click(function() {
@@ -192,9 +197,9 @@
 			<div class="modal_content">
 				<div id="selectTitle">회원관리</div>
 				 <div class="close-area" id="close-area">X</div>
-				 <form action="#" id="modal_frm">
+				 <form id="modal_frm" method="post">
 				
-				<table id="selectTa">
+				<table id="selectTa"> 
 					<tr>
 						<th>번호</th>
 						<td><input type="text" readonly="readonly" style="background-color: #dfdfdf" id="modal_num" name="modal_num" value=""></td>
@@ -202,7 +207,7 @@
 					<tr>
 						<th>아이디</th>
 						<td><input type="text" readonly="readonly" style="background-color: #dfdfdf" id="modal_id" name="modal_id"></td>
-					</tr>		
+					</tr>			
 					<tr>
 						<th>이름</th>
 						<td><input type="text" id="modal_name" name="modal_name"></td>
@@ -213,7 +218,7 @@
 					</tr>		
 					<tr>
 						<th>성별</th>
-						<td><input type="radio" name="gender" value="M">남 <input type="radio" name="gender" value="W">여</td>
+						<td><input type="radio" name="gender" value="M">남 <input type="radio" name="gender" value="F">여</td>
 					</tr>		
 					<tr>
 						<th>이메일</th>
@@ -228,12 +233,12 @@
 						<td><input type="text" readonly="readonly" style="background-color: #dfdfdf" id="modal_reg_date" name="modal_reg_date"></td>
 					</tr>		
 				</table>
-				 </form>
 				<div id="grBtn">
-					<input type="button" class="btn btn-primary btn-lg" value="수정" id="modal_edit_btn"/>
-					<input type="button" class="btn btn-danger btn-lg" value="삭제" id="modal_delete_btn"/>
+					<input type="submit" class="btn btn-primary btn-lg" value="수정" id="modal_edit_btn" formaction="admin_member_modify.jsp"/>
+					<input type="submit" class="btn btn-danger btn-lg" value="삭제" id="modal_delete_btn" formaction="admin_member_delete.jsp"/>
 					<input type="button" class="btn btn-default btn-lg" value="취소" id="modal_close_btn"/>
 				</div>
+				 </form>
 			</div>
 			<div class="modal_layer"></div>
 		</div>
