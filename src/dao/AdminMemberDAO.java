@@ -55,7 +55,7 @@ public class AdminMemberDAO {
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				admVO = new AdminMemberVO();
+				admVO = new AdminMemberVO(rs.getString("mem_no"), rs.getString("mem_id"), rs.getString("mem_name"), rs.getString("mem_birth"), rs.getString("mem_gender"), rs.getString("mem_email"), rs.getString("mem_phone"), rs.getString("mem_regdate"));
 			} // end while
 		} finally {
 			dc.dbClose(con, pstmt, null);
