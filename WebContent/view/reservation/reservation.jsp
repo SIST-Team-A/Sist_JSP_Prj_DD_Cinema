@@ -12,6 +12,8 @@
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <% String mvNo = request.getParameter("mvNo"); %>
+ 
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -171,7 +173,7 @@ List<SchMovieDateTimeVO> smdtList = new ArrayList<SchMovieDateTimeVO>();
 
 
 <script type="text/javascript">	
-	
+
 	
 		function dateSelectBox(){
 			var date = $("#dateList option:selected").val();
@@ -200,8 +202,24 @@ List<SchMovieDateTimeVO> smdtList = new ArrayList<SchMovieDateTimeVO>();
 		}//dateSelectBox
 
 		$(function(){
-			$("#mainBtn").click(function(){
+			
+			var mvNo = "<%=mvNo %>";
+			
+			if( mvNo!= "null"){
 				
+				//for (var i = 0 ; i < $("#movieList").lenght; i++){
+					$("#movieList option").css("background-color","#000000");
+					$("#movieList option").attr("disabled",true);
+				//}
+				
+				if(mvNo != $("#movieList option").attr("class")){
+					$("."+mvNo).css("background-color","#ffffff");
+					$("."+mvNo).attr("disabled", false);
+				}
+			}
+			
+			$("#mainBtn").click(function(){
+				location.href = "http://localhost/movie_reservation/view/main.jsp";
 			})
 		
 			$("#seatBtn").click(function(){

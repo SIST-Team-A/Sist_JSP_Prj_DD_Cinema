@@ -34,7 +34,7 @@ public class AdminSchMovieDAO {
 	
 	
 	/**
-	 * 쨍횧�횓쩔징쩌짯 쨘쨍쩔짤횁첬 sch_movie �체횄쩌 select
+	 * 관리자 스케줄 관리 메인 리스트
 	 * @return
 	 * @throws SQLException
 	 */
@@ -73,7 +73,7 @@ public class AdminSchMovieDAO {
 	
 	
 	/**
-	 * 째체쨍짰�횣쩔징쩌짯 쩍쨘횆횋횁횢 횄횩째징쩍횄 쩔쨉횊짯쨍짰쩍쨘횈짰
+	 *스케줄 추가할떄 영화리스트 띄우기
 	 * @return
 	 * @throws SQLException
 	 */
@@ -88,14 +88,10 @@ public class AdminSchMovieDAO {
 		ResultSet rs = null;
 		
 		try {
-		//1. Connection 쩐챵짹창
 			con = dc.getConn();
-		//2. 횆천쨍짰쨔짰 쨩첵쩌쨘째쨈횄쩌 쩐챵짹창
 			
 			String selectQuery = "select   mv_no, mv_title, mv_opendate from  movie ";
 			pstmt = con.prepareStatement(selectQuery);
-		//3. 쨔횢�횓쨉책 쨘짱쩌철쩔징 째짧 횉횘쨈챌.
-		//4. 횆천쨍짰쨔짰 쩌철횉횪 횊횆 째찼째첬 쩐챵짹창
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) { 
@@ -105,7 +101,6 @@ public class AdminSchMovieDAO {
 
 			
 		}finally {
-		//5. 쩔짭째찼 짼첨짹창.
 			dc.dbClose(con, pstmt, rs);
 		}//end try~ finally
 		return amlList;
@@ -113,7 +108,7 @@ public class AdminSchMovieDAO {
 	
 	
 	/**
-	 * 쩍쨘횆횋횁횢 횄횩째징쩍횄 insert횉횕쨈횂 쨍횧쩌횘
+	 * 스케줄 추가 
 	 * @param asmiVO
 	 * @return
 	 * @throws SQLException
@@ -127,19 +122,15 @@ public class AdminSchMovieDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-		//1. Connection 쩐챵짹창
 			con = dc.getConn();
-		//2. 횆천쨍짰쨔짰 쨩첵쩌쨘째쨈횄쩌 쩐챵짹창
 			
 			String insertQuery = "insert into sch_movie values(concat('h_',lpad(seq_schmv.nextval,8,0)), (select mv_no from movie where mv_title = ? and mv_opendate= ?),?,?,?,sysdate) ";
 			pstmt = con.prepareStatement(insertQuery);
-		//3. 쨔횢�횓쨉책 쨘짱쩌철쩔징 째짧 횉횘쨈챌.
 			pstmt.setString(1, asmiVO.getMvTitle());
 			pstmt.setString(2, asmiVO.getMvOpenDate());
 			pstmt.setString(3, asmiVO.getSchDate());
 			pstmt.setString(4, asmiVO.getSchStime());
 			pstmt.setString(5, asmiVO.getSchEtime());
-		//4. 횆천쨍짰쨔짰 쩌철횉횪 횊횆 째찼째첬 쩐챵짹창
 			 cnt = pstmt.executeUpdate();
 			
 			if(cnt == 1) {
@@ -147,7 +138,6 @@ public class AdminSchMovieDAO {
 			}
 			
 		}finally {
-		//5. 쩔짭째찼 짼첨짹창.
 			dc.dbClose(con, pstmt, null);
 		}//end try~ finally
 		
@@ -155,6 +145,13 @@ public class AdminSchMovieDAO {
 	}//insertSchMovie
 	
 	
+	/**
+	 * 스케줄 추가, 수정할 때 영화 개봉종료일 업데이트
+	 * @param mvTitle
+	 * @param closeDate
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean updateMovieClose(String mvTitle, String closeDate) throws SQLException{
 		boolean flag = false;
 		int cnt = 0;
@@ -164,9 +161,7 @@ public class AdminSchMovieDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-		//1. Connection 쩐챵짹창
 			con = dc.getConn();
-		//2. 횆천쨍짰쨔짰 쨩첵쩌쨘째쨈횄쩌 쩐챵짹창
 			
 			String updateQuery = "update movie set mv_closedate = ? where mv_no in (select mv_no from movie where mv_title = ?)";
 			pstmt = con.prepareStatement(updateQuery);
@@ -187,6 +182,12 @@ public class AdminSchMovieDAO {
 		return flag;
 	}
 
+	/**
+	 * 상세보기
+	 * @param schNo
+	 * @return
+	 * @throws SQLException
+	 */
 	public AdminSchMovieSelectVO selcetSchMovie(String schNo) throws SQLException{
 		AdminSchMovieSelectVO asmsVO= null;
 		
@@ -217,6 +218,12 @@ public class AdminSchMovieDAO {
 		return asmsVO;
 	}
 	
+	/**
+	 * 스케줄 삭제
+	 * @param SchNo
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean deleteSchMovie(String SchNo) throws SQLException{
 		boolean flag=  false;
 
@@ -244,6 +251,12 @@ public class AdminSchMovieDAO {
 	}
 
 	
+	/**
+	 * 스케줄 수정 
+	 * @param asmuVO
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean updateSchMovie(AdminSchMovieUpdateVO asmuVO) throws SQLException{
 		boolean flag = false;
 		
