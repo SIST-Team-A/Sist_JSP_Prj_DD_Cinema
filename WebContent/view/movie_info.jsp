@@ -148,7 +148,13 @@
               						<%} %>
               					<%} %>
               		</div>
-              		<div id="btn-reservation" ><a class="btn btn-default" role="button" href="http://localhost/movie_reservation/view/reservation/reservation.jsp?mvNo=<%=mvNo %>">예매하기</a></div>
+              		 <%
+          				if(session.getAttribute("id")==null){
+          			 %>
+          			 		<div id="btn-reservation" ><a class="btn btn-default" role="button" onclick="alert('로그인을 해주세요');">예매하기</a></div>
+          				<% }else{%>
+          					<div id="btn-reservation" ><a class="btn btn-default" role="button" href="http://localhost/movie_reservation/view/reservation/reservation.jsp?mvNo=<%=mvNo %>">예매하기</a></div>
+          				<%} %>
             </div>
           </div>
         </div>
