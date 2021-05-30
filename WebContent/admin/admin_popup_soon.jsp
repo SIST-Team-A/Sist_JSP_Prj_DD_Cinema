@@ -153,10 +153,10 @@ function del(){
              <tr id="tr-header">
                 <td colspan="3"><h3>개봉예정작관리</h3></td>
             </tr>
+            
             <tr>
               <td class="td-first">번호</td>
-              <td class="td-second"><input type="text" name="mv-no" value="<%=mvNO %>" readonly="readonly" class="table-text" /></td>
-              
+              <td class="td-second"><input type="text" name="mv-no" value="<%=mvNO %>" readonly="readonly" class="table-text" /></td>             
             </tr>
             
             <tr>     	 
@@ -182,37 +182,36 @@ function del(){
             <tr>
               <td class="td-first">감독</td>
               <td class="td-second"><input type="text" name="mv-director" value="<%=amsVO.getMvDirector()%>" class="table-text" /></td>
-
             </tr>          
               		
             <tr>
               <td class="td-first">주연</td>
               <td class="td-second" id="table-lead"><input type="text" name="mv-lead" value="<%=lead %>" class="table-text" /></td>
-
             </tr>
+            
             <tr>
               <td class="td-first">조연</td>
               <td class="td-second" id="table-sub"><input type="text" name="mv-sub" value="<%=sub %>" class="table-text" /></td>
-
             </tr>
+            
             <tr>
               <td class="td-first">줄거리</td>
               <td class="td-second"><input type="text" name="mv-story" value="<%=amsVO.getMvSt()%>" class="table-text" style="height:100px" /></td>
             </tr>
+            
             <tr>
               <td class="td-first">러닝타임</td>
               <td class="td-second"><input type="text" name="mv-runtime" value="<%=amsVO.getMvRuntime()%>" class="table-text" /></td>
-
             </tr>
+            
             <tr>
               <td class="td-first">트레일러</td>
               <td class="td-second"><input type="text" name="mv-trailer" value="<%=amsVO.getMvTrailer()%>" class="table-text" /></td>
-
             </tr>
+            
             <tr>
               <td class="td-first">개봉일자</td>
               <td class="td-second"><input type="text" name="mv-opendate" value="<%=amsVO.getMvOpenDate()%>" class="table-text" /></td>
-  
             </tr>
              
              <tr>
@@ -228,10 +227,9 @@ function del(){
             <tr>
               <td class="td-first">개봉여부</td>
               <td class="td-second" style="font-size:15px">
-              	<input type="radio" id="mv-open-radio" name="opennot" value="O" <%=opennot1 %>/>개봉&emsp;<input type="radio"  id="mv-noopen-radio" name="opennot" value="N" <%=opennot2 %>/>미개봉&nbsp;<input type="radio"  id="mv-close-radio" name="opennot" value=""/>상영종료
+              	<input type="radio" id="mv-open-radio" name="opennot" value="O" <%=opennot1 %>/>개봉&emsp;<input type="radio"  id="mv-noopen-radio" name="opennot" value="N" <%=opennot2 %>/>미개봉&nbsp;
          	  </td>             
-            </tr>
-               
+            </tr>            
 			
 			<tr id="tr-bottom">
 			   		<td>
