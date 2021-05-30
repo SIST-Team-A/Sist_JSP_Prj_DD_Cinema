@@ -128,9 +128,9 @@ public class AdminSchMovieDAO {
 			pstmt = con.prepareStatement(insertQuery);
 			pstmt.setString(1, asmiVO.getMvTitle());
 			pstmt.setString(2, asmiVO.getMvOpenDate());
-			pstmt.setString(3, asmiVO.getSchDate());
-			pstmt.setString(4, asmiVO.getSchStime());
-			pstmt.setString(5, asmiVO.getSchEtime());
+			pstmt.setString(3, asmiVO.getSchStime());
+			pstmt.setString(4, asmiVO.getSchEtime());
+			pstmt.setString(5, asmiVO.getSchDate());
 			 cnt = pstmt.executeUpdate();
 			
 			if(cnt == 1) {
