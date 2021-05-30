@@ -31,6 +31,15 @@ public class ReservationDAO {
 		return rDAO;
 	}//getInstance
 	
+	/**
+	 * 좌석검색
+	 * @param revNo
+	 * @param mvTitle
+	 * @param schDate
+	 * @param schStime
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<SeatRevVO> selectSeat(String revNo, String mvTitle, String schDate, String schStime) throws SQLException{
 		List<SeatRevVO> srList = new ArrayList<SeatRevVO>();
 		SeatRevVO srVO = null;
@@ -60,6 +69,15 @@ public class ReservationDAO {
 		return srList;
 	}
 	
+	/**
+	 * 예매 조회
+	 * @param revNo
+	 * @param mvTitle
+	 * @param schDate
+	 * @param schStime
+	 * @return
+	 * @throws SQLException
+	 */
 	public ReservationVO selectReservation(String revNo, String mvTitle, String schDate, String schStime) throws SQLException{
 		ReservationVO rVO = null;
 		DbConnection dc = DbConnection.getInstance();
@@ -91,6 +109,12 @@ public class ReservationDAO {
 		return rVO;
 	}//selectReservation
 	
+	/**
+	 * 예매하기
+	 * @param riVO
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean insertReservation(ReservationInsertVO riVO) throws SQLException{
 		boolean flag = true;
 		
@@ -124,6 +148,11 @@ public class ReservationDAO {
 		return flag;
 	}//insertReservation
 	
+	/**
+	 * 추가된 예매정보 가져오기
+	 * @return
+	 * @throws SQLException
+	 */
 	public String selectRevNO() throws SQLException{
 		String result = null;
 		
