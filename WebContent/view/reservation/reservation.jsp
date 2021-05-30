@@ -145,8 +145,7 @@
 									$("#"+schDate[i]).prop("disabled",false);
 								}//end if
 						}//end fi
-												
-				}//end for
+					
 				}
 			}
 		})	
