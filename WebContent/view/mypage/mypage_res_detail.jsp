@@ -1,16 +1,17 @@
+<%@page import="vo.ReservationMyPageDetVO"%>
+<%@page import="vo.SeatRevVO"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.ReservationDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%
 	request.setCharacterEncoding("UTF-8");
-	String res_num = request.getParameter("res_num");
+	String res_num = request.getParameter("reNo");
+	//String res_num = "r_00000025";
 	
-	
-
-
-
-
-
+	ReservationDAO rDAO = new ReservationDAO();
+	ReservationMyPageDetVO rmpdVO = rDAO.selectReservationMyDetail(res_num);
 %>    
         
     
@@ -47,7 +48,7 @@
 			position: absolute;
 			top:75px;
 			left: 40px;
-			background-image: url(http://localhost/movie_reservation/common/images/a2.jpg); 
+			/* background-image: url(); */ 
 			background-size: contain;
 			background-position: center;
 			background-repeat:no-repeat;
@@ -67,10 +68,13 @@
 		
 		$("#rev_cancel_btn").click(function() {
 			confirm("예매를 취소 하시겠습니까?");
-			//깃테스트용입니다.
+			$("#frm").submit();//깃테스트용입니다.
 		});
 		
 	});//ready
+	
+	
+	
 </script>
 </head>
 <body>
@@ -88,19 +92,26 @@
 				</ul>
 			</div>
 			<br/>
+			<form action="mypage_delete_process.jsp" method="post" id="frm">
 			<div id="detailContents">
-				<div id="poster"></div>
+				<div id="poster"><img src="../<%=rmpdVO.getMv_poster() %>"/></div>
 				<div id="rev_detail">
 					<h3><span class="label label-default">영화 제목</span></h3>
-						<h4>괴물</h4>
+						<h4><%=rmpdVO.getMv_title() %></h4>
 					<h3><span class="label label-default">극장 위치</span></h3>
 						<h4>강남 DD Cinama</h4>
 					<h3><span class="label label-default">관람 일시</span></h3>
-						<h4>2021-05-16</h4>
+						<h4><%=rmpdVO.getSch_date() %></h4>
 					<h3><span class="label label-default">관람 인원</span></h3>
-						<h4>3명</h4>
+						<h4><%=rmpdVO.getRev_adultcnt() %></h4>
 					<h3><span class="label label-default">관람 좌석</span></h3>
-						<h4>a-1/a-2/a-3</h4>
+						<%
+							for(int i=0; i<rmpdVO.getList().size();i++){
+						%>
+							<h4><%=rmpdVO.getList().get(i).toString() %></h4>
+						<%
+							}
+						%>
 				</div>
 				
 				<div class="panel panel-default" style="width: 230px; height: 100px; text-align: center;  position: absolute; top:150px; left: 555px; font-size: 26px">
@@ -108,8 +119,9 @@
 				    <h1 class="panel-title">예약 번호</h1>
 				  </div>
 				  <div class="panel-body">
-				    2105161
+				    <%=res_num %>
 				  </div>
+				  <input type="hidden" value="<%=res_num %>" name="res_num"> 
 				</div>
 				
 				
@@ -117,9 +129,11 @@
 					<input type="button" value="확인" class="btn btn-primary" style="width: 115px;font-size: 26px;">
 				</div>
 				<div id="rev_cancel_btn">
-					<input type="button" value="예매취소" class="btn btn-warning" style="width: 115px;font-size: 26px;">
+					<input type="button" value="예매취소" class="btn btn-warning" style="width: 115px;font-size: 26px;"
+					>
 				</div>
 			</div>
+			</form>
 		</div>
 		
 		<%@ include file="../footer.jsp" %>

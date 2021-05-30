@@ -19,5 +19,11 @@ public class SeatRevVO {
 	public void setSeatName(String seatName) {
 		this.seatName = seatName;
 	}
+
+	@Override
+	public String toString() {
+		return seatName;
+	}
+	
 	
 }

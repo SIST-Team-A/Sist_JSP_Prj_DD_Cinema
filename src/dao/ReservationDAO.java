@@ -9,6 +9,8 @@ import java.util.List;
 
 import dao.ReservationDAO;
 import vo.ReservationInsertVO;
+import vo.ReservationMainVO;
+import vo.ReservationMyPageDetVO;
 import vo.ReservationVO;
 import vo.SeatRevVO;
 
@@ -170,4 +172,106 @@ public class ReservationDAO {
 		}//end try ~finally
 		return result;
 	}
+	
+	 public List<SeatRevVO> selectRevSeat(String revVO) throws SQLException {
+	      List<SeatRevVO> list = new ArrayList<SeatRevVO>();
+	      SeatRevVO srVO = null;
+	      DbConnection dc = DbConnection.getInstance();
+	      Connection con = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+
+	      try {
+	         con = dc.getConn();
+
+	         String selectQuery = "select seat_name from seat where rev_no='"+revVO+"'";
+	         pstmt = con.prepareStatement(selectQuery);
+	         rs = pstmt.executeQuery();
+	         while (rs.next()) {
+	            srVO = new SeatRevVO(rs.getString("seat_name"));
+	            list.add(srVO);
+	         }
+	      } finally {
+	         dc.dbClose(con, pstmt, rs);
+	      } // end try ~finally
+
+	      return list;
+	 }
+	
+	 public ReservationMyPageDetVO selectReservationMyDetail(String revNo) throws SQLException{
+		 	
+		 	ReservationMyPageDetVO rmpdVO = null;
+		 	
+			DbConnection dc = DbConnection.getInstance();
+			Connection con  =null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				con = dc.getConn();
+				
+				String selectQuery = "select distinct m.mv_title, m.mv_poster,sm.sch_date, r.rev_adultcnt,s.seat_name from movie m, sch_movie sm, reservation r, seat s where (m.mv_no = sm.mv_no) and (s.rev_no = r.rev_no) and (s.sch_no = sm.sch_no) and r.rev_no = ? ";
+				pstmt = con.prepareStatement(selectQuery);
+				
+				pstmt.setString(1, revNo);
+				
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					rmpdVO = new ReservationMyPageDetVO(rs.getString("mv_Title"), rs.getString("mv_poster"),
+							rs.getString("sch_date"),rs.getString("rev_adultcnt"),selectRevSeat(revNo));
+				}
+			}finally {
+				dc.dbClose(con, pstmt, rs);
+			}//end try ~finally
+			
+			return rmpdVO;
+		}//selectReservation
+	
+	 public int delectReservation(String revNo) throws SQLException{
+			int cnt =0;
+			
+			Connection con = null;
+			PreparedStatement pstmt=null;
+			
+			DbConnection dc = DbConnection.getInstance();
+			
+			try {
+				con=dc.getConn();
+				
+				String deletMember = "DELETE FROM RESERVATION WHERE REV_NO = '"+revNo+"'";
+				
+				pstmt = con.prepareStatement(deletMember);
+				cnt = pstmt.executeUpdate();
+				
+				
+			} finally {
+				dc.dbClose(con, pstmt, null); 
+			}//end finally
+			return cnt;
+		}
+	 
+	 public List< ReservationMainVO>  selectReservation(String id) throws SQLException{
+	      List< ReservationMainVO> rmList = new ArrayList<ReservationMainVO>(); 
+	      ReservationMainVO rmVO = null;
+	      
+	      DbConnection dc = DbConnection.getInstance();
+	      Connection con  =null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      try {
+	         con = dc.getConn();
+	         
+	         String selectQuery = "select distinct m.mv_title,  r.rev_no from movie m, sch_movie sm,   reservation r, seat s  where m.mv_no = sm.mv_no    and s.rev_no = r.rev_no    and s.sch_no = sm.sch_no    and r.mem_id = '"+ id +"'";
+	         
+	         pstmt = con.prepareStatement(selectQuery);
+	         rs = pstmt.executeQuery();
+	         while(rs.next()) {
+	            rmVO = new ReservationMainVO(rs.getString("mv_Title"), rs.getString("rev_No"));
+	            rmList.add(rmVO);
+	         }
+	      }finally {
+	         dc.dbClose(con, pstmt, rs);
+	      }//end try ~finally
+	      return rmList;
+	   }
+	 
 }//class
