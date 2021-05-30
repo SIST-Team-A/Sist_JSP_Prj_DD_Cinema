@@ -31,94 +31,6 @@
     <script src="../common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
 
     <style>
-      body,
-      html {
-        width: 100%;
-        height: 100%;
-        font-family: "Noto Sans KR", sans-serif;
-      }
-      body {
-        margin: 0;
-        overflow-x: hidden;
-        overflow-y: overlay;
-      }
-      div {
-        /* border: 1px solid black; */
-      }
-      a {
-        text-decoration: none;
-        color: black;
-      }
-      a:hover {
-        text-decoration: none;
-        color: black;
-      }
-      #wrap {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-      }
-      ul {
-        list-style: none;
-      }
-      #header {
-        width: 100%;
-        min-width: 950px;
-        height: 122px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        /* margin-bottom: auto; */
-      }
-      #header-top {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 0px;
-      }
-      #header-bottom {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        width: 85%;
-        border-top: 1px solid #b2b2b2;
-        font-size:14px;
-        margin: 0 auto;
-      }
-      #header-bottom ul {
-        text-align: center;
-        margin: 0px;
-        padding: 0px;
-      }
-      #header-bottom ul li {
-        margin: 10px 0;
-        font-family: "Noto Sans KR", sans-serif;
-        float: left;
-      }
-
-      #left {
-        width: 25%;
-      }
-      #title {
-        font-size: 36px;
-        font-family: "Noto Sans KR", sans-serif;
-      }
-      #login {
-        width: 25%;
-        text-align: center;
-      }
-      #login a {
-        color: #656565;
-        font-family: "Noto Sans KR", sans-serif;
-        font-size: 12px;
-      }
-      #login a:hover {
-        color: #656565;
-      }
 
       #main {
         width: 50%;
@@ -129,10 +41,6 @@
         justify-content: space-between;
         align-items: center;
         margin: 50px 0;
-      }
-
-      #main div {
-        /* border: 1px solid black; */
       }
 
       #main-info {
@@ -208,40 +116,6 @@
       #btn-main {
         margin-top: 40px;
       }
-      #footer {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        width: 100%;
-        min-width: 950px;
-        min-height: 140px;
-        background-color: black;
-        /* margin-top: auto; */
-      }
-      #footertxt {
-        color: #a2a2a2;
-        font-size: 12px;
-      }
-      #footer-right {
-        width: 20%;
-      }
-
-      .header-bottom-ul li {
-        float: left;
-        margin-right: 5px;
-      }
-
-      .header-bottom-ul li::before {
-        padding-left: 5px;
-        color: #b2b2b2;
-        content: "｜";
-      }
-
-      .header-bottom-ul li:first-child::before {
-        content: "";
-      }
-
       .hidden {
         display: none;
       }
@@ -250,27 +124,7 @@
   </head>
   <body>
     <div id="wrap">
-      <div id="header">
-        <div id="header-top">
-          <div id="left"></div>
-          <div id="title"><a href="main.jsp">D.D Cinema</a></div>
-          <div id="login">
-            <a href="">로그인</a>
-            <a href="">회원가입</a>
-          </div>
-        </div>
-        <div id="header-bottom">
-          <ul class="header-bottom-ul">
-            <li>
-              <a href="">예매</a>
-            </li>
-            <li>
-              <a href="cur_movie.jsp">현재상영작</a>
-            </li>
-            <li><a href="soon_movie.jsp">개봉예정작</a></li>
-          </ul>
-        </div>
-      </div>
+      <%@ include file="./header.jsp" %>
       <div id="main">
         <div id="main-info">
           <div id="movie-poster"><img src="<%=mvSelectVO.getMvPoster() %>" /></div>
@@ -317,17 +171,7 @@
           onclick="location.href='main.jsp'"
         />
       </div>
-      <div id="footer">
-        <div id="footertxt">
-          Double Dragon Cinema<br />
-          서울특별시 강남구 테헤란로 132 한독약품빌딩 8층 쌍용교육센터 고객센터
-          1544<br />
-          조장 한상민 사업자등록번호 000-00-000000 개인정보 보호 최고 책임자
-          한상민<br />
-          COPYRIGHT©Double Dragon Cinema.
-        </div>
-        <div id="footer-right"></div>
-      </div>
+      <%@ include file="./footer.jsp" %>
     </div>
   </body>
 </html>
