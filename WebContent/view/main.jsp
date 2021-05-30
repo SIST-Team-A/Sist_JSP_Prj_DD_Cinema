@@ -312,7 +312,14 @@
           </div>
           <div id="header-bottom">
             <ul class="header-bottom-ul">
-              <li><a href="http://localhost/movie_reservation/view/reservation/reservation.jsp">예매</a></li>
+              <%
+          		if(session.getAttribute("id") != null){
+          	%>
+            <li>
+              <a href="http://localhost/movie_reservation/view/reservation/reservation.jsp">예매</a>
+            </li>
+            <%} else{ %>
+				<%  } %>
               <li><a href="cur_movie.jsp">현재상영작</a></li>
               <li><a href="soon_movie.jsp">개봉예정작</a></li>
             </ul>
