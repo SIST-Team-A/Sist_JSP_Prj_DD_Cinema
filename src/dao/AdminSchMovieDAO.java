@@ -90,7 +90,7 @@ public class AdminSchMovieDAO {
 		try {
 			con = dc.getConn();
 			
-			String selectQuery = "select   mv_no, mv_title, mv_opendate from  movie ";
+			String selectQuery = "select   mv_no, mv_title, mv_opendate from  movie where  mv_openornot <> 'O' ";
 			pstmt = con.prepareStatement(selectQuery);
 			rs = pstmt.executeQuery();
 			

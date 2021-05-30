@@ -104,6 +104,7 @@
 
 	<script type="text/javascript">
 		$(function(){
+			
 			var mvNo = "<%=mvNo %>";
 			
 			if( mvNo!= "null"){
@@ -111,6 +112,7 @@
 				//for (var i = 0 ; i < $("#movieList").lenght; i++){
 					$("#movieList option").css("background-color","#000000");
 					$("#movieList option").attr("disabled",true);
+					$("#nonValue").css("background-color","#FFFFFF");
 
 				//}
 				
@@ -136,7 +138,7 @@
 					
 			    $(".date").css("background-color", "#4C4C4C");
 				for( var i = 0 ; i< schMvNo.length; i++){
-						$("#"+schDate[i]).attr("disabled",true);
+						$("#"+schDate[i]).prop("disabled",true);
 				
 
 						if( schMvNo[i] == movie){
@@ -147,8 +149,9 @@
 						}//end fi
 					
 				}
+				}
 			}
-		})	
+			});//ready	
 	
 		function movieSelectBox(){
 			var movie = $("#movieList option:selected").attr("class");
@@ -177,7 +180,18 @@
 							$("#"+schDate[i]).prop("disabled",false);
 						}//end if
 				}//end fi
-										
+								
+				
+				
+				
+			 	if(reservation[0]==null){
+					reservation.push(movie);
+				}else{
+					if(reservation[0] != $("#movieList option:selected").val()){
+						reservation[0] = $("#movieList option:selected").val();
+					}//end if
+				}//end if ~ else 
+				
 		}//end for
 			
 		
@@ -244,6 +258,17 @@ List<SchMovieDateTimeVO> smdtList = new ArrayList<SchMovieDateTimeVO>();
 	        	}//end if
 	        }//end for
 	        
+	        if(reservation[0]==null){
+	        	reservation.push("0");
+	        }
+	        if(reservation[1]==null){
+	    		reservation.push(date);
+	    	}else{
+	    		if(reservation[1] != $("#dateList option:selected").val()){
+	    			reservation[1] = $("#dateList option:selected").val();
+	    		}//end if
+	    	}//end if ~ else 
+	    	
 	     
 		}//dateSelectBox
 
@@ -252,18 +277,73 @@ List<SchMovieDateTimeVO> smdtList = new ArrayList<SchMovieDateTimeVO>();
 			
 			
 			$("#mainBtn").click(function(){
-				location.href = "http://localhost/movie_reservation/view/main.jsp";
+				console.log(reservation);
+				//location.href = "http://localhost/movie_reservation/view/main.jsp";
 			})
 		
 			$("#seatBtn").click(function(){
 				//window.location.href = "seat.jsp";//+url.replaceAll("#","");
-				$("#frm").submit();
+				
+				if(reservation[1] != null && reservation[2] != null){
+					$("#frm").submit();
+				}else{
+					alert("상영일과 상영시간을 다시 선택해주세요.");
+				}
 			});//click
 		});//ready
 		
 		
 	</script>
+<script type="text/javascript">
+ reservation = new Array();
+/* 
+function movieSelectBox(){
+	var movie = $("#movieList option:selected").val();
+ 			
+		
+ 	if(reservation[0]==null){
+		reservation.push(movie);
+	}else{
+		if(reservation[0] != $("#movieList option:selected").val()){
+			reservation[0] = $("#movieList option:selected").val();
+		}//end if
+	}//end if ~ else 
+		
+	
+	 
+	
+}//movieSelectBox
 
+
+function dateSelectBox(){
+	var date = $("#dateList option:selected").val()
+	 if(reservation[1]==null){
+		reservation.push(date);
+	}else{
+		if(reservation[1] != $("#dateList option:selected").val()){
+			reservation[1] = $("#dateList option:selected").val();
+		}//end if
+	}//end if ~ else 
+	if(reservation[0] == null){
+		alert("영화를먼저 선택해주세요.");
+		return;
+	}
+}//dateSelectBox  */
+
+
+function timeSelectBox(){
+	var time = $("#timeList option:selected").val()
+ if(reservation[2]==null){
+		reservation.push(time);
+	}else{
+		if(reservation[2] != $("#timeList option:selected").val()){
+			reservation[2] = $("#timeList option:selected").val();
+		}//end if
+	}//end if ~ else 
+	}//timeSelectBox
+
+
+</script>
 </head>
 <body>
 
@@ -298,6 +378,7 @@ List<SchMovieDateTimeVO> smdtList = new ArrayList<SchMovieDateTimeVO>();
 					<%if(list.isEmpty()){ %>
 						<option>영화가 준비중입니다.</option>
 					<%}//end if %>
+						<option id ="nonValue" style = "height : 1px; " disabled="disabled"></option>
 					<%for(MovieListVO MainMlVO : list){ %>
 						<option  class="<%=MainMlVO.getMvNo() %>" ><%=MainMlVO.getMvTitle() %></option>
 					
@@ -337,7 +418,7 @@ List<SchMovieDateTimeVO> smdtList = new ArrayList<SchMovieDateTimeVO>();
 					</select>
 				</div>
 				<div id="movie-time">
-					<select id="timeList"  name ="time" multiple class="form-control" style= " height:100%" >
+					<select id="timeList"  name ="time" multiple class="form-control" style= " height:100%" onchange="timeSelectBox()" >
 						
 					
 					</select>
