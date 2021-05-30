@@ -127,4 +127,4 @@ public boolean updateMember(AdminUpdateMemberVO aumVO) throws SQLException{
 	return result;
 }
 
-}
+}//class

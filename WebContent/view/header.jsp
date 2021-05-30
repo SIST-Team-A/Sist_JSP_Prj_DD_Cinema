@@ -9,8 +9,22 @@
           <div id="left"></div>
           <div id="title"><a href="http://localhost/movie_reservation/view/main.jsp">D.D Cinema</a></div>
           <div id="login">
-            <a href="http://localhost/movie_reservation/view/login/login.jsp">로그인</a>
-            <a href="http://localhost/movie_reservation/view/login/sign_Up.jsp">회원가입</a>
+          
+          <%
+          	if(session.getAttribute("id")==null){
+          		%>
+          		
+            <a href="login.jsp">로그인</a>
+            
+            <a href="login.jsp">회원가입</a>
+          	<% }else{%>
+          	<form method ="post" action="main.jsp">
+            <a href="login/logout.jsp">로그아웃</a>
+            </form>
+            <a href="/login/login.jsp">회원가입</a>
+          	<%
+          		}      
+          		%>
           </div>
         </div>
         

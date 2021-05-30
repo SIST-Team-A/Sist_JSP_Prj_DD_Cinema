@@ -9,6 +9,7 @@ import vo.InsertMemberVO;
 import vo.MemberLoginVO;
 import vo.MemberPassFindVO;
 import vo.MemberPassUpdateVO;
+import vo.SelectUpdateMemberVO;
 
 public class MemberDAO {
 	
@@ -72,6 +73,30 @@ public class MemberDAO {
 		return result;
 	}//selectCheckId
 	
+	public void updateMember(SelectUpdateMemberVO sumVO) throws SQLException{
+		Connection con = null;
+		PreparedStatement pstmt=null;
+		
+		DbConnection dc = DbConnection.getInstance();
+		
+		try {
+			con=dc.getConn();
+			String updateMember = "UPDATE MEMBER SET MEM_NAME = ?, MEM_GENDER = ?, MEM_BIRTH = ?,MEM_PHONE = ?,MEM_EMAIL = ?WHERE (MEM_ID = LOWER(?) )";
+			pstmt = con.prepareStatement(updateMember);
+
+			pstmt.setString(1, sumVO.getMemName());
+			pstmt.setString(2, sumVO.getMemGender());
+			pstmt.setString(3, sumVO.getMemBirth());
+			pstmt.setString(4, sumVO.getMemPhone());
+			pstmt.setString(5, sumVO.getMemEmail());
+			pstmt.setString(6, sumVO.getMemId());
+			pstmt.executeUpdate();
+			
+		} finally {
+			dc.dbClose(con, pstmt, null);
+		}//end finally
+		
+	}//insertMember
 	
 	
 	

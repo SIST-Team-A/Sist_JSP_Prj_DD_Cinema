@@ -1,5 +1,12 @@
+<%@page import="vo.SelectUpdateMemberVO"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="dao.MemberDAO"%>
+<%@page import="vo.MemberLoginVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,11 +15,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
  <!-- 부트스트랩 -->
-    <link href="http://localhost/jsp_prj/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
     <!--  jQuery CDN(contents Delivery Network) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<!--  bootstrap  -->
- 	<script src="http://localhost/jsp_prj/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+ 	<script src="common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
  	
      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"      rel="stylesheet"    />
  <style type="text/css">
@@ -25,30 +32,42 @@ input{height : 35px; }
 </style>
 
 <script type="text/javascript">
+$(function(){
+	$("#id").keydown(function(evt){ 
+		if(evt.which == 13){
+			chkNull();
+		}//end if
+	});	
+	$("#pass").keydown(function(evt){ 
+		if(evt.which == 13){
+			chkNull();
+		}//end if
+	});	
+	$("#login_button").click(function(){ 
+		chkNull();
+		result();
+	});	
+});
 
-function login(){
-	var obj = document.frm;
-	var iddata =12;
-	var passdata =12;
-	if(obj.id.value==""){
-		alert("아이디를 입력하세요!");
-	}else if(obj.pass.value==""){
-		alert("비밀번호를 입력하세요!");
-	}else{
-	if((iddata==obj.id.value)&(passdata==obj.pass.value)){
-				alert("로그인 성공");
-				location.href="#" ;
-	}else{
-		alert("잘못된 정보입니다. 다시 입력 해 주세요 !");
-	}
-	}
-}
+function chkNull(){
+	if( $("#id").val() ==""){
+		alert("아이디는 필수 입력");
+		$("#id").focus();
+		return;
+	}//end if
+	if( $("#pass").val() ==""){
+		alert("비밀번호는 필수 입력");
+		$("#pass").focus();
+		return;
+	}//end if
+	$("#loginFrm").submit();
+}//chkNull
 </script>
 </head>
 <body>
    <div id="wrap">
    <%@ include file="../header.jsp" %>
-   <form action="#" name = "frm">
+   <form method="post" id="loginFrm"  action ="login_process.jsp">
 		<div id ="main">
 			<div  style ="background-color : #E4E4E4 ; width : 100%;  ;height : 500px; padding : 80px;  ">
 			<h1 >회원 로그인</h1>
@@ -56,15 +75,15 @@ function login(){
             <table id ="login_table">
                <tr>
                   <td style="height : 60px; width : 100px; font-size: 20px; ">아이디</td>
-                  <td><input  type ="text"  name="id" value ="" placeholder="아이디 입력"/></td>
-                  <td rowspan ="2"><button type="button" class="btn btn-default btn-lg" id= "login_button" onclick=" login()">로그인</button></td>
+                  <td><input  type ="text"  id=id name="id" value ="" placeholder="아이디 입력"/></td>
+                  <td rowspan ="2"><input type="button"  class="btn btn-default btn-lg"  id= "login_button"  tabindex="3" value="로그인"/></td>
                </tr>
                <tr>
                    <td style="height : 60px; width : 100px; font-size: 20px; ">비밀번호</td>
-                  <td> <input  type ="text"  name="pass"value ="" placeholder="비밀번호 입력"/></td>
+                  <td> <input  type ="password"  id ="pass" name="pass"value ="" placeholder="비밀번호 입력"/></td>
                </tr>   
                <tr>
-               		<td colspan="3"  style="text-align : center"><a href="http://localhost/sec_project/find.jsp"> 아이디 비밀번호 찾기</a> | <a href="http://localhost/sec_project/sign_Up.jsp"> 회원가입</a> </td>
+               		<td colspan="3"  style="text-align : center"><a href="find.jsp"> 아이디 비밀번호 찾기</a> | <a href="sign_Up.jsp"> 회원가입</a> </td>
                </tr>   
             </table>   
          </div>

@@ -48,6 +48,7 @@ function findid(){
 		};
 };
 
+
 function findpass(){
 	
 	if( $("#PASS_name").val()==""){
