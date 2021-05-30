@@ -25,21 +25,21 @@
 	request.setCharacterEncoding("UTF-8");
 	String name = request.getParameter("ID_name");
 	String email = request.getParameter("ID_email");
-	String id="";
+	
 	
 	MemberIdFindVO mifVO = new MemberIdFindVO(name, email);
 	
 	MemberDAO mDAO = new MemberDAO();
-	id = mDAO.memberIdFind(mifVO);
-		%>
+	String id = mDAO.memberIdFind(mifVO);
+	%>
 		alert("<%=name %>님의 아이디는 <%=id%> 입니다.");
 		location.href="login.jsp";
-		<%
+	<%
 		if(id == null){
-		%>
+	%>
 		alert("입력하신 정보가 일치하지 않습니다. 다시 한번 입력해주세요.");
 		location.href='find.jsp';
-		<%
+	<%
 	}
 	%>
 </script>
