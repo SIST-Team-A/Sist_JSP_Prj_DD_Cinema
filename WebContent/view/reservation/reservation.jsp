@@ -103,10 +103,57 @@
 		%>
 
 	<script type="text/javascript">
-		
+		$(function(){
+			var mvNo = "<%=mvNo %>";
+			
+			if( mvNo!= "null"){
+				
+				//for (var i = 0 ; i < $("#movieList").lenght; i++){
+					$("#movieList option").css("background-color","#000000");
+					$("#movieList option").attr("disabled",true);
+
+				//}
+				
+				if(mvNo != $("#movieList option").attr("class")){
+					$("."+mvNo).css("background-color","#ffffff");
+					$("."+mvNo).attr("disabled", false);
+					$("."+mvNo).attr("selected", true);
+					
+					var movie = $("#movieList option:selected").attr("class");
+					
+					var schDate = new Array();
+					var schMvNo = new Array();
+					
+					
+					<%for( int i= 0 ; i < schDate.length ; i++){%>
+				 	schDate[<%=i%>]="<%=schDate[i]%>"
+					
+				 <%}%>
+					<%for( int i= 0 ; i < schMvNo.length ; i++){%>
+					schMvNo[<%=i%>]="<%=schMvNo[i]%>"
+					
+				 <%}%>
+					
+			    $(".date").css("background-color", "#4C4C4C");
+				for( var i = 0 ; i< schMvNo.length; i++){
+						$("#"+schDate[i]).attr("disabled",true);
+				
+
+						if( schMvNo[i] == movie){
+								if(schDate[i] == $("#"+schDate[i]).val()){
+									$("#"+schDate[i]).css("background-color", "#FFFFFF");
+									$("#"+schDate[i]).prop("disabled",false);
+								}//end if
+						}//end fi
+												
+				}//end for
+				}
+			}
+		})	
 	
 		function movieSelectBox(){
 			var movie = $("#movieList option:selected").attr("class");
+	
 			var schDate = new Array();
 			var schMvNo = new Array();
 			
@@ -203,20 +250,7 @@ List<SchMovieDateTimeVO> smdtList = new ArrayList<SchMovieDateTimeVO>();
 
 		$(function(){
 			
-			var mvNo = "<%=mvNo %>";
 			
-			if( mvNo!= "null"){
-				
-				//for (var i = 0 ; i < $("#movieList").lenght; i++){
-					$("#movieList option").css("background-color","#000000");
-					$("#movieList option").attr("disabled",true);
-				//}
-				
-				if(mvNo != $("#movieList option").attr("class")){
-					$("."+mvNo).css("background-color","#ffffff");
-					$("."+mvNo).attr("disabled", false);
-				}
-			}
 			
 			$("#mainBtn").click(function(){
 				location.href = "http://localhost/movie_reservation/view/main.jsp";
