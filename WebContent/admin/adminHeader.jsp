@@ -13,7 +13,7 @@
           	if(session.getAttribute("id") !=null){
           		%>
           	<form method ="post" action="main.jsp">
-            <a href="admin_logout.jsp">로그아웃</a>
+            <a href="http://localhost/movie_test/admin/admin_logout.jsp">로그아웃</a>
             </form>
             <!-- <a href="admin_change_pass.jsp">비밀번호 변경</a> -->
           	<%
@@ -30,7 +30,7 @@
               <a href="admin_soon_movie.html">개봉예정작관리</a>
             </li>
             <li><a href="adminSchMain.jsp">영화스케쥴관리</a></li>
-            <li><a href="ad_mem_mian.jsp">회원관리</a></li>
+            <li><a href="ad_mem_main.jsp">회원관리</a></li>
           </ul>
         </div>
       </div>

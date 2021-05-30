@@ -17,14 +17,14 @@
 	<!--  bootstrap  -->
  	<script src="http://localhost/movie_reservation/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"    rel="stylesheet"    />
-    <link href="http://localhost/movie_reservation/common/css/adminHeaderFooter.css" rel= "stylesheet">
+    <link href="http://localhost/movie_reservaion/common/css/adminHeaderFooter.css" rel= "stylesheet">
 <style type="text/css">
 body{font-family: "Noto Sans KR", sans-serif;}
 h1{text-align: center}
 #main {     /* margin: auto 0; */  background-color : #FFFFFF ;    padding-left : 0px;  width : 1200px;       margin : 250px auto      }
 td{height : 40px; font-size: 23px; width : 150px }
 #login_table{ height: 180px; ;margin: 0px auto ; }
-#login_button{   height: 100px; width: 100px; margin-left: 30px ;   }
+#login_button{   height: 110px; width: 100px; margin-left: 30px ;   }
 input{height : 35px; }
 </style>
 
@@ -63,7 +63,7 @@ function chkNull(){
 
 <body>
    <div id="wrap">
-    <form  method="post" id="adminloginFrm"  action ="admin_login_process.jsp">
+    <form  method="post" id="adminloginFrm"  action ="http://localhost/movie_reservation/admin/admin_login_process.jsp">
    		<div id ="main" >
    			<!-- head -->
 			 <div >
@@ -73,12 +73,12 @@ function chkNull(){
             <table id ="login_table">
                <tr>
                	<td id="id_pass_text" style = "padding :15px">아이디 </td>
-                  <td><input  type ="text"  id= "id" name="id" value ="" placeholder="아이디 입력"/></td>
-                  <td rowspan ="2"><button type="button" class="btn btn-default" id= "login_button"  ">로그인</button></td>
+                  <td><input  type ="text"  id= "id" name="id" value ="" placeholder="아이디 입력" tabindex="1"/></td>
+                  <td rowspan ="2"><button type="button" class="btn btn-default" id= "login_button"  tabindex="3">로그인</button></td>
                </tr>
                <tr>	
                		<td  id="id_pass_text" style = "padding :15px">비밀번호 </td>
-                   <td> <input  type ="password"  id="pass" name ="pass" value ="" placeholder="비밀번호 입력"/></td>
+                   <td> <input  type ="password"  id="pass" name ="pass" value ="" placeholder="비밀번호 입력" tabindex="2"/></td>
                </tr>   
                <tr>	
                </tr>   

@@ -28,7 +28,7 @@
 %>
 <script type="text/javascript">
 	alert("로그아웃이 되었습니다");
-	location.href ="admin_login.jsp";
+	location.href ="http://localhost/movie_test/admin/admin_login.jsp";
 </script>
 </div>
 </body>

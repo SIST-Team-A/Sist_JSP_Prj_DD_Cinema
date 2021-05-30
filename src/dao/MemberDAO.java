@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import vo.InsertMemberVO;
+import vo.MemberIdFindVO;
 import vo.MemberLoginVO;
 import vo.MemberPassFindVO;
 import vo.MemberPassUpdateVO;
@@ -132,6 +133,34 @@ public class MemberDAO {
 		
 		return result;
 	}//memberLogin
+	
+	public String memberIdFind(MemberIdFindVO mifVO) throws SQLException{
+		String id = "";
+		Connection con = null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+
+		DbConnection dc = DbConnection.getInstance();
+		try {
+			con=dc.getConn();
+			
+			String selectQuery = "select MEM_ID from MEMBER where MEM_NAME = ? and MEM_EMAIL = ? ";
+			
+			pstmt = con.prepareStatement(selectQuery);
+			
+			pstmt.setString(1,mifVO.getMemName());
+			pstmt.setString(2, mifVO.getMemEmail());
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				id = rs.getString(1);
+			}
+		} finally {
+			dc.dbClose(con, pstmt, rs);
+		}//end finally
+			
+		return id ;
+	}
 	
 	public boolean memberPassFind(MemberPassFindVO mpfVO) throws SQLException{
 		boolean result = false;

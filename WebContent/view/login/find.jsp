@@ -23,31 +23,24 @@ body{font-family: "Noto Sans KR", sans-serif;}
 #id_table{  height: 100px; position: absolute; left: 10% ;top :10%}
 #pass_table{  height: 100px; position: absolute; left: 60% ;}
 #id_button{ width:100px; margin-left: 30px ;   }
-#pass_button{    width:100px;margin-left: 30px ;  }
+#pass_button{    width:100px;margin-left: 30px ;}
 input{height : 35px; width : 200px}
 </style>
 <script type="text/javascript">
 
 function findid(){
-	var obj = document.frm;
-	var name= "lee";
-	var email= "lee";
-	if( obj.ID_name.value==""){
+	if( $("#ID_name").val()==""){
 		alert("이름 입력은 필수 입력입니다.");
-	}else	if(obj.ID_email.value== ""){
-			alert("이메일 입력은 필수 입력입니다.");
-	}else{
-			if((name == obj.ID_name.value)&(email == obj.ID_email.value)){
-				alert(name+"님의 아이디는 [ 아이디 ] 입니다.")// 성공
-				location.href="login.jsp" ;
-			}else{
-				alert("일치하는 정보가 없습니다. 다시 입력 해주세요");
-				obj.ID_name="";
-				obj.ID_email="";
-			};
-		};
+		$("#ID_name").focus();
+		return ;
+	}
+	if($("#ID_email").val()==""){
+		alert("이메일 입력은 필수 입력입니다.");
+		$("#ID_email").focus();
+		return ;
+	}
+	$("#frmId").submit();
 };
-
 
 function findpass(){
 	
@@ -68,7 +61,7 @@ function findpass(){
 		$("#PASS_email").focus();
 		return;
 	}; 
-	$("#frm").submit();
+	$("#frmPass").submit();
 };
 </script>
 </head>
@@ -76,12 +69,12 @@ function findpass(){
 <!--  top: 45%;  transform: translateX(-50%) translateY(-50%)  top: 45%;  transform: translateX(-50%) translateY(-50%) -->
    <div id="wrap">
    <%@ include file="../header.jsp" %>
-		 <form action="find_process.jsp" id="frm">
 		<div id ="main">
 		<div  style ="background-color : #E4E4E4;height : 500px; padding : 20px" >
          <div id ="find_head">아이디 비밀번호 찾기</div>
          <div  id ="find">
          <div id = "change_infor" >
+		 <form action="find_id_process.jsp" id="frmId" method="post">
             <table id ="id_table">
             	<tr>
             		<td colspan ="2">
@@ -100,6 +93,8 @@ function findpass(){
                		<td colspan ="2"  style="padding :10px"><button type="button" class="btn btn-default  btn-lg" id= "id_button" onclick="findid();">확인</button></td>
                </tr>   
             </table>  
+          </form>  
+		 <form action="find_process.jsp" id="frmPass" method="post">
             <table id ="pass_table">
             	<tr>
             		<td colspan ="2">
@@ -124,11 +119,11 @@ function findpass(){
                		</td>
                </tr>   
             </table> 
-         </div>
-         </div>
-   	</div>
-   	</div>
    	</form>
+         </div>
+         </div>
+   	</div>
+   	</div>
 		<%@ include file="../footer.jsp" %>
 		</div>
 </body>
