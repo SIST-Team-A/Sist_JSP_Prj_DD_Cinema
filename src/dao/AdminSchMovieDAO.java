@@ -9,6 +9,7 @@ import java.util.List;
 
 import dao.AdminSchMovieDAO;
 import vo.AdminSchMovieSelectVO;
+import vo.AdminSchMovieUpdateVO;
 import vo.AdminMovieCloseUpdateVO;
 import vo.AdminMovieListVO;
 import vo.AdminSchMovieInsertVO;
@@ -33,7 +34,7 @@ public class AdminSchMovieDAO {
 	
 	
 	/**
-	 * ¸ŞÀÎ¿¡¼­ º¸¿©Áú sch_movie ÀüÃ¼ select
+	 * ì¨íš§ï¿½íš“ì©”ì§•ì©Œì§¯ ì¨˜ì¨ì©”ì§¤íšì²¬ sch_movie ï¿½ì²´íš„ì©Œ select
 	 * @return
 	 * @throws SQLException
 	 */
@@ -72,7 +73,7 @@ public class AdminSchMovieDAO {
 	
 	
 	/**
-	 * °ü¸®ÀÚ¿¡¼­ ½ºÄÉÁÙ Ãß°¡½Ã ¿µÈ­¸®½ºÆ®
+	 * ì§¸ì²´ì¨ì§°ï¿½íš£ì©”ì§•ì©Œì§¯ ì©ì¨˜íš†íš‹íšíš¢ íš„íš©ì§¸ì§•ì©íš„ ì©”ì¨‰íšŠì§¯ì¨ì§°ì©ì¨˜íšˆì§°
 	 * @return
 	 * @throws SQLException
 	 */
@@ -87,14 +88,14 @@ public class AdminSchMovieDAO {
 		ResultSet rs = null;
 		
 		try {
-		//1. Connection ¾ò±â
+		//1. Connection ì©ì±µì§¹ì°½
 			con = dc.getConn();
-		//2. Äõ¸®¹® »ı¼º°´Ã¼ ¾ò±â
+		//2. íš†ì²œì¨ì§°ì¨”ì§° ì¨©ì²µì©Œì¨˜ì§¸ì¨ˆíš„ì©Œ ì©ì±µì§¹ì°½
 			
 			String selectQuery = "select   mv_no, mv_title, mv_opendate from  movie ";
 			pstmt = con.prepareStatement(selectQuery);
-		//3. ¹ÙÀÎµå º¯¼ö¿¡ °ª ÇÒ´ç.
-		//4. Äõ¸®¹® ¼öÇà ÈÄ °á°ú ¾ò±â
+		//3. ì¨”íš¢ï¿½íš“ì¨‰ì±… ì¨˜ì§±ì©Œì² ì©”ì§• ì§¸ì§§ íš‰íš˜ì¨ˆì±Œ.
+		//4. íš†ì²œì¨ì§°ì¨”ì§° ì©Œì² íš‰íšª íšŠíš† ì§¸ì°¼ì§¸ì²¬ ì©ì±µì§¹ì°½
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) { 
@@ -104,7 +105,7 @@ public class AdminSchMovieDAO {
 
 			
 		}finally {
-		//5. ¿¬°á ²÷±â.
+		//5. ì©”ì§­ì§¸ì°¼ ì§¼ì²¨ì§¹ì°½.
 			dc.dbClose(con, pstmt, rs);
 		}//end try~ finally
 		return amlList;
@@ -112,7 +113,7 @@ public class AdminSchMovieDAO {
 	
 	
 	/**
-	 * ½ºÄÉÁÙ Ãß°¡½Ã insertÇÏ´Â ¸Ş¼Ò
+	 * ì©ì¨˜íš†íš‹íšíš¢ íš„íš©ì§¸ì§•ì©íš„ insertíš‰íš•ì¨ˆíš‚ ì¨íš§ì©Œíš˜
 	 * @param asmiVO
 	 * @return
 	 * @throws SQLException
@@ -126,19 +127,19 @@ public class AdminSchMovieDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-		//1. Connection ¾ò±â
+		//1. Connection ì©ì±µì§¹ì°½
 			con = dc.getConn();
-		//2. Äõ¸®¹® »ı¼º°´Ã¼ ¾ò±â
+		//2. íš†ì²œì¨ì§°ì¨”ì§° ì¨©ì²µì©Œì¨˜ì§¸ì¨ˆíš„ì©Œ ì©ì±µì§¹ì°½
 			
 			String insertQuery = "insert into sch_movie values(concat('h_',lpad(seq_schmv.nextval,8,0)), (select mv_no from movie where mv_title = ? and mv_opendate= ?),?,?,?,sysdate) ";
 			pstmt = con.prepareStatement(insertQuery);
-		//3. ¹ÙÀÎµå º¯¼ö¿¡ °ª ÇÒ´ç.
+		//3. ì¨”íš¢ï¿½íš“ì¨‰ì±… ì¨˜ì§±ì©Œì² ì©”ì§• ì§¸ì§§ íš‰íš˜ì¨ˆì±Œ.
 			pstmt.setString(1, asmiVO.getMvTitle());
 			pstmt.setString(2, asmiVO.getMvOpenDate());
 			pstmt.setString(3, asmiVO.getSchDate());
 			pstmt.setString(4, asmiVO.getSchStime());
 			pstmt.setString(5, asmiVO.getSchEtime());
-		//4. Äõ¸®¹® ¼öÇà ÈÄ °á°ú ¾ò±â
+		//4. íš†ì²œì¨ì§°ì¨”ì§° ì©Œì² íš‰íšª íšŠíš† ì§¸ì°¼ì§¸ì²¬ ì©ì±µì§¹ì°½
 			 cnt = pstmt.executeUpdate();
 			
 			if(cnt == 1) {
@@ -146,7 +147,7 @@ public class AdminSchMovieDAO {
 			}
 			
 		}finally {
-		//5. ¿¬°á ²÷±â.
+		//5. ì©”ì§­ì§¸ì°¼ ì§¼ì²¨ì§¹ì°½.
 			dc.dbClose(con, pstmt, null);
 		}//end try~ finally
 		
@@ -154,7 +155,7 @@ public class AdminSchMovieDAO {
 	}//insertSchMovie
 	
 	
-	public boolean updateMovieClose(AdminMovieCloseUpdateVO amcuVO) throws SQLException{
+	public boolean updateMovieClose(String mvTitle, String closeDate) throws SQLException{
 		boolean flag = false;
 		int cnt = 0;
 		DbConnection dc = DbConnection.getInstance();
@@ -163,18 +164,15 @@ public class AdminSchMovieDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-		//1. Connection ¾ò±â
+		//1. Connection ì©ì±µì§¹ì°½
 			con = dc.getConn();
-		//2. Äõ¸®¹® »ı¼º°´Ã¼ ¾ò±â
+		//2. íš†ì²œì¨ì§°ì¨”ì§° ì¨©ì²µì©Œì¨˜ì§¸ì¨ˆíš„ì©Œ ì©ì±µì§¹ì°½
 			
-			String updateQuery = "update movie set mv_closedate = ? where mv_title = ? and mv_opendate= ?";
+			String updateQuery = "update movie set mv_closedate = ? where mv_no in (select mv_no from movie where mv_title = ?)";
 			pstmt = con.prepareStatement(updateQuery);
-		//3. ¹ÙÀÎµå º¯¼ö¿¡ °ª ÇÒ´ç.
-			pstmt.setString(1, amcuVO.getMvCloseDate());
-			pstmt.setString(2, amcuVO.getMvTitle());
-			pstmt.setString(3, amcuVO.getMvOpendDate());
 			
-		//4. Äõ¸®¹® ¼öÇà ÈÄ °á°ú ¾ò±â
+			pstmt.setString(1, closeDate);
+			pstmt.setString(2, mvTitle);
 			cnt =  pstmt.executeUpdate();
 			
 			if(cnt == 1) {
@@ -182,7 +180,7 @@ public class AdminSchMovieDAO {
 			}
 			
 		}finally {
-		//5. ¿¬°á ²÷±â.
+		//5. ì©”ì§­ì§¸ì°¼ ì§¼ì²¨ì§¹ì°½.
 			dc.dbClose(con, pstmt, null);
 		}//end try~ finally
 		
@@ -203,7 +201,7 @@ public class AdminSchMovieDAO {
 			
 			String selectQuery = "select m.mv_no,  m.mv_title, m.mv_opendate, m.mv_closedate, sm.sch_date, sm.sch_stime, sm.sch_etime from movie m, sch_movie sm where m.mv_no = sm.mv_no and sm.sch_no = ?";
 			pstmt = con.prepareStatement(selectQuery);
-		//3. ¹ÙÀÎµå º¯¼ö¿¡ °ª ÇÒ´ç.
+		//3. ì¨”íš¢ï¿½íš“ì¨‰ì±… ì¨˜ì§±ì©Œì² ì©”ì§• ì§¸ì§§ íš‰íš˜ì¨ˆì±Œ.
 			pstmt.setString(1, schNo);
 
 			rs = pstmt.executeQuery();
@@ -219,7 +217,7 @@ public class AdminSchMovieDAO {
 		return asmsVO;
 	}
 	
-	public boolean deleteAdminSchMovie(String SchNo) throws SQLException{
+	public boolean deleteSchMovie(String SchNo) throws SQLException{
 		boolean flag=  false;
 
 		DbConnection dc =DbConnection.getInstance();
@@ -227,15 +225,12 @@ public class AdminSchMovieDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-		//1. Connection ¾ò±â
+		//1. Connection ì©ì±µì§¹ì°½
 			con = dc.getConn();
-		//2. Äõ¸®¹® »ı¼º°´Ã¼ ¾ò±â
 			
 			String deleteQuery = "delete from sch_movie where sch_no = ?";
 			pstmt = con.prepareStatement(deleteQuery);
-		//3. ¹ÙÀÎµå º¯¼ö¿¡ °ª ÇÒ´ç.
 			pstmt.setString(1, SchNo);
-		//4. Äõ¸®¹® ¼öÇà ÈÄ °á°ú ¾ò±â
 		
 			
 			if(pstmt.executeUpdate() == 1) {
@@ -243,9 +238,38 @@ public class AdminSchMovieDAO {
 			}
 			
 		}finally {
-		//5. ¿¬°á ²÷±â.
 			dc.dbClose(con, pstmt, null);
 		}//end try~ finally
+		return flag;
+	}
+
+	
+	public boolean updateSchMovie(AdminSchMovieUpdateVO asmuVO) throws SQLException{
+		boolean flag = false;
+		
+		DbConnection dc =DbConnection.getInstance();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = dc.getConn();
+			
+			String updateQuery = "update sch_movie set sch_date = ?, sch_stime = ?, sch_etime = ? where sch_no = ?";
+			pstmt = con.prepareStatement(updateQuery);
+			pstmt.setString(1, asmuVO.getSchDate());
+			pstmt.setString(2, asmuVO.getSchStime());
+			pstmt.setString(3, asmuVO.getSchEtime());
+			pstmt.setString(4, asmuVO.getSchNo());
+		
+			
+			if(pstmt.executeUpdate() == 1) {
+				flag = true;
+			}
+			
+		}finally {
+			dc.dbClose(con, pstmt, null);
+		}//end try~ finally
+		
 		return flag;
 	}
 }//class
