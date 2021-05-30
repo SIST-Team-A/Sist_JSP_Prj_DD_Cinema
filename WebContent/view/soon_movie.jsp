@@ -28,92 +28,7 @@
     <script src="../common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
 
     <style>
-      body,
-      html {
-        width: 100%;
-        height: 100%;
-        font-family: "Noto Sans KR", sans-serif;
-      }
-      body {
-        margin: 0px;
-        overflow-x: hidden;
-        overflow-y: overlay;
-      }
-      div {
-        /* border: 1px solid black; */
-      }
-      a {
-        text-decoration: none;
-        color: black;
-      }
-      a:hover {
-        text-decoration: none;
-        color: black;
-      }
-      #wrap {
-        display: flex;
-        height: 100%;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-      }
-      ul {
-        list-style: none;
-      }
-      #header {
-        width: 100%;
-        min-width: 950px;
-        height: 122px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        margin-bottom: auto;
-      }
-      #header-top {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 0px;
-      }
-      #header-bottom {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        width: 85%;
-        border-top: 1px solid #b2b2b2;
-        margin: 0 auto;
-      }
-      #header-bottom ul {
-        text-align: center;
-        margin: 0px;
-        padding: 0px;
-      }
-      #header-bottom ul li {
-        margin: 10px 0;
-        font-family: "Noto Sans KR", sans-serif;
-        float: left;
-      }
 
-      #left {
-        width: 25%;
-      }
-      #title {
-        font-size: 36px;
-        font-family: "Noto Sans KR", sans-serif;
-      }
-      #login {
-        width: 25%;
-        text-align: center;
-      }
-      #login a {
-        color: #656565;
-        font-family: "Noto Sans KR", sans-serif;
-        font-size: 12px;
-      }
-      #login a:hover {
-        color: #656565;
-      }
 
       #main {
         width: 100%;
@@ -209,27 +124,7 @@
   </head>
   <body>
     <div id="wrap">
-      <div id="header">
-        <div id="header-top">
-          <div id="left"></div>
-          <div id="title"><a href="main.jsp">D.D Cinema</a></div>
-          <div id="login">
-         <a href="http://localhost/movie_reservation/view/login/login.jsp">로그인</a>
-            <a href="http://localhost/movie_reservation/view/login/sign_Up.jsp">회원가입</a>
-          </div>
-        </div>
-        <div id="header-bottom">
-          <ul class="header-bottom-ul">
-            <li>
-              <a href="">예매</a>
-            </li>
-            <li>
-              <a href="cur_movie.jsp">현재상영작</a>
-            </li>
-            <li><a href="soon_movie.jsp">개봉예정작</a></li>
-          </ul>
-        </div>
-      </div>
+      <%@ include file="./header.jsp" %>
       <div id="main">
         <div id="main-title">
           <h3>개봉예정작</h3>
@@ -247,17 +142,7 @@
           />
         </div>
       </div>
-      <div id="footer">
-        <div id="footertxt">
-          Double Dragon Cinema<br />
-          서울특별시 강남구 테헤란로 132 한독약품빌딩 8층 쌍용교육센터 고객센터
-          1544<br />
-          조장 한상민 사업자등록번호 000-00-000000 개인정보 보호 최고 책임자
-          한상민<br />
-          COPYRIGHT©Double Dragon Cinema.
-        </div>
-        <div id="footer-right"></div>
-      </div>
+      <%@ include file="./footer.jsp" %>
     </div>
   </body>
 </html>
