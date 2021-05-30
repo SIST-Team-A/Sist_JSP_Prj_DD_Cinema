@@ -218,11 +218,11 @@ function closeWindow(){
             <tr>
               <td class="td-first">개봉여부</td>
               <td class="td-second" style="font-size:15px">
-              	<input type="radio" id="mv-open-radio" name="opennot" value="O" <%=opennot1 %>/>개봉&emsp;<input type="radio"  id="mv-noopen-radio" name="opennot" value="N" <%=opennot2 %>/>미개봉&nbsp;<input type="radio"  id="mv-close-radio" name="opennot" value="X"/>상영종료
+              	<input type="radio" id="mv-open-radio" name="opennot" value="O" <%=opennot1 %>/>개봉&emsp;<input type="radio"  id="mv-noopen-radio" name="opennot" value="N" <%=opennot2 %>/>미개봉&nbsp;<input type="radio"  id="mv-close-radio" name="opennot" value=""/>상영종료
          	  </td>             
             </tr>
                      
-			<tr id="tr-bottom">
+			<tr id="tr-bottom" style="width: 300px;">
 			   		<td>
 			  		   <input type="submit" value="수정"  id="modifyBtn" onclick="javascript: form.action='mv_update.jsp'" style="width:70px"/></td>
 					<td><input type="hidden" name="delNum" value="<%=mvNO%>">
