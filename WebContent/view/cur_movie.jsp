@@ -209,27 +209,7 @@
   </head>
   <body>
     <div id="wrap">
-      <div id="header">
-        <div id="header-top">
-          <div id="left"></div>
-          <div id="title"><a href="main.jsp">D.D Cinema</a></div>
-          <div id="login">
-            <a href="">로그인</a>
-            <a href="">회원가입</a>
-          </div>
-        </div>
-        <div id="header-bottom">
-          <ul class="header-bottom-ul">
-            <li>
-              <a href="">예매</a>
-            </li>
-            <li>
-              <a href="cur_movie.jsp">현재상영작</a>
-            </li>
-            <li><a href="soon_movie.jsp">개봉예정작</a></li>
-          </ul>
-        </div>
-      </div>
+      <%@ include file="./header.jsp" %>
       <div id="main">
         <div id="main-title">
           <h3>현재상영작</h3>
@@ -249,17 +229,7 @@
           />
         </div>
       </div>
-      <div id="footer">
-        <div id="footertxt">
-          Double Dragon Cinema<br />
-          서울특별시 강남구 테헤란로 132 한독약품빌딩 8층 쌍용교육센터 고객센터
-          1544<br />
-          조장 한상민 사업자등록번호 000-00-000000 개인정보 보호 최고 책임자
-          한상민<br />
-          COPYRIGHT©Double Dragon Cinema.
-        </div>
-        <div id="footer-right"></div>
-      </div>
+        <%@ include file="./footer.jsp" %>
     </div>
   </body>
 </html>
