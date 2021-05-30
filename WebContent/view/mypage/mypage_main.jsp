@@ -1,7 +1,19 @@
+<%@page import="java.util.List"%>
+<%@page import="java.lang.reflect.Array"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.ReservationDAO"%>
+<%@page import="vo.ReservationMainVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-   
+ <%
+String id =(String)session.getAttribute("id");
+
+
+//DAO단의 클래스를 사용하여 DB작업 수행
+ReservationDAO mDAO=new ReservationDAO();
+List <ReservationMainVO > rmList = mDAO.selectReservation(id);
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,10 +44,9 @@
 </style>
 <script type="text/javascript">
 	$(function() {
-		$(".detailBtn").click(function() {
-			window.location="http://localhost/movie_reservation/view/mypage/mypage_res_detail.jsp";
+		$("#detailBtn").click(function() {
+			$("#frm").submit();
 		});//click
-		
 	});//ready
 </script>
 </head>
@@ -48,7 +59,7 @@
 	<div id="title">My page</div>
 	<div id="navibar">
 		<ul class="nav nav-pills">
-		  <li role="presentation"><a href="mypage_res_detail.jsp">예매내역</a></li>
+		  <li role="presentation"><a	href="mypage_res_detail.jsp">예매내역</a></li>
 		<li role="presentation"><a href="change_infor1.jsp">정보 수정</a></li>
 		<li role="presentation"><a	href="change_pass1.jsp">비밀번호	변경</a></li>
 		</ul>
@@ -56,6 +67,7 @@
 	<br/>
 	<br/>
 	<div>
+	<form action = "mypage_res_detail.jsp" name = "frm" >
 	<table class="table table-hover">
 		<thead>
 		<tr id="taHead">
@@ -65,30 +77,17 @@
 		</tr>
 		</thead>
 		<tbody>
+		<% for(ReservationMainVO rmVO : rmList ){%>
 		<tr>
-			<td>21051601</td>
-			<td>괴물</td>
-			<td class="detailBtn"><input type="button" value="상세보기" class="btn btn-primary"></td>
+			<td ><input type ="hidden" name ="reNo" value = "<%= rmVO.getRevNo() %>" ><%=  rmVO.getRevNo()%> </td>
+			<td	><%= rmVO.getMvTitle() %></td>
+			<td class="detailBtn"><button class="btn btn-primary"  id="detailBtn">상세보기</button></td>
 		</tr>
-		<tr>
-			<td>21051602</td>
-			<td>인셉션</td>
-			<td class="detailBtn"><input type="button" value="상세보기" class="btn btn-primary"></td>
-		</tr>
-		<tr>
-			<td>21051603</td>
-			<td>테넷</td>
-			<td class="detailBtn"><input type="button" value="상세보기" class="btn btn-primary"></td>
-		</tr>
-		<tr>
-			<td>21051604</td>
-			<td>미나리</td>
-			<td class="detailBtn"><input type="button" value="상세보기" class="btn btn-primary"></td>
-		</tr>
-		
+		<%}%>
 		</tbody>
 		
 	</table>
+	</form>
 	</div>
 
 	</div>
