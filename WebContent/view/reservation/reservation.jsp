@@ -106,10 +106,7 @@
 
 	<script type="text/javascript">
 		$(function(){
-			if(id == null){
-				 location.href="http://localhost/movie_reservation/admin/admin_login.jsp" ;
-
-			}
+			
 			var mvNo = "<%=mvNo %>";
 			
 			if( mvNo!= "null"){
@@ -127,6 +124,7 @@
 					$("."+mvNo).attr("selected", true);
 					
 					var movie = $("#movieList option:selected").attr("class");
+					
 					
 					var schDate = new Array();
 					var schMvNo = new Array();
@@ -165,6 +163,9 @@
 			var schMvNo = new Array();
 			
 			
+			$("#timeList option").remove();
+			$("#dateList option").attr("selected",false);
+			$("#timeList option").attr("selected",false);
 			<%for( int i= 0 ; i < schDate.length ; i++){%>
 		 	schDate[<%=i%>]="<%=schDate[i]%>"
 			
@@ -260,6 +261,7 @@ List<SchMovieDateTimeVO> smdtList = new ArrayList<SchMovieDateTimeVO>();
 	        for ( var i = 0; i < schStime.length; i++){
 	        	if(sDate[i] == date){
 	        		$("#timeList").append("<option value ='"+schStime[i]+"'>"+schStime[i]+" </option>");
+	        	
 	        	}//end if
 	        }//end for
 	        
