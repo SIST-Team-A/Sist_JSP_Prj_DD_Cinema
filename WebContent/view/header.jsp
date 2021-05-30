@@ -14,14 +14,14 @@
           	if(session.getAttribute("id")==null){
           		%>
           		
-            <a href="../login/login.jsp">로그인</a>
+            <a href="http://localhost/movie_reservation/view/login/login.jsp">로그인</a>
             
-            <a href="../login/login.jsp">회원가입</a>
+            <a href="http://localhost/movie_reservation/view/login/sign_Up.jsp">회원가입</a>
           	<% }else{%>
           	<form method ="post" action="main.jsp">
-            <a href="../login/logout.jsp">로그아웃</a>
+            <a href="http://localhost/movie_reservation/view/login/logout.jsp">로그아웃</a>
             </form>
-            <a href="../login/login.jsp">회원가입</a>
+            <a href="http://localhost/movie_reservation/view/mypage/mypage_main.jsp">마이페이지</a>
           	<%
           		}      
           		%>
