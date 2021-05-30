@@ -77,8 +77,8 @@
             <li>
               <a href="">개봉예정작관리</a>
             </li>
-            <li><a href="">영화스케쥴관리</a></li>
-            <li><a href="">회원관리</a></li>
+            <li><a href="adminSchMain.jsp">영화스케쥴관리</a></li>
+            <li><a href="admin_member_main.jsp">회원관리</a></li>
           </ul>
         </div>
       </div>
