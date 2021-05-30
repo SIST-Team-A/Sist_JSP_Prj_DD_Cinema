@@ -61,9 +61,15 @@
       }
 
       #movie-detail {
+      	display:flex;
+      	flex-direction:column;
+      	justify-content:space-between;
+      	align-items:center;
         margin-top: 50px;
         width: 100%;
         height: 100%;
+      }
+      #btn-reservation{
       }
       #movie-poster{
       	width: 349px;
@@ -130,16 +136,19 @@
           <div id="movie-poster"><img src="<%=mvSelectVO.getMvPoster() %>" /></div>
           <div id="movie-info">
             <div id="movie-title"><h2><%=mvSelectVO.getMvTitle() %></h2></div>
-            <div id="movie-detail">
-              장르 : <%=mvSelectVO.getMvGenre() %>/ <%=mvSelectVO.getMvOpenDate() %> 개봉 / <%=mvSelectVO.getMvRuntime()%><br />
-              감독 : <%=mvSelectVO.getMvDirector()%><br />
-              출연 : <% for(int i = 0; i<list.size(); i++){
-            	  if(i!=list.size()-1){%> 
-              		<%=list.get(i).getActName()%><%=list.get(i).getActMainOrSub().equals("M")?"(주연), ":"(조연), "%>
-              		<%}else{ %>
-              		<%=list.get(i).getActName()%><%=list.get(i).getActMainOrSub().equals("M")?"(주연)":"(조연)"%>
-              		<%} %>
-              		<%} %>
+            	<div id="movie-detail">
+            		<div id= "movie-detail-info">
+              			장르 : <%=mvSelectVO.getMvGenre() %>/ <%=mvSelectVO.getMvOpenDate() %> 개봉 / <%=mvSelectVO.getMvRuntime()%><br />
+              			감독 : <%=mvSelectVO.getMvDirector()%><br />
+              			출연 : <% for(int i = 0; i<list.size(); i++){
+            	  					if(i!=list.size()-1){%> 
+              							<%=list.get(i).getActName()%><%=list.get(i).getActMainOrSub().equals("M")?"(주연), ":"(조연), "%>
+              						<%}else{ %>
+              							<%=list.get(i).getActName()%><%=list.get(i).getActMainOrSub().equals("M")?"(주연)":"(조연)"%>
+              						<%} %>
+              					<%} %>
+              		</div>
+              		<div id="btn-reservation" ><a class="btn btn-default" role="button" href="http://localhost/movie_reservation/view/reservation/reservation.jsp?mvNo=<%=mvNo %>">예매하기</a></div>
             </div>
           </div>
         </div>

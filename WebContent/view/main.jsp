@@ -284,8 +284,21 @@
             <div id="left"></div>
             <div id="title"><a href="">D.D Cinema</a></div>
             <div id="login">
-              <a href="http://localhost/movie_reservation/view/login/login.jsp">로그인</a>
+              <%
+          	if(session.getAttribute("id")==null){
+          		%>
+          		
+            <a href="http://localhost/movie_reservation/view/login/login.jsp">로그인</a>
+            
             <a href="http://localhost/movie_reservation/view/login/sign_Up.jsp">회원가입</a>
+          	<% }else{%>
+          	<form method ="post" action="main.jsp">
+            <a href="http://localhost/movie_reservation/view/login/logout.jsp">로그아웃</a>
+            </form>
+            <a href="http://localhost/movie_reservation/view/mypage/mypage_main.jsp">마이페이지</a>
+          	<%
+          		}      
+          		%>
             </div>
           </div>
           <div id="header-bottom">

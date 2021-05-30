@@ -193,7 +193,7 @@
       window.onload = function () {
         const btn = document.getElementById("btn-unfold");
         btn.addEventListener("click", () => {
-          let cnt = 5;
+          let cnt = 3;
           const items = document.querySelectorAll(".item");
           for (const item of items) {
             if (cnt) {
@@ -214,11 +214,14 @@
         <div id="main-title">
           <h3>현재상영작</h3>
         </div>
-        <%for(int i = 0; i<list.size();i++){ %>
+        <%for(int i = 0; i<list.size();i++){ 
+        	if(i<3){
+        	%>
         <div class="item"><a href="movie_info.jsp?mvNo=<%= list.get(i).getMvNo() %>"><img src="<%= list.get(i).getMvPoster() %>"/></a></div>
+        <% 	}else{ %>
+        <div class="item hidden"><a href="movie_info.jsp?mvNo=<%= list.get(i).getMvNo() %>"><img src="<%= list.get(i).getMvPoster() %>"/></a></div>
         <% } %>
-        
-        <!-- <div class="item hidden">11</div> -->
+        <% } %>
         
         <div id="unfold">
           <input
