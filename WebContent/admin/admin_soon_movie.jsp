@@ -71,7 +71,7 @@
                 for(int i=0; i<soonList.size();i++){%>
              <form id="myform<%=i %>" method="post" action="admin_popup_soon.jsp" target="popupwin">               
       		<tr id="tr<%=i %>">
-      			<td class="movie-num"><input type="text" id="test<%=i %>" name="test" value="<%=soonList.get(i).getMvNo() %>"readonly="readonly" style=" width:80px; height:10px; text-align: center; border: 0px solid #333 "/></td>                             
+      			<td class="movie-num"><input type="text" id="test<%=i %>" name="test" value="<%=soonList.get(i).getMvNo() %>"readonly="readonly" style=" width:80px; height:15px; text-align: center; border: 0px solid #333 "/></td>                             
       			<td class="movie-title"><%=soonList.get(i).getMvTitle()%></td>
       			<td class="director"><%=soonList.get(i).getMvDirector()%></td>
       			<td class="cast"><%for(int j=0; j<soonList.get(i).getActName().size(); j++){ %>
