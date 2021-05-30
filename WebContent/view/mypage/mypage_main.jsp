@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+   
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +48,7 @@
 	<div id="title">My page</div>
 	<div id="navibar">
 		<ul class="nav nav-pills">
-		  <li role="presentation"><a	href="mypage_res_detail.jsp">예매내역</a></li>
+		  <li role="presentation"><a href="mypage_res_detail.jsp">예매내역</a></li>
 		<li role="presentation"><a href="change_infor1.jsp">정보 수정</a></li>
 		<li role="presentation"><a	href="change_pass1.jsp">비밀번호	변경</a></li>
 		</ul>
