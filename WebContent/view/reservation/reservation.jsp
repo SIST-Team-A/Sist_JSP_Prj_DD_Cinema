@@ -12,6 +12,8 @@
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
     <% String mvNo = request.getParameter("mvNo"); %>
  
 <!DOCTYPE HTML>
@@ -104,7 +106,10 @@
 
 	<script type="text/javascript">
 		$(function(){
-			
+			if(id == null){
+				 location.href="http://localhost/movie_reservation/admin/admin_login.jsp" ;
+
+			}
 			var mvNo = "<%=mvNo %>";
 			
 			if( mvNo!= "null"){
@@ -346,6 +351,7 @@ function timeSelectBox(){
 </script>
 </head>
 <body>
+<%-- <%if( session.getAttribute("id") != null){ %> --%>
 
 	<div id="wrap" >
 
@@ -441,7 +447,15 @@ function timeSelectBox(){
 		
 		<%@ include file="../footer.jsp" %>
 	</div>
+<%-- <%}else{%>		
+	<script type="text/javascript">
+	$(function(){
 		
+	alert("로그인 해주세요");
+	 location.href="http://localhost/movie_reservation/admin/admin_login.jsp" ;
+	})	
+	</script>
+<% }%> --%>
 
 </body>
 </html>
