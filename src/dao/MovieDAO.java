@@ -141,11 +141,7 @@ public class MovieDAO {
 			while(rs.next()) {
 				mvCloseArr = rs.getString(1).split("-");
 				calMv.set(Integer.parseInt(mvCloseArr[0]), Integer.parseInt(mvCloseArr[1])-1,Integer.parseInt(mvCloseArr[2]));
-//				System.out.println(calNow.get(Calendar.YEAR)+"-"+(calNow.get(Calendar.MONTH)+1)+"-"+calNow.get(Calendar.DAY_OF_MONTH));
-//				System.out.println(calMv.get(Calendar.YEAR)+"-"+(calMv.get(Calendar.MONTH)+1)+"-"+calMv.get(Calendar.DAY_OF_MONTH));
-//				System.out.println(calNow.after(calMv));
 				if(calNow.after(calMv)) {
-//					pstmt.executeUpdate("update movie set mv_openornot='C' where mv_no='"+rs.getString(2)+"'");
 					mvNoList.add(rs.getString(2));
 				}
 			}
