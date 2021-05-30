@@ -124,7 +124,7 @@ public class AdminSchMovieDAO {
 		try {
 			con = dc.getConn();
 			
-			String insertQuery = "insert into sch_movie values(concat('h_',lpad(seq_schmv.nextval,8,0)), (select mv_no from movie where mv_title = ? and mv_opendate= ?),?,?,?,sysdate) ";
+			String insertQuery = "insert into sch_movie values(concat('h_',lpad(seq_schmv.nextval,8,0)), (select mv_no from movie where mv_title = ? and mv_opendate= ?),?,?,sysdate,?) ";
 			pstmt = con.prepareStatement(insertQuery);
 			pstmt.setString(1, asmiVO.getMvTitle());
 			pstmt.setString(2, asmiVO.getMvOpenDate());
