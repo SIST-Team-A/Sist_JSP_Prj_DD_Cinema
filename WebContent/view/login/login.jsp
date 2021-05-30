@@ -1,7 +1,3 @@
-<%@page import="vo.SelectUpdateMemberVO"%>
-<%@page import="java.sql.SQLException"%>
-<%@page import="dao.MemberDAO"%>
-<%@page import="vo.MemberLoginVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -20,12 +16,12 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<!--  bootstrap  -->
  	<script src="common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
- 	
      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"      rel="stylesheet"    />
+     
  <style type="text/css">
 body{font-family: "Noto Sans KR", sans-serif;}
 h1{text-align: center}
-#main {     /* margin: auto 0; */  background-color : #FFFFFF ;    padding-left : 0px;  width : 1200px;       margin : 10px auto      }
+#main {     /* margin: auto 0; */  background-color : #FFFFFF ;    padding-right : 150px;  width : 1200px;       margin : 0px auto      }
 #login_table{ height: 180px; ;margin: 0px auto ; }
 #login_button{   height: 100px; width: 100px; margin-left: 30px ;   }
 input{height : 35px; }
@@ -45,7 +41,6 @@ $(function(){
 	});	
 	$("#login_button").click(function(){ 
 		chkNull();
-		result();
 	});	
 });
 
@@ -69,7 +64,7 @@ function chkNull(){
    <%@ include file="../header.jsp" %>
    <form method="post" id="loginFrm"  action ="login_process.jsp">
 		<div id ="main">
-			<div  style ="background-color : #E4E4E4 ; width : 100%;  ;height : 500px; padding : 80px;  ">
+			<div  style ="background-color : #E4E4E4 ; width : 100%;  ;height : 300px; padding : 80px;  ">
 			<h1 >회원 로그인</h1>
 			<br/>
             <table id ="login_table">
@@ -83,7 +78,7 @@ function chkNull(){
                   <td> <input  type ="password"  id ="pass" name="pass"value ="" placeholder="비밀번호 입력"/></td>
                </tr>   
                <tr>
-               		<td colspan="3"  style="text-align : center"><a href="find.jsp"> 아이디 비밀번호 찾기</a> | <a href="sign_Up.jsp"> 회원가입</a> </td>
+               		<td colspan="3"  style="text-align : center"><a href="http://localhost/movie_reservation/view/login/find.jsp"> 아이디 비밀번호 찾기</a> | <a href="http://localhost/movie_reservation/view/login/sign_Up.jsp"> 회원가입</a> </td>
                </tr>   
             </table>   
          </div>

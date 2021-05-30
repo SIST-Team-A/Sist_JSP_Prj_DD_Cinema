@@ -30,10 +30,10 @@ boolean result= aDAO.adminLogin(aVO); //DB
 if(result ){
 	session.setMaxInactiveInterval(60*60);//요청이 끝난 다음에 다음 요청이 발생하기전까지의 시간.
 	session.setAttribute("id",id);//세션에 값을 저
-	response.sendRedirect( "adminHeader.jsp");
+	response.sendRedirect( "http://localhost/movie_test/admin/adminHeader.jsp");
 	}else{%>
 	alert("아이디 비밀번호를 확인해주세요.")
-	location.href = "admin_login.jsp";
+	location.href = "http://localhost/movie_test/admin/admin_login.jsp";
 	<%}
 %>
 </script>
