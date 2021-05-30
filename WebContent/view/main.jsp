@@ -312,7 +312,7 @@
           </div>
           <div id="header-bottom">
             <ul class="header-bottom-ul">
-              <li><a href="">예매</a></li>
+              <li><a href="http://localhost/movie_reservation/view/reservation/reservation.jsp">예매</a></li>
               <li><a href="cur_movie.jsp">현재상영작</a></li>
               <li><a href="soon_movie.jsp">개봉예정작</a></li>
             </ul>
@@ -323,7 +323,6 @@
           <%for(int i=0;i<soonList.size();i++){ %>
             <a href="movie_info.jsp?mvNo=<%=soonList.get(i).getMvNo()%>">
               <img src="<%=soonList.get(i).getMvSoonPoster()%>"/>
-              <%System.out.print(soonList.get(i).getMvSoonPoster()); %>
             </a>
             <%} %>
           </div>
@@ -337,7 +336,6 @@
           		<div class="swiper-slide">
             		<a href="movie_info.jsp?mvNo=<%= curList.get(i).getMvNo() %>">
               		<img src="<%=curList.get(i).getMvPoster()%>"/>
-              		<%System.out.print(curList.get(i).getMvPoster()); %>
             		</a>
             	</div>
             		<%} %>
