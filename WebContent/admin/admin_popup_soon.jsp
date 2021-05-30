@@ -106,6 +106,14 @@ text-align: center;
 width:500px;
 }
 
+#mv-no{
+	background-color: #ECECED;
+}
+
+#mv-regdate{
+	background-color: #ECECED;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -143,7 +151,7 @@ function del(){
 <form action="mv_update.jsp" id="Frm1" method="post"> <!-- 폼으로 삭제요청 -->           
   <table id="popup-table">
              <tr id="tr-header">
-                <td colspan="2"><h3>개봉예정작관리</h3></td>
+                <td colspan="3"><h3>개봉예정작관리</h3></td>
             </tr>
             <tr>
               <td class="td-first">번호</td>
@@ -206,12 +214,24 @@ function del(){
               <td class="td-second"><input type="text" name="mv-opendate" value="<%=amsVO.getMvOpenDate()%>" class="table-text" /></td>
   
             </tr>
+             
+             <tr>
+              <td class="td-first">종료일자</td>
+              <td class="td-second"><input type="text" name="mv-closedate" id="mv-closedate" value="<%=amsVO.getMvCloseDate()%>" class="table-text" /></td> 
+            </tr>
+            
+            <tr>
+              <td class="td-first">등록일자</td>
+              <td class="td-second"><input type="text" name="mv-regdate" id="mv-regdate" value="<%=amsVO.getMvRegdate()%>" readonly="readonly"  class="table-text" /></td> 
+            </tr>
+            
             <tr>
               <td class="td-first">개봉여부</td>
               <td class="td-second" style="font-size:15px">
-              	<input type="radio" name="opennot" value="O" <%=opennot1%>/>개봉&emsp;<input type="radio" name="opennot" value="N"<%=opennot2%>/>미개봉&nbsp;<input type="radio" name="opennot"/>상영종료
-              </td>             
-            </tr>      
+              	<input type="radio" id="mv-open-radio" name="opennot" value="O" <%=opennot1 %>/>개봉&emsp;<input type="radio"  id="mv-noopen-radio" name="opennot" value="N" <%=opennot2 %>/>미개봉&nbsp;<input type="radio"  id="mv-close-radio" name="opennot" value=""/>상영종료
+         	  </td>             
+            </tr>
+               
 			
 			<tr id="tr-bottom">
 			   		<td>

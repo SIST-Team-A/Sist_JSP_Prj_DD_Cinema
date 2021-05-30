@@ -31,8 +31,7 @@
   <style></style>
     
     <script>
-    
-    
+
  window.onload=function(){
 
     function showPopup(){
@@ -44,13 +43,12 @@
     
     <% for(int i=0; i<amdao.selectMovieAll("O").size();i++){%>
    $("#table tbody #tr<%=count3++%>").click(function(){
-		alert($("#test<%=count4++%>").val());
+		<%-- alert($("#test<%=count4++%>").val()); --%>
 		showPopup();
 		$("#myform<%=count5++%>").submit();
    });  
    <%}%>
-    
-  
+ 
  };    
     </script>    
     
