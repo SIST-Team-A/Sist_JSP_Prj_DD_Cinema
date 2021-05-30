@@ -103,7 +103,7 @@ public class AdminMovieDAO {
 						rs.getString("mv_soon_poster"), rs.getString("mv_title"), rs.getString("mv_director"),
 						selectActor(rs.getString("mv_no")), rs.getString("mv_st"), rs.getString("mv_runtime"),
 						rs.getString("mv_trailer"), rs.getString("mv_opendate"), rs.getString("mv_openornot"),
-						rs.getString("mv_genre"));
+						rs.getString("mv_genre"),rs.getString("mv_closedate"),rs.getString("mv_regdate"));
 			}
 		} finally {
 			dc.dbClose(con, pstmt, rs);
@@ -121,7 +121,7 @@ public class AdminMovieDAO {
 
 		try {
 			con = dc.getConn();
-			String insertQuery = "insert into movie(mv_no,mv_title,mv_poster,mv_director,mv_st,mv_trailer,mv_opendate,mv_closedate,mv_runtime,mv_regdate,mv_openornot,mv_genre,mv_soon_poster) values(concat('m_',lpad(seq_mv.nextval,8,0)),?,?,?,?,?,?,sysdate,?,sysdate,?,?,?)";
+			String insertQuery = "insert into movie(mv_no,mv_title,mv_poster,mv_director,mv_st,mv_trailer,mv_opendate,mv_closedate,mv_runtime,mv_regdate,mv_openornot,mv_genre,mv_soon_poster) values(concat('m_',lpad(seq_mv.nextval,8,0)),?,?,?,?,?,?,?,?,sysdate,?,?,?)";
 			pstmt = con.prepareStatement(insertQuery);
 
 			pstmt.setString(1, muiVO.getMvTitle());
@@ -130,10 +130,11 @@ public class AdminMovieDAO {
 			pstmt.setString(4, muiVO.getMvSt());
 			pstmt.setString(5, muiVO.getMvTrailler());
 			pstmt.setString(6, muiVO.getMvOpenDate());
-			pstmt.setString(7, muiVO.getMvRuntime());
-			pstmt.setString(8, muiVO.getMvOpenOrNot());
-			pstmt.setString(9, muiVO.getMvGenre());
-			pstmt.setString(10, muiVO.getMvPosterSoon());
+			pstmt.setString(7, muiVO.getMvCloseDate());			
+			pstmt.setString(8, muiVO.getMvRuntime());
+			pstmt.setString(9, muiVO.getMvOpenOrNot());
+			pstmt.setString(10, muiVO.getMvGenre());
+			pstmt.setString(11, muiVO.getMvPosterSoon());
 
 			pstmt.executeUpdate();
 
@@ -159,7 +160,7 @@ public class AdminMovieDAO {
 			deleteActor(muiVO.getMvNo());
 			insertActor(muiVO.getMvNo(), muiVO.getActLeadArr(), muiVO.getActSubArr());
 
-			String updateQuery = "update movie set mv_title=?,mv_poster=?,mv_director=?,mv_st=?,mv_trailer=?,mv_opendate=?,mv_runtime=?,mv_openornot=?, mv_regdate=sysdate, mv_genre=?, mv_soon_poster=? where mv_no='"
+			String updateQuery = "update movie set mv_title=?,mv_poster=?,mv_director=?,mv_st=?,mv_trailer=?,mv_opendate=?,mv_closedate=?,mv_runtime=?,mv_openornot=?, mv_regdate=sysdate, mv_genre=?, mv_soon_poster=? where mv_no='"
 					+ muiVO.getMvNo() + "'";
 			pstmt = con.prepareStatement(updateQuery);
 
@@ -169,10 +170,11 @@ public class AdminMovieDAO {
 			pstmt.setString(4, muiVO.getMvSt());
 			pstmt.setString(5, muiVO.getMvTrailler());
 			pstmt.setString(6, muiVO.getMvOpenDate());
-			pstmt.setString(7, muiVO.getMvRuntime());
-			pstmt.setString(8, muiVO.getMvOpenOrNot());
-			pstmt.setString(9, muiVO.getMvGenre());
-			pstmt.setString(10, muiVO.getMvPosterSoon());
+			pstmt.setString(7, muiVO.getMvCloseDate());
+			pstmt.setString(8, muiVO.getMvRuntime());
+			pstmt.setString(9, muiVO.getMvOpenOrNot());
+			pstmt.setString(10, muiVO.getMvGenre());
+			pstmt.setString(11, muiVO.getMvPosterSoon());
 
 			pstmt.executeUpdate();
 		} finally {

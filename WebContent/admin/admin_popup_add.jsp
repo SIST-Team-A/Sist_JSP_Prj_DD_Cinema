@@ -57,6 +57,14 @@ text-align: center;
 width:500px;
 }
 
+#mv-no{
+	background-color: #ECECED;
+}
+
+#mv-regdate{
+	background-color: #ECECED;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -66,12 +74,14 @@ function closeWindow(){
 	opener.location.reload();
 }
 
-function mvInsert(){
-	document.getElementById("Frm1").submit();
+function mvInsert(){	
+	if(confirm("추가 하시겠습니까?")){
+		document.getElementById('Frm1').submit();		
+	}else{
+		return;
+	}
 }
 
-window.onload=function(){	
-};
 
 </script>
 </head>
@@ -81,11 +91,11 @@ window.onload=function(){
   <form action="mv_insert.jsp"  id="Frm1" method="post"><!-- 폼으로 삭제요청 --> 
    <table id="popup-table">
              <tr id="tr-header">
-                <td colspan="2"><h3>개봉예정작관리</h3></td>
+                <td colspan="3"><h3>개봉예정작추가</h3></td>
             </tr>
             <tr>
               <td class="td-first">번호</td>
-              <td class="td-second"><input type="text" id="test" name="mv-no" value="" class="table-text" /></td>
+              <td class="td-second"><input type="text" id="test" name="mv-no" value="" readonly="readonly" class="table-text" /></td>
             </tr>
             
             <tr>     	 
@@ -143,8 +153,19 @@ window.onload=function(){
             
             <tr>
               <td class="td-first">개봉일자</td>
-              <td class="td-second"><input type="text" name="mv-opendate" value="" class="table-text" /></td>
+              <td class="td-second"><input type="text" name="mv-opendate" id="mv-opendate" value="" class="table-text" /></td> 
             </tr>
+            
+            <tr>
+              <td class="td-first">종료일자</td>
+              <td class="td-second"><input type="text" name="mv-closedate" id="mv-closedate" value="" class="table-text" /></td> 
+            </tr>
+            
+            <tr>
+              <td class="td-first">등록일자</td>
+              <td class="td-second"><input type="text" name="mv-regdate" id="mv-regdate" value="" readonly="readonly" class="table-text" /></td> 
+            </tr>
+            
             
             <tr>
               <td class="td-first">개봉여부</td>

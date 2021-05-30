@@ -42,7 +42,7 @@
     
     <% for(int i=0; i<amdao.selectMovieAll("N").size();i++){%>
    $("#table tbody #tr<%=count3++%>").click(function(){
-		alert($("#test<%=count4++%>").val());
+		<%-- alert($("#test<%=count4++%>").val()); --%>
 		showPopup();
 		$("#myform<%=count5++%>").submit();
    });  
@@ -52,7 +52,7 @@
     	var xPos = (document.body.offsetWidth/2) - (750/2); // 가운데 정렬
 		xPos += window.screenLeft; // 듀얼 모니터일 때
 		var yPos = (document.body.offsetHeight/2) - (500/2);
-		window.open("admin_popup_add.jsp", "aaa", "width=750, height=1200,left="+xPos+", top="+yPos+", menubar=yes, status=yes, titlebar=yes, resizable=yes"); 	 	
+		window.open("admin_popup_add.jsp", "addPopup", "width=750, height=1200,left="+xPos+", top="+yPos+", menubar=yes, status=yes, titlebar=yes, resizable=yes"); 	 	
     });
    
  };    

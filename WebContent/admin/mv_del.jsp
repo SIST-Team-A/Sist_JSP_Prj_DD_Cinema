@@ -22,11 +22,13 @@
 </style>
 
 <script type="text/javascript">
+
 alert("삭제되었습니다.");
 window.onload=function(){
 	window.close();
 	opener.location.reload();
 } 
+
 </script>
 </head>
 <body>

@@ -23,9 +23,12 @@
 
 </style>
 <script type="text/javascript">
+
+alert("추가되었습니다.");
 window.onload=function(){
-	alert("ㅎㅇ");
-}
+	window.close();
+	opener.location.reload();
+} 
 
 </script>
 </head>
@@ -47,18 +50,19 @@ String mvRuntime=request.getParameter("mv-runtime");
 String mvTrailer=request.getParameter("mv-trailer");
 String mvOpendate=request.getParameter("mv-opendate");
 String mvOpenornot=request.getParameter("opennot");
-
+String mvRegdate=request.getParameter("mv-regdate");
+String mvClosedate=request.getParameter("mv-closedate");
 /* if(mvOpenornot.equals("on")){
 	mvOpenornot="O";
 }else{
 	mvOpenornot="N";	
 }  */
 
-MovieUpdateInsertVO muiVO=new MovieUpdateInsertVO(mvNo,mvPoster,mvPosterSoon,mvTitle,mvDirector,mvLead,mvSub,mvSt,mvRuntime,mvTrailer,mvOpendate,mvOpenornot,mvGenre);
+MovieUpdateInsertVO muiVO=new MovieUpdateInsertVO(mvNo,mvPoster,mvPosterSoon,mvTitle,mvDirector,mvLead,mvSub,mvSt,mvRuntime,mvTrailer,mvOpendate,mvOpenornot,mvGenre,mvClosedate);
 amdao.insertMovie(muiVO);
 /* amdao.insertActor(muiVO.getMvNo()); */
 %>
-<%=mvPoster %>
+
 </div>
 
 </body>

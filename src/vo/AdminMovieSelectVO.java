@@ -16,12 +16,14 @@ public class AdminMovieSelectVO {
 	private String mvOpenDate;
 	private String mvOpenOrNot;
 	private String mvGenre;
+	private String mvCloseDate;
+	private String mvRegdate;
 	public AdminMovieSelectVO() {
 		super();
 	}
 	public AdminMovieSelectVO(String mvNo, String mvPoster, String mvPosterSoon, String mvTitle, String mvDirector,
 			List<ActorVO> actorList, String mvSt, String mvRuntime, String mvTrailer, String mvOpenDate,
-			String mvOpenOrNot, String mvGenre) {
+			String mvOpenOrNot, String mvGenre, String mvCloseDate, String mvRegdate) {
 		super();
 		this.mvNo = mvNo;
 		this.mvPoster = mvPoster;
@@ -35,6 +37,8 @@ public class AdminMovieSelectVO {
 		this.mvOpenDate = mvOpenDate;
 		this.mvOpenOrNot = mvOpenOrNot;
 		this.mvGenre = mvGenre;
+		this.mvCloseDate = mvCloseDate;
+		this.mvRegdate = mvRegdate;
 	}
 	public String getMvNo() {
 		return mvNo;
@@ -108,5 +112,19 @@ public class AdminMovieSelectVO {
 	public void setMvGenre(String mvGenre) {
 		this.mvGenre = mvGenre;
 	}
-
+	public String getMvCloseDate() {
+		return mvCloseDate;
+	}
+	public void setMvCloseDate(String mvCloseDate) {
+		this.mvCloseDate = mvCloseDate;
+	}
+	public String getMvRegdate() {
+		return mvRegdate;
+	}
+	public void setMvRegdate(String mvRegdate) {
+		this.mvRegdate = mvRegdate;
+	}
+	
+	
+	
 }
