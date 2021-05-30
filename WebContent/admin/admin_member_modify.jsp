@@ -18,8 +18,15 @@
 	
 	AdminMemberDAO admDAO = new AdminMemberDAO();
 	
-	boolean result = admDAO.updateMember(aumVO);
-	
+	int cnt = admDAO.updateMember(aumVO);
+	if(cnt > 0 ){
+		%>
+		<script type="text/javascript">
+		location.href="admin_member_main.jsp";
+		</script>
+		
+		<%
+	}
 	
 %>
 

@@ -6,16 +6,20 @@
 <%
 
 	request.setCharacterEncoding("UTF-8");
-	String id     = request.getParameter("modal_id");
-	String name   = request.getParameter("modal_name");
-	String birth  = request.getParameter("modal_birth");
-	String gender = request.getParameter("gender");
-	String email  = request.getParameter("modal_email");	
-	String phone  = request.getParameter("modal_phone");
+	int cnt=0;
+	String id = request.getParameter("modal_id");
 	
 	AdminMemberDAO admDAO = new AdminMemberDAO();
 	
-	boolean result = admDAO.delectMember(id);
+	cnt = admDAO.delectMember(id);
+	if(cnt > 0 ){
+		%>
+		<script type="text/javascript">
+		location.href="admin_member_main.jsp";
+		</script>
+		
+		<%
+	}
 	
 %>
 

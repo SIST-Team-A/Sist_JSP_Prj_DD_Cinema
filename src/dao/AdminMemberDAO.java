@@ -63,40 +63,34 @@ public class AdminMemberDAO {
 		return admVO;
 	}
 
-public boolean delectMember(String memId) throws SQLException{
-	boolean flage=false ;
+public int delectMember(String memId) throws SQLException{
+	int cnt =0;
 	
 	Connection con = null;
 	PreparedStatement pstmt=null;
-	ResultSet rs = null;
 	
 	DbConnection dc = DbConnection.getInstance();
 	
 	try {
 		con=dc.getConn();
 		
-		String deletMember = "DELETE FROM MEMBER WHERE MEM_ID = "+memId;
+		String deletMember = "DELETE FROM MEMBER WHERE MEM_ID = '"+memId+"'";
 		
 		pstmt = con.prepareStatement(deletMember);
-		rs = pstmt.executeQuery();
-		pstmt.executeUpdate();
+		cnt = pstmt.executeUpdate();
 		
-		while (rs.next()) {
-			flage=true;
-		} // end while
+		
 	} finally {
 		dc.dbClose(con, pstmt, null); 
 	}//end finally
-	return  flage;
+	return cnt;
 }
 
-public boolean updateMember(AdminUpdateMemberVO aumVO) throws SQLException{
-	
-	boolean result = false;
+public int updateMember(AdminUpdateMemberVO aumVO) throws SQLException{
+	int cnt=0;
 	
 	Connection con = null;
 	PreparedStatement pstmt=null;
-	ResultSet rs = null;
 	
 	DbConnection dc = DbConnection.getInstance();
 	try {
@@ -113,18 +107,14 @@ public boolean updateMember(AdminUpdateMemberVO aumVO) throws SQLException{
 		pstmt.setString(5, aumVO.getMemPhone());
 		pstmt.setString(6, aumVO.getMemId());
 		
-		rs = pstmt.executeQuery();
+		cnt = pstmt.executeUpdate();
 		
 		
-		while (rs.next()) {
-			result=true;
-		} // end while
 	} finally {
-			dc.dbClose(con, pstmt,rs);
+			dc.dbClose(con, pstmt, null);
 
 	}//end finally
-	
-	return result;
+	return cnt;
 }
 
 }//class
