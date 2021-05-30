@@ -130,30 +130,14 @@ function closeWindow(){
 	opener.location.reload();
 }
 
-function updat(){
-
-	if(confirm("정말로 수정 하시겠습니까?")){
-		document.getElementById('Frm1').submit();		
-	}else{
-		return;
-	}
-}
-
-function del(){
-	if(confirm("정말로 삭제 하시겠습니까?")){
-		document.getElementById('Frm2').submit();		
-	}else{
-		return;
-	}
-	
-}
 </script>
 </head>
 <body>
 
+<form method="post" name="Frm">
 <div id="wrap">
      
-<form action="mv_update.jsp" id="Frm1" method="post"><!-- 폼으로 삭제요청 -->   
+
   <table id="popup-table">
              <tr id="tr-header">
                 <td colspan="3"><h3>현재상영작관리</h3></td>
@@ -237,22 +221,18 @@ function del(){
               	<input type="radio" id="mv-open-radio" name="opennot" value="O" <%=opennot1 %>/>개봉&emsp;<input type="radio"  id="mv-noopen-radio" name="opennot" value="N" <%=opennot2 %>/>미개봉&nbsp;<input type="radio"  id="mv-close-radio" name="opennot" value="X"/>상영종료
          	  </td>             
             </tr>
-               
-            
+                     
 			<tr id="tr-bottom">
 			   		<td>
-			  		   <input type="button" value="수정"  id="motifyBtn" onclick="updat()"/></td>
-			  		   </form>
-			   		<form action="mv_del.jsp" id="Frm2" method="post"><!-- 폼으로 삭제요청 -->
+			  		   <input type="submit" value="수정"  id="modifyBtn" onclick="javascript: form.action='mv_update.jsp'" style="width:70px"/></td>
 					<td><input type="hidden" name="delNum" value="<%=mvNO%>">
-					   <input type="button" value="삭제"  id="deleteBtn" onclick="del()"></td>
-				   </form>
-			  		  <td> <input type="button" value="취소" id="cencelBtn" onclick="closeWindow()"></td>
+					   <input type="submit" value="삭제"  id="deleteBtn" onclick="javascript: form.action='mv_del.jsp'" style="width:70px"></td>
+			  		  <td> <input type="button" value="취소" id="cencelBtn" onclick="closeWindow()" style="width:70px"></td>
 			</tr>           
               </table> 
 
 </div>
-
+</form>
 </body>
 </html>
 

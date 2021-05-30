@@ -7,12 +7,7 @@
      <% 
      AdminMovieDAO amdao=AdminMovieDAO.getInstance();
      List<AdminMovieMainVO> soonList =new ArrayList<AdminMovieMainVO>(); 
- 	int count0=0;
- 	int count1=0;
- 	int count2=0;
- 	int count3=0;
- 	int count4=0;
- 	int count5=0;
+ 
   %>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,10 +36,9 @@
     }
     
     <% for(int i=0; i<amdao.selectMovieAll("N").size();i++){%>
-   $("#table tbody #tr<%=count3++%>").click(function(){
-		<%-- alert($("#test<%=count4++%>").val()); --%>
+   $("#table tbody #tr<%=i%>").click(function(){
 		showPopup();
-		$("#myform<%=count5++%>").submit();
+		$("#myform<%=i%>").submit();
    });  
    <%}%>
    
@@ -60,28 +54,7 @@
   </head>
   <body>
     <div id="wrap">
-      <div id="header">
-        <div id="header-top">
-          <div id="left"></div>
-          <div id="title"><a href="">ADMIN MANAGER</a></div>
-          <div id="login">
-            <a href="">로그아웃</a>
-            <a href="">비밀번호변경</a>
-          </div>
-        </div>
-        <div id="header-bottom">
-          <ul class="header-bottom-ul">
-            <li>
-              <a href="admin_cur_movie.jsp">현재상영작관리</a>
-            </li>
-            <li>
-              <a href="">개봉예정작관리</a>
-            </li>
-            <li><a href="adminSchMain.jsp">영화스케쥴관리</a></li>
-            <li><a href="admin_member_main.jsp">회원관리</a></li>
-          </ul>
-        </div>
-      </div>
+<%@ include file="adminHeader.jsp" %>
       <div id="main">
         <div id="table-header">개봉예정작품</div>
 
@@ -96,9 +69,9 @@
             </tr>
                  	<%soonList=amdao.selectMovieAll("N");
                 for(int i=0; i<soonList.size();i++){%>
-             <form id="myform<%=count0++ %>" method="post" action="admin_popup_soon.jsp" target="popupwin">               
-      		<tr id="tr<%=count1++ %>">
-      			<td class="movie-num"><input type="text" id="test<%=count2++ %>" name="test" value="<%=soonList.get(i).getMvNo() %>"readonly="readonly" style=" width:80px; height:10px; text-align: center; border: 0px solid #333 "/></td>                             
+             <form id="myform<%=i %>" method="post" action="admin_popup_soon.jsp" target="popupwin">               
+      		<tr id="tr<%=i %>">
+      			<td class="movie-num"><input type="text" id="test<%=i %>" name="test" value="<%=soonList.get(i).getMvNo() %>"readonly="readonly" style=" width:80px; height:10px; text-align: center; border: 0px solid #333 "/></td>                             
       			<td class="movie-title"><%=soonList.get(i).getMvTitle()%></td>
       			<td class="director"><%=soonList.get(i).getMvDirector()%></td>
       			<td class="cast"><%for(int j=0; j<soonList.get(i).getActName().size(); j++){ %>
@@ -115,17 +88,7 @@
         <input type="button" value="추가"  name="addBtn"  id="addBtn" />
         </div>
       </div>
-      <div id="footer">
-        <div id="footertxt">
-          Double Dragon Cinema<br />
-          서울특별시 강남구 테헤란로 132 한독약품빌딩 8층 쌍용교육센터 고객센터
-          1544<br />
-          조장 한상민 사업자등록번호 000-00-000000 개인정보 보호 최고 책임자
-          한상민<br />
-          COPYRIGHT©Double Dragon Cinema.
-        </div>
-        <div id="footer-right"></div>
-      </div>
+      <%@ include file="adminFooter.jsp" %>
     </div>
   </body>
 </html>
