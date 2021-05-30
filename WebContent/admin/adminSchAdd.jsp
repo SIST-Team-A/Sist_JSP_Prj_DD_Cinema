@@ -33,7 +33,7 @@
  <!-- timepicker -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
    
-   <style type="text/css">
+  <style type="text/css">
 
 	
 
@@ -51,7 +51,6 @@
 }
        
 </style>
-
 <%
 	AdminSchMovieDAO asmDAO = new AdminSchMovieDAO();
 	List<AdminMovieListVO> amlList = asmDAO.selectSchMovieAll();
@@ -188,23 +187,23 @@
 					<table style = "width : 90%; height : 100%; ">
 						<tr>
 							<td>영화제목</td>
-							<td><input type ="text" id="titleMovie"  name ="titleMovie" readonly="readonly" class="inputBox" style = "background-color :#dfdfdf ;width :240px" ></td>
+							<td><input type ="text" id="titleMovie"  name ="addTitleMovie" readonly="readonly" class="inputBox" style = "background-color :#dfdfdf ;width :240px" ></td>
 						</tr>
 						<tr>
 							<td>개봉일</td>
-							<td><input type ="text" id="startMovie" name = "startMovie"readonly="readonly" style = "background-color :#dfdfdf"> <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></td>
+							<td><input type ="text" id="startMovie" name = "addStartMovie"readonly="readonly" style = "background-color :#dfdfdf"> <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></td>
 						</tr>
 						<tr>
 							<td>상영종료일</td>
-							<td><input type ="text" id = "endMovie" name = "endMovie"class="datepicker" > <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></td>
+							<td><input type ="text" id = "endMovie" name = "addEndMovie"class="datepicker" > <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></td>
 						</tr>
 						<tr>
 							<td>상영일</td>
-							<td> <input type ="text" id = "dateMovie" name = "dateMovie"class="datepicker"> <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></td>
+							<td> <input type ="text" id = "dateMovie" name = "addDateMovie"class="datepicker"> <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></td>
 						</tr>
 						<tr>
 							<td>상영시간</td>
-							<td> <input type ="text" class="timepicker"  id="sTime" name ="sTime"style ="width  :100px;" > ~ <input type = "text" id="eTime" name="eTime"class="timepicker"  style ="width  :100px; "></td>
+							<td> <input type ="text" class="timepicker"  id="sTime" name ="addsTime"style ="width  :100px;" > ~ <input type = "text" id="eTime" name="addeTime"class="timepicker"  style ="width  :100px; "></td>
 						</tr>
 					
 					</table>
@@ -224,6 +223,3 @@
 
 </body>
 </html>
-
-
-
