@@ -63,8 +63,8 @@ function chkNull(){
 
 <body>
    <div id="wrap">
-    <form  method="post" id="adminloginFrm"  action ="http://localhost/movie_reservation/admin/admin_login_process.jsp">
-   		<div id ="main" >
+    <form  method="post" id="adminloginFrm"  action ="admin_login_process.jsp">
+   		<div id ="main">
    			<!-- head -->
 			 <div >
 			 <h1>관리자 로그인</h1>
@@ -85,7 +85,6 @@ function chkNull(){
             </table>   
   	 </div>
   	 </form>
-  	  <%@ include file="adminFooter.jsp" %>
   	  </div>
 </body>
 </html>
