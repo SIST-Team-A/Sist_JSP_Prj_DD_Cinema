@@ -18,7 +18,9 @@ public class MemberDAO {
 	
 	}//MemberDAO
 	
-	public void insertMember(InsertMemberVO imVO) throws SQLException{
+	public int insertMember(InsertMemberVO imVO) throws SQLException{
+		int cnt=0;
+		
 		Connection con = null;
 		PreparedStatement pstmt=null;
 		
@@ -38,11 +40,11 @@ public class MemberDAO {
 			pstmt.setString(6, imVO.getMemPhone());
 			pstmt.setString(7, imVO.getMemEmail());
 			
-			pstmt.executeUpdate();
+			cnt = pstmt.executeUpdate();
 		} finally {
 			dc.dbClose(con, pstmt, null);
 		}//end finally
-		
+		return cnt;
 	}//insertMember
 	
 	public boolean selectCheckId(String memId) throws SQLException {

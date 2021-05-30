@@ -4,29 +4,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 	
-	<%	
-	request.setCharacterEncoding("UTF-8");
-	String Id = request.getParameter("Id");
-	String Pass = request.getParameter("Pass");
-	String Name = request.getParameter("Name");
-	String Gender = request.getParameter("Gender");
-	String Birth = request.getParameter("Birth");
-	String Phone = request.getParameter("Phone");
-	String EmailId = request.getParameter("EmailId");
-	String Domain = request.getParameter("Domain");
-	
-	String email = EmailId+"@"+Domain;
-	
-	InsertMemberVO imVO=new InsertMemberVO(Id, Pass, Name, Gender, Birth,Phone,email);
-	
-	MemberDAO mDAO = new MemberDAO();
-	try{
-		mDAO.insertMember(imVO);
-	}catch(SQLException se){
-		se.printStackTrace();
-	}
-	
-	%>
     
 <!DOCTYPE html>
 <html>
@@ -85,6 +62,39 @@ function signup(){
 			$("#frm").submit();
 		}
 	};
+	
+	
+	<%	
+	request.setCharacterEncoding("UTF-8");
+	int cnt=0;
+	String Id = request.getParameter("Id");
+	String Pass = request.getParameter("Pass");
+	String Name = request.getParameter("Name");
+	String Gender = request.getParameter("Gender");
+	String Birth = request.getParameter("Birth");
+	String Phone = request.getParameter("Phone");
+	String EmailId = request.getParameter("EmailId");
+	String Domain = request.getParameter("Domain");
+	
+	String email = EmailId+"@"+Domain;
+	
+	InsertMemberVO imVO=new InsertMemberVO(Id, Pass, Name, Gender, Birth,Phone,email);
+	
+	MemberDAO mDAO = new MemberDAO();
+	try{
+		cnt=mDAO.insertMember(imVO);
+		if(cnt>0){
+		%>
+			location.href="login.jsp"
+		<% 
+		
+		}
+	}catch(SQLException se){
+		se.printStackTrace();
+		
+	}
+	
+	%>
 </script>
 </head>
 <body>
@@ -132,16 +142,19 @@ function signup(){
 						<td>이메일</td>
 						<td style="width: 500px"><input type="text" name="EmailId"
 							placeholder="이메일" /> @ <select name="Domain" size="1">
-								<option value="daum.net">다음</option>
-								<option value="naver.com">네이버</option>
-								<option value="google.com">지메일</option>
-								<option value="hotmail.com">핫메일</option>
+								<option value="null">--이메일선택--</option>
+								<option value="daum.net">daum.net</option>
+								<option value="naver.com">naver.com</option>
+								<option value="nate.com">nate.com</option>
+								<option value="google.com">google.com</option>
+								<option value="hotmail.com">hotmail.com</option>
+								<option value="sist.co.kr">sist.co.kr</option>
 						</select></td>
 					</tr>
 					<tr>
 						<td id="btn" colspan="2"style="border-bottom: 0px solid #333; text-align: center;">
 							<br />
-							<input type="button" value="수정" class="btn btn-default btn-lg"		style="width: 120px; "  onclick="signup()"/> 
+							<input type="button" value="가입" class="btn btn-default btn-lg"		style="width: 120px; "  onclick="signup()"/> 
 					</tr>
 				</table>
 
