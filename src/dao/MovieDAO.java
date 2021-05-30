@@ -42,12 +42,12 @@ public class MovieDAO {
 
 		try {
 			con = dc.getConn();
-			query = "select mv_no,mv_poster from movie where mv_openornot = ?";
+			query = "select mv_no,mv_poster,mv_soon_poster from movie where mv_openornot = ?";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, OpenOrNot);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				list.add(new MovieMainVO(rs.getString("mv_no"), rs.getString("mv_poster")));
+				list.add(new MovieMainVO(rs.getString("mv_no"), rs.getString("mv_poster"), rs.getString("mv_soon_poster")));
 			}
 		} finally {
 			dc.dbClose(con, pstmt, rs);

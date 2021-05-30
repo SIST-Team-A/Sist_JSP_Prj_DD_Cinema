@@ -1,5 +1,14 @@
+<%@page import="vo.MovieMainVO"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.MovieDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%
+	MovieDAO mvDAO = MovieDAO.getInstance();
+	List<MovieMainVO> curList = mvDAO.selectMainPoster("O");
+	List<MovieMainVO> soonList = mvDAO.selectMainPoster("N");
+	
+	%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -311,18 +320,12 @@
         </div>
         <div id="main">
           <div id="main-poster">
-            <a href="" target="_blank">
-              <img src="../common/images/Line_1920774.jpg" />
+          <%for(int i=0;i<soonList.size();i++){ %>
+            <a href="movie_info.jsp?mvNo=<%=soonList.get(i).getMvNo()%>">
+              <img src="<%=soonList.get(i).getMvSoonPoster()%>"/>
+              <%System.out.print(soonList.get(i).getMvSoonPoster()); %>
             </a>
-            <a href="" target="_blank">
-              <img src="../common/images/Spiral_1920774.jpg" />
-            </a>
-            <a href="" target="_blank">
-              <img src="../common/images/TheFast_1920774.jpg" />
-            </a>
-            <a href="" target="_blank">
-              <img src="../common/images/Voyagers_1920774.jpg" />
-            </a>
+            <%} %>
           </div>
         </div>
       </div>
@@ -330,38 +333,14 @@
       <div id="containerPoster">
         <div class="swiper-container">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-            <a href="movie_info.jsp">
-              <img src="../common/images/a1.jpg" />
-              </a>
-            </div>
-            <div class="swiper-slide">
-              <img src="../common/images/a2.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="../common/images/a3.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="../common/images/a4.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="../common/images/a5.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="../common/images/a6.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="../common/images/a7.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="../common/images/a8.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="../common/images/a9.jpg" />
-            </div>
-            <div class="swiper-slide">
-              <img src="../common/images/a10.jpg" />
-            </div>
+          	<%for(int i=0;i<curList.size();i++){ %>
+          		<div class="swiper-slide">
+            		<a href="movie_info.jsp?mvNo=<%= curList.get(i).getMvNo() %>">
+              		<img src="<%=curList.get(i).getMvPoster()%>"/>
+              		<%System.out.print(curList.get(i).getMvPoster()); %>
+            		</a>
+            	</div>
+            		<%} %>
           </div>
           <!-- 네비게이션 -->
           <div class="swiper-button-next"></div>

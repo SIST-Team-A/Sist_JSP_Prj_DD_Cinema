@@ -48,7 +48,6 @@
         width: 300px;
         height: 500px;
         margin: 10px;
-        border: 1px solid black;
         text-align: center;
       }
       .item img{

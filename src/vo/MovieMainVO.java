@@ -4,13 +4,17 @@ public class MovieMainVO {
 
 	private String mvNo;
 	private String mvPoster;
-
+	private String mvSoonPoster;
+	
 	public MovieMainVO() {
+		super();
 	}
-
-	public MovieMainVO(String mvNo, String mvPoster) {
+	
+	public MovieMainVO(String mvNo, String mvPoster, String mvSoonPoster) {
+		super();
 		this.mvNo = mvNo;
 		this.mvPoster = mvPoster;
+		this.mvSoonPoster = mvSoonPoster;
 	}
 
 	public String getMvNo() {
@@ -29,4 +33,12 @@ public class MovieMainVO {
 		this.mvPoster = mvPoster;
 	}
 
+	public String getMvSoonPoster() {
+		return mvSoonPoster;
+	}
+
+	public void setMvSoonPoster(String mvSoonPoster) {
+		this.mvSoonPoster = mvSoonPoster;
+	}
+	
 }
