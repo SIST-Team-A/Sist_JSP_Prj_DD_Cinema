@@ -14,14 +14,14 @@
           	if(session.getAttribute("id")==null){
           		%>
           		
-            <a href="login.jsp">로그인</a>
+            <a href="../login/login.jsp">로그인</a>
             
-            <a href="login.jsp">회원가입</a>
+            <a href="../login/login.jsp">회원가입</a>
           	<% }else{%>
           	<form method ="post" action="main.jsp">
-            <a href="login/logout.jsp">로그아웃</a>
+            <a href="../login/logout.jsp">로그아웃</a>
             </form>
-            <a href="/login/login.jsp">회원가입</a>
+            <a href="../login/login.jsp">회원가입</a>
           	<%
           		}      
           		%>
@@ -31,7 +31,7 @@
         <div id="header-bottom">
           <ul class="header-bottom-ul">
             <li>
-              <a href="">예매</a>
+              <a href="http://localhost/movie_reservation/view/reservation/reservation.jsp">예매</a>
             </li>
             <li>
               <a href="http://localhost/movie_reservation/view/cur_movie.jsp">현재상영작</a>

@@ -17,7 +17,10 @@
 		
 		String[] selectSeat = request.getParameterValues("selectSeat");
 		
-		ReservationInsertVO riVO = new ReservationInsertVO("lee3",selectSeat.length);
+		
+		String id = (String)session.getAttribute("id");
+		
+		ReservationInsertVO riVO = new ReservationInsertVO(id,selectSeat.length);
 		ReservationDAO rDAO = new ReservationDAO ();
 		boolean revInsert = rDAO.insertReservation(riVO);
 		String rev_no = rDAO.selectRevNO();
