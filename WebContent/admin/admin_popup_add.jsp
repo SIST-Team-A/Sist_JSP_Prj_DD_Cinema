@@ -96,7 +96,7 @@ function mvInsert(){
             
             <tr>
               <td class="td-first">번호</td>
-              <td class="td-second"><input type="text" id="test" name="mv-no" value="" readonly="readonly" class="table-text" /></td>
+              <td class="td-second"><input type="text" id="mv-no" name="mv-no" value="" readonly="readonly" class="table-text" /></td>
             </tr>
             
             <tr>     	 
@@ -174,8 +174,8 @@ function mvInsert(){
 			<tr id="tr-bottom">            
 			   <td colspan="2">
 		 		<!--  <input type="hidden" name="addData" value="asd"> -->
-			   <input type="button" value="추가"  id="addBtn" onclick="mvInsert()"/>
-			   <input type="button" value="취소" id="cencelBtn"  onclick="closeWindow()"/>
+			   <input type="button" value="추가"  id="addBtn" onclick="mvInsert()" style="width:70px"/>
+			   <input type="button" value="취소" id="cencelBtn"  onclick="closeWindow()" style="width:70px"/>
 			   </td>
 			</tr>
 			           

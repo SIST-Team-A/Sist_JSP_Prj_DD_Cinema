@@ -7,12 +7,7 @@
  <% 
    AdminMovieDAO amdao=AdminMovieDAO.getInstance();
    List<AdminMovieMainVO> curList=new ArrayList<AdminMovieMainVO>(); 
- 	int count0=0;
- 	int count1=0;
- 	int count2=0;
- 	int count3=0;
- 	int count4=0;
- 	int count5=0;
+ 
   %>
   
 <!DOCTYPE html>
@@ -42,10 +37,9 @@
     }
     
     <% for(int i=0; i<amdao.selectMovieAll("O").size();i++){%>
-   $("#table tbody #tr<%=count3++%>").click(function(){
-		<%-- alert($("#test<%=count4++%>").val()); --%>
+   $("#table tbody #tr<%=i %>").click(function(){
 		showPopup();
-		$("#myform<%=count5++%>").submit();
+		$("#myform<%=i %>").submit();
    });  
    <%}%>
  
@@ -93,9 +87,9 @@
         	
         	curList=amdao.selectMovieAll("O");
         	for(int i=0; i<amdao.selectMovieAll("O").size();i++){%>
-             <form id="myform<%=count0++ %>" method="post" action="admin_popup_cur.jsp" target="popupwin">               
-      		<tr id="tr<%=count1++ %>">
-      			<td class="movie-num"><input type="text" id="test<%=count2++ %>" name="test" value="<%=curList.get(i).getMvNo() %>"readonly="readonly" style=" width:80px; height:10px; text-align: center; border: 0px solid #333 "/></td>                             
+             <form id="myform<%=i %>" method="post" action="admin_popup_cur.jsp" target="popupwin">               
+      		<tr id="tr<%=i %>">
+      			<td class="movie-num"><input type="text" id="test<%=i %>" name="test" value="<%=curList.get(i).getMvNo() %>"readonly="readonly" style=" width:80px; height:10px; text-align: center; border: 0px solid #333 "/></td>                             
       			<td class="movie-title"><%=curList.get(i).getMvTitle()%></td>
       			<td class="director"><%=curList.get(i).getMvDirector()%></td>
       			<td class="cast"><%for(int j=0; j<curList.get(i).getActName().size(); j++){ %>
