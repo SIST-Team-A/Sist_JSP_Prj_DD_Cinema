@@ -59,7 +59,6 @@
        
        
 </style>
-
 	<script type="text/javascript">
 	$(function(){
 
@@ -88,18 +87,24 @@
 	        scrollbar: true
 	    });
 	    
-	    $("#modifyBtn").click(function(){
-	    	alert("수정이 완료되었습니다.");
-	    	location.href = "adminSchMain.jsp"
-	    });
-	
+
 	   
 });//ready
 		
 		function deleteClick(){
     		alert("삭제가  완료되었습니다.");
+    		
+    		
+			frm.action = "adminSchMainDelete.jsp"
+			frm.submit();
+		}
+		function updateClick(){
+    		alert("수정이  완료되었습니다.");
 			$("#frm").submit();
 		}
+		
+		
+		
 		
 		function backClick(){
 			window.history.back();
@@ -120,35 +125,36 @@
 			<h2>영화 스케줄 수정</h2>
 			</div>
 			<div style=" width : 480px; height : 550px; margin-left: 240px">
-			<form action ="adminSchMain.jsp" id = "frm" >
+			<form action ="adminSchMain.jsp" id = "frm" method = "post">
 					<table style = "width : 80%; height : 550px ">
 						<tr>
 							<td>스케줄 코드</td>
-							<td> <input type ="text" readonly="readonly" name = "SchNo" value = "<%=SchNo %>" style = "background-color :#dfdfdf" ></td>
+							<td> <input type ="text" readonly="readonly" name = "schNo" value = "<%=SchNo %>" style = "background-color :#dfdfdf" ></td>
 						</tr>
 						<tr>
 							<td>영화코드</td>
-							<td> <input type ="text" readonly="readonly" value = "<%=asmsVO.getMvNo() %>"style = "background-color :#dfdfdf"></td>
+							<td> <input type ="text" readonly="readonly" name = "mvNo" value = "<%=asmsVO.getMvNo() %>"style = "background-color :#dfdfdf"></td>
+							
 						</tr>
 						<tr>
 							<td>영화제목</td>
-							<td> <input type ="text" readonly="readonly" value = "<%=asmsVO.getMvTitle() %>" style = "background-color :#dfdfdf"></td>
+							<td> <input type ="text" readonly="readonly" name = "mvTitle" value = "<%=asmsVO.getMvTitle() %>" style = "background-color :#dfdfdf"></td>
 						</tr>
 						<tr>
 							<td>개봉일</td>
-							<td> <input type ="text" readonly="readonly" value = "<%=asmsVO.getMvOpenDate() %>" style = "background-color :#dfdfdf"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></td>
+							<td> <input type ="text" readonly="readonly" name = "openDate" value = "<%=asmsVO.getMvOpenDate() %>" style = "background-color :#dfdfdf"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></td>
 						</tr>
 						<tr>
 							<td>상영종료일</td>
-							<td> <input type ="text"  class="datepicker" value = "<%=asmsVO.getMvCloseDate()%>"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></td>
+							<td> <input type ="text"  class="datepicker" name = "closeDate" value = "<%=asmsVO.getMvCloseDate()%>"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></td>
 						</tr>
 						<tr>
 							<td>상영일</td>
-							<td> <input type ="text"  class="datepicker" value = "<%=asmsVO.getSchDate() %>" ><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></td>
+							<td> <input type ="text"  class="datepicker" name = "schDate"value = "<%=asmsVO.getSchDate() %>" ><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></td>
 						</tr>
 						<tr>
 							<td>상영시간</td>
-							<td > <input type ="text" class="timepicker"  value = "<%=asmsVO.getSchStime() %>"style =" width  :100px;"> ~ <input type = "text"  class = "timepicker" value = "<%=asmsVO.getSchEtime() %>" style ="width  :100px;"></td>
+							<td > <input type ="text" class="timepicker"  name = "sTime" value = "<%=asmsVO.getSchStime() %>"style =" width  :100px;"> ~ <input type = "text"  name = "eTime"class = "timepicker" value = "<%=asmsVO.getSchEtime() %>" style ="width  :100px;"></td>
 						</tr>
 					
 					</table>
@@ -157,7 +163,7 @@
 			<div >
 				<button id = "backBtn"class ="btn" style ="margin-left : 500px;width : 120px; height: 50px; background-color: #333333 ; color : #FFFFFF" onclick = "backClick()">뒤로가기</button>
 				<button id = "deleteBtn"class ="btn" style ="width : 120px; height: 50px; background-color: #333333 ; color : #FFFFFF" onclick = "deleteClick()">삭제하기</button>
-				<button id = "modifyBtn"class ="btn" style ="width : 120px; height: 50px; background-color: #333333 ; color : #FFFFFF">수정하기</button>
+				<button id = "modifyBtn"class ="btn" style ="width : 120px; height: 50px; background-color: #333333 ; color : #FFFFFF" onclick = "updateClick()">수정하기</button>
 			</div>
 		</div>
 
@@ -168,4 +174,4 @@
 	</div>
 
 </body>
-</html></html>
+</html>
