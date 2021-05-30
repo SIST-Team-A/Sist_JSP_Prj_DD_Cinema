@@ -135,7 +135,7 @@ public class MemberDAO {
 	}//memberLogin
 	
 	public String memberIdFind(MemberIdFindVO mifVO) throws SQLException{
-		String id = "";
+		String id = null;
 		Connection con = null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -152,13 +152,15 @@ public class MemberDAO {
 			pstmt.setString(2, mifVO.getMemEmail());
 			
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
-				id = rs.getString(1);
+				id = rs.getString("MEM_ID");
 			}
+			
 		} finally {
 			dc.dbClose(con, pstmt, rs);
 		}//end finally
-			
+			 
 		return id ;
 	}
 	
