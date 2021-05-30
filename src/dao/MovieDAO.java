@@ -107,7 +107,7 @@ public class MovieDAO {
 
 		try {
 			con = dc.getConn();
-			query = "select * from actor where mv_no = ?";
+			query = "select * from actor where mv_no = ? order by act_mainorsub";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, mvNo);
 			rs = pstmt.executeQuery();
