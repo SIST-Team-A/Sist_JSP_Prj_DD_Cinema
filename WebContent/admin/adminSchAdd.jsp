@@ -111,9 +111,9 @@
 			    
 			    $("#addBtn").click(function(){
 			    	
-			    	var startMovie = $("#startMovie").val().substring(5,7) * 30 + $("#startMovie").val().substring(8,10) ;
-			    	var endMovie = $("#endMovie").val().substring(5,7)* 30 + $("#endMovie").val().substring(8,10);
-			        var  dateMovie = $("#dateMovie").val().substring(5,7)* 30 + $("#dateMovie").val().substring(8,10);
+			    	var startMovie =  $("#startMovie").val().substring(2,4) * 365 + $("#startMovie").val().substring(5,7) * 30 + $("#startMovie").val().substring(8,10) ;
+			    	var endMovie = $("#startMovie").val().substring(2,4) * 365 + $("#endMovie").val().substring(5,7)* 30 + $("#endMovie").val().substring(8,10);
+			        var  dateMovie = $("#startMovie").val().substring(2,4) * 365 + $("#dateMovie").val().substring(5,7)* 30 + $("#dateMovie").val().substring(8,10);
 	    			var sTime = $("#sTime").val().substring(0,2) * 60 + $("#sTime").val().substring(3,5);
 	    			var eTime = $("#eTime").val().substring(0,2) * 60 + $("#eTime").val().substring(3,5);
 			        //개봉일보다 상영종료일이 더 앞선 날짜일경우
