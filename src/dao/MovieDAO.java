@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import vo.ActorVO;
@@ -39,7 +40,9 @@ public class MovieDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String query = null;
-
+		
+		updateMovieState();
+		
 		try {
 			con = dc.getConn();
 			query = "select mv_no,mv_poster,mv_soon_poster from movie where mv_openornot = ?";
@@ -47,7 +50,8 @@ public class MovieDAO {
 			pstmt.setString(1, OpenOrNot);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				list.add(new MovieMainVO(rs.getString("mv_no"), rs.getString("mv_poster"), rs.getString("mv_soon_poster")));
+				list.add(new MovieMainVO(rs.getString("mv_no"), rs.getString("mv_poster"),
+						rs.getString("mv_soon_poster")));
 			}
 		} finally {
 			dc.dbClose(con, pstmt, rs);
@@ -115,5 +119,49 @@ public class MovieDAO {
 		}
 
 		return list;
+	}
+
+	public void updateMovieState() throws SQLException {
+		DbConnection dc = DbConnection.getInstance();
+		Calendar calNow = Calendar.getInstance();
+		Calendar calMv = Calendar.getInstance();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query = null;
+		String[] mvCloseArr = null;
+		List<String> mvNoList = new ArrayList<String>();
+
+		try {
+			con = dc.getConn();
+			query = "select mv_closedate,mv_no from movie";
+			pstmt = con.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				mvCloseArr = rs.getString(1).split("-");
+				calMv.set(Integer.parseInt(mvCloseArr[0]), Integer.parseInt(mvCloseArr[1])-1,Integer.parseInt(mvCloseArr[2]));
+//				System.out.println(calNow.get(Calendar.YEAR)+"-"+(calNow.get(Calendar.MONTH)+1)+"-"+calNow.get(Calendar.DAY_OF_MONTH));
+//				System.out.println(calMv.get(Calendar.YEAR)+"-"+(calMv.get(Calendar.MONTH)+1)+"-"+calMv.get(Calendar.DAY_OF_MONTH));
+//				System.out.println(calNow.after(calMv));
+				if(calNow.after(calMv)) {
+//					pstmt.executeUpdate("update movie set mv_openornot='C' where mv_no='"+rs.getString(2)+"'");
+					mvNoList.add(rs.getString(2));
+				}
+			}
+			pstmt.close();
+			rs.close();
+			
+			pstmt = con.prepareStatement("update movie set mv_openornot='C' where mv_no=?");
+			
+			for(int i = 0; i<mvNoList.size();i++) {
+				pstmt.setString(1, mvNoList.get(i));
+				pstmt.executeUpdate();
+				pstmt.clearParameters();
+			}
+			
+		} finally {
+			dc.dbClose(con, pstmt, rs);
+		}
 	}
 }
