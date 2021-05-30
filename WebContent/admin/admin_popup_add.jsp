@@ -93,6 +93,7 @@ function mvInsert(){
              <tr id="tr-header">
                 <td colspan="3"><h3>개봉예정작추가</h3></td>
             </tr>
+            
             <tr>
               <td class="td-first">번호</td>
               <td class="td-second"><input type="text" id="test" name="mv-no" value="" readonly="readonly" class="table-text" /></td>
@@ -121,14 +122,11 @@ function mvInsert(){
             <tr>
               <td class="td-first">감독</td>
               <td class="td-second"><input type="text" name="mv-director"  value="" class="table-text" /></td>
-
             </tr>
             
             <tr>
               <td class="td-first">주연</td>
-              <td class="td-second" id="table-lead"><input type="text" name="mv-lead" value="" class="table-text" />
-            
-
+              <td class="td-second" id="table-lead"><input type="text" name="mv-lead" value="" class="table-text" />           
             </tr>
             
             <tr>
@@ -165,8 +163,7 @@ function mvInsert(){
               <td class="td-first">등록일자</td>
               <td class="td-second"><input type="text" name="mv-regdate" id="mv-regdate" value="" readonly="readonly" class="table-text" /></td> 
             </tr>
-            
-            
+                     
             <tr>
               <td class="td-first">개봉여부</td>
               <td class="td-second" style="font-size:15px">
