@@ -9,18 +9,8 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-
-    <!-- botstrap -->
-    <link href="http://localhost/jsp_prj/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    
-    <!-- botstrap -->
-    <script src="http://localhost/jsp_prj/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
-    
+<title></title>
 <style type="text/css">
-
 </style>
 
 <script type="text/javascript">
@@ -31,15 +21,12 @@ window.onload=function(){
 	opener.location.reload();
 } 
 
-
 </script>
 </head>
 <body>
 
 <div>
 <%
-/* request.getParameter("mv-sub");
-request.getParameter("mv-lead"); */
 AdminMovieDAO amdao=AdminMovieDAO.getInstance();
 String mvNo=request.getParameter("mv-no");
 String mvPoster=request.getParameter("mv-poster");
@@ -56,15 +43,9 @@ String mvOpendate=request.getParameter("mv-opendate");
 String mvOpenornot=request.getParameter("opennot");
 String mvRegdate=request.getParameter("mv-regdate");
 String mvClosedate=request.getParameter("mv-closedate");
-
-	/* if(mvOpenornot.equals("on")){
-		mvOpenornot="O";
-	}else{
-		mvOpenornot="N";
-	} */
 	
-	MovieUpdateInsertVO muiVO = new MovieUpdateInsertVO(mvNo,mvPoster,mvPosterSoon,mvTitle,mvDirector,mvLead,mvSub,mvSt,mvRuntime,mvTrailer,mvOpendate,mvOpenornot,mvGenre,mvClosedate);
- 	amdao.updateMovie(muiVO); 
+MovieUpdateInsertVO muiVO = new MovieUpdateInsertVO(mvNo,mvPoster,mvPosterSoon,mvTitle,mvDirector,mvLead,mvSub,mvSt,mvRuntime,mvTrailer,mvOpendate,mvOpenornot,mvGenre,mvClosedate);
+amdao.updateMovie(muiVO); 
 %>
 
 </div>
