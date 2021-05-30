@@ -144,7 +144,7 @@ public class MemberDAO {
 		try {
 			con=dc.getConn();
 			
-			String selectQuery = "select MEM_ID from MEMBER where MEM_NAME = ? and MEM_EMAIL = ? ";
+			String selectQuery = " select mem_id from member where mem_name= ? and mem_email= ? ";
 			
 			pstmt = con.prepareStatement(selectQuery);
 			
@@ -156,7 +156,6 @@ public class MemberDAO {
 			while(rs.next()) {
 				id = rs.getString("MEM_ID");
 			}
-			
 		} finally {
 			dc.dbClose(con, pstmt, rs);
 		}//end finally

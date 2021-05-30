@@ -31,14 +31,16 @@
 	
 	MemberDAO mDAO = new MemberDAO();
 	String id = mDAO.memberIdFind(mifVO);
-	%>
-		alert("<%=name %>님의 아이디는 <%=id%> 입니다.");
-		location.href="login.jsp";
-	<%
+	
 		if(id == null){
 	%>
 		alert("입력하신 정보가 일치하지 않습니다. 다시 한번 입력해주세요.");
 		location.href='find.jsp';
+	<%
+		}else{
+	%>
+		alert("<%=name %>님의 아이디는 <%=id%> 입니다.");
+		location.href="login.jsp";
 	<%
 	}
 	%>
