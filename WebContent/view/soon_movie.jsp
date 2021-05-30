@@ -55,6 +55,7 @@
         height: 100%;
         flex-direction: column;
         justify-content: space-between;
+        align-items: center;
       }
       ul {
         list-style: none;
@@ -116,7 +117,8 @@
 
       #main {
         width: 100%;
-        min-width: 950px;
+        min-width: 1150px;
+        max-width: 950px;
         display: flex;
         flex-direction: row;
         justify-content: center;
