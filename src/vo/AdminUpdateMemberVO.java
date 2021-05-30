@@ -10,6 +10,7 @@ public class AdminUpdateMemberVO {
 	
 	public AdminUpdateMemberVO() {
 	}
+	
 	public AdminUpdateMemberVO(String memId, String memName, String memBirth, String memGender, String memEmail,
 			String memPhone) {
 		this.memId = memId;

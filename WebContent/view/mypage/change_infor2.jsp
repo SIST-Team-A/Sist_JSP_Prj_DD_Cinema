@@ -30,39 +30,80 @@ td{width : 200px; height : 50px;font-size :20px ;border-bottom: 1px solid #C8C8C
 </style>
 
 <script type="text/javascript">
-function changeinfor(){
-	var obj = document.frm ;
-	answer = confirm("정보를 수정 하시겠습니까?");
-if(answer){
-	if(obj.Name.value==""){
-		alert("이름 필수입력");
-		obj.Name.focus();
-	}else	if(obj.Birth.value==""){
-		alert("생일 필수입력");
-		obj.Birth.focus();
-	}else	if(obj.Phone.value==""){
-		alert("폰번호 필수입력");
-		obj.Phone.focus();
-	}else if(obj.Email.value==""){
-		alert("이메일 필수입력");
-		obj.Email.focus();
-	}else	if(obj.gender.value==""){
-		alert("성별 필수입력");
-		obj.gender.focus();
-	}else{
-		alert("정보가 수정 되었습니다.");
-		location.href="../log/login.jsp" ;
-	}
- }else{
-	 location.href="change_infor1.jsp" ;
- }
+$(function(){
+	$("#id").keydown(function(evt){ 
+		if(evt.which == 13){
+			chkNull();
+		}//end if
+	});
+	$("#name").keydown(function(evt){ 
+		if(evt.which == 13){
+			chkNull();
+		}//end if
+	});	
+	$("#gender").keydown(function(evt){ 
+		if(evt.which == 13){
+			chkNull();
+		}//end if
+	});	
+	$("#birth").keydown(function(evt){ 
+		if(evt.which == 13){
+			chkNull();
+		}//end if
+	});	
+	$("#phone").keydown(function(evt){ 
+		if(evt.which == 13){
+			chkNull();
+		}//end if
+	});	
+	$("#email").keydown(function(evt){ 
+		if(evt.which == 13){
+			chkNull();
+		}//end if
+	});	
+	$("#btn").click(function(){ 
+		chkNull();
+	});
+});
+function chkNull(){
+	
+	if( $("#name").val() ==""){
+		alert("이름는 필수 입력");
+		$("#name").focus();
+	return;
+	}//end if
+	if( $("#gender").val() ==""){
+		alert("성별는 필수 입력");
+		$("#gender").focus();
+	return;
+	}//end if
+	if( $("#birth").val() ==""){
+		alert("생일은 필수 입력");
+		$("#birth").focus();
+	return;
+	}//end if
+	if( $("#phone").val() ==""){
+		alert("전화번호는 필수 입력");
+		$("#phone").focus();
+	return;
+	}//end if
+	if( $("#email").val() ==""){
+		alert("이메일은 필수 입력");
+		$("#email").focus();
+	return;
+	}//end if
+	$("#frm").submit();
+};
+function home(){
+		location.href="../main.jsp" ;
 }
+
 </script>
 </head>
 <body>
 <div id="wrap">
 <%@ include file="../header.jsp" %>
-<form action="#" name = "frm">
+<form action="change_infor2_process.jsp" method="post" id= "frm">
 	<div id ="main">
 	   	  <div id="body_head">My page > 정보 수정</div>
   		  <div id="navibar">
@@ -77,28 +118,28 @@ if(answer){
 		<table >
 		  <tr >
 		  		<td>아이디</td>
-		  		<td><input type ="text" name="id" readonly="readonly" style="border-color : #C8C8C8 ;background-color: #C8C8C8 "/> </td>
+		  		<td><input type ="text" id="id" name="id" readonly="readonly" value ="<%=(String)session.getAttribute("id")%>"style="border-color : #C8C8C8 ;background-color: #C8C8C8 "/></td>
 		  </tr>
 		  <tr >
 		  		<td>이름</td>
-		  		<td><input type ="text" name="Name"  placeholder="이름"/> </td>
+		  		<td><input type ="text" id="name" name="name"  placeholder="이름"/> </td>
 		  </tr>
 		  <tr >
 		  		<td>성별</td>
-		  		<td> <input type ="radio" name="gender" value= "M" checked ="checked"/>남자
-						<input type ="radio" name="gender" value= "F" />여자</td>
+		  		<td> <input type ="radio" id="gender" name="gender" value= "M" checked ="checked"/>남자
+						<input type ="radio" id="gender" name="gender" value= "F" />여자</td>
 		  </tr>
 		  <tr >
 		  		<td>생년월일</td>
-		  		<td><input type ="text" name ="Birth"  placeholder="생년 월 일 "/> </td>
+		  		<td><input type ="text" id="birth"  name ="birth"  placeholder="생년 월 일 "/> </td>
 		  </tr>
 		  <tr >
 		  		<td>연락처</td>
-		  		<td><input type ="text" name ="Phone"  placeholder="연락처"/> </td>
+		  		<td><input type ="text" id="phone" name ="phone"  placeholder="연락처"/> </td>
 		  </tr>
 		  <tr >
 		  		<td>이메일 </td>
-		  		<td style="width : 500px" ><input type ="text"   name ="Email" placeholder="이메일"/> @ 
+		  		<td style="width : 500px" ><input type ="text"  id= "emailid" name ="emailid" placeholder="이메일"/> @ 
 		  		<select name = "domain" size="1">
 				<option value="daum.net">다음</option>
 				<option value="naver.com">네이버</option>
@@ -110,7 +151,7 @@ if(answer){
 		  <tr>
 		 	 <td   id="btn" colspan="2" style="border-bottom: 0px solid #333; text-align:center ;" ><br/>
 				<input type ="button" value ="수정" class="btn btn-default btn-lg" 
-				style="width : 120px ;background-color: #828282 ; color : white "  onclick="changeinfor()"/> 
+				style="width : 120px ;background-color: #828282 ; color : white " name="btn" id="btn" /> 
 			</td>
 		  </tr>
 		</table>

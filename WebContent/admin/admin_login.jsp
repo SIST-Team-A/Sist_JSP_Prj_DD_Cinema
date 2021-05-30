@@ -1,5 +1,8 @@
+<%@page import="vo.AdminVO"%>
+<%@page import="dao.AdminDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +21,7 @@
 <style type="text/css">
 body{font-family: "Noto Sans KR", sans-serif;}
 h1{text-align: center}
-#main {     /* margin: auto 0; */  background-color : #FFFFFF ;    padding-left : 0px;  width : 1200px;       margin : 10px auto      }
+#main {     /* margin: auto 0; */  background-color : #FFFFFF ;    padding-left : 0px;  width : 1200px;       margin : 250px auto      }
 td{height : 40px; font-size: 23px; width : 150px }
 #login_table{ height: 180px; ;margin: 0px auto ; }
 #login_button{   height: 100px; width: 100px; margin-left: 30px ;   }
@@ -26,32 +29,41 @@ input{height : 35px; }
 </style>
 
 <script type="text/javascript">
-function login(){
-	var obj = document.frm;
-	var iddata = 12;
-	var passdata = 12;
-	if(obj.id.value==""){
-		alert("아이디를 입력하세요!");
-	}else if(obj.pass.value==""){
-		alert("비밀번호를 입력하세요!");
-	}else{
-	if(iddata==obj.id.value){
-		if(passdata==obj.pass.value){
-				alert("로그인 성공");
-				location.href="#" ;
-		}
-	}else{
-		alert("잘못된 정보입니다. 다시 입력 해 주세요 !");
-	}
-	}
-}
+$(function(){
+	$("#id").keydown(function(evt){ 
+		if(evt.which == 13){
+			chkNull();
+		}//end if
+	});	
+	$("#pass").keydown(function(evt){ 
+		if(evt.which == 13){
+			chkNull();
+		}//end if
+	});	
+	$("#login_button").click(function(){ 
+		chkNull();
+	});	
+});
+
+function chkNull(){
+	if( $("#id").val() ==""){
+		alert("아이디는 필수 입력");
+		$("#id").focus();
+		return;
+	}//end if
+	if( $("#pass").val() ==""){
+		alert("비밀번호는 필수 입력");
+		$("#pass").focus();
+		return;
+	}//end if
+	$("#adminloginFrm").submit();
+};	
 </script>
 </head>
 
 <body>
    <div id="wrap">
-    <%@ include file="adminHeader.jsp" %>
-    <form action="#" name = "frm">
+    <form  method="post" id="adminloginFrm"  action ="admin_login_process.jsp">
    		<div id ="main" >
    			<!-- head -->
 			 <div >
@@ -61,15 +73,14 @@ function login(){
             <table id ="login_table">
                <tr>
                	<td id="id_pass_text" style = "padding :15px">아이디 </td>
-                  <td><input  type ="text"  name="id" value ="" placeholder="아이디 입력"/></td>
-                  <td rowspan ="2"><button type="button" class="btn btn-default" id= "login_button"  onclick="login()">로그인</button></td>
+                  <td><input  type ="text"  id= "id" name="id" value ="" placeholder="아이디 입력"/></td>
+                  <td rowspan ="2"><button type="button" class="btn btn-default" id= "login_button"  ">로그인</button></td>
                </tr>
                <tr>	
                		<td  id="id_pass_text" style = "padding :15px">비밀번호 </td>
-                   <td> <input  type ="password"  id="pass" value ="" placeholder="비밀번호 입력"/></td>
+                   <td> <input  type ="password"  id="pass" name ="pass" value ="" placeholder="비밀번호 입력"/></td>
                </tr>   
                <tr>	
-               		<td  colspan="3" style="text-align: center"><br/><a href="admin_change_pass.jsp " >비밀번호 변경</a></td>
                </tr>   
             </table>   
   	 </div>

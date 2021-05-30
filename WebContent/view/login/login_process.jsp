@@ -1,0 +1,45 @@
+<%@page import="dao.MemberDAO"%>
+<%@page import="vo.MemberLoginVO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <title></title>
+ <!-- bootstrap -->
+ <link href="http://localhost/jsp_prj/common/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
+
+ <!-- jQuery CDN(Contents Delivery Network) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+ <!-- bootstrap -->
+<script src="http://localhost/jsp_prj/common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+</style>
+<script type="text/javascript">
+<%
+String id=request.getParameter("id");
+String pass=request.getParameter("pass");
+MemberLoginVO mlVO=new MemberLoginVO(id,pass);
+//DAO단의 클래스를 사용하여 DB작업 수행
+MemberDAO mDAO=new MemberDAO();
+boolean result= mDAO.memberLogin(mlVO); //DB
+if(result ){
+	session.setMaxInactiveInterval(60*60);//요청이 끝난 다음에 다음 요청이 발생하기전까지의 시간.
+	session.setAttribute("id",id);//세션에 값을 저
+	response.sendRedirect( "../header.jsp");
+	}else{%>
+	alert("아이디 비밀번호를 확인해주세요.")
+	response.sendRedirect( "login.jsp");
+	<%}
+%>
+</script>
+</head>
+<body>
+<div>
+</div>
+</body>
+</html>

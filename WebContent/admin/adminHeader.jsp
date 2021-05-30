@@ -9,8 +9,16 @@
           <div id="left"></div>
           <div id="title"><a href="">D.D Cinema</a></div>
           <div id="login">
-            <a href="http://localhost/movie_reservation/admin/admin_login.jsp">로그아웃</a> <!-- 링크 변경 예정 -->
-            <a href="http://localhost/movie_reservation/admin/admin_change_pass.jsp"">비밀번호변경</a> <!-- 링크 변경 예정 -->
+          <%
+          	if(session.getAttribute("id") !=null){
+          		%>
+          	<form method ="post" action="main.jsp">
+            <a href="admin_logout.jsp">로그아웃</a>
+            </form>
+            <!-- <a href="admin_change_pass.jsp">비밀번호 변경</a> -->
+          	<%
+          		}      
+          		%>
           </div>
         </div>
         <div id="header-bottom">

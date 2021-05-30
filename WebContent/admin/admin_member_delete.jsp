@@ -6,7 +6,6 @@
 <%
 
 	request.setCharacterEncoding("UTF-8");
-	boolean result = false;
 	String id     = request.getParameter("modal_id");
 	String name   = request.getParameter("modal_name");
 	String birth  = request.getParameter("modal_birth");
@@ -15,8 +14,8 @@
 	String phone  = request.getParameter("modal_phone");
 	
 	AdminMemberDAO admDAO = new AdminMemberDAO();
-	admDAO.delectMember(id);
 	
+	boolean result = admDAO.delectMember(id);
 	
 %>
 
