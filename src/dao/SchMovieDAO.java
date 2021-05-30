@@ -45,7 +45,7 @@ public class SchMovieDAO {
 			con = dc.getConn();
 		//2. 쿼리문 생성객체 얻기
 			
-			String selectQuery = "select  distinct m.mv_title, m.mv_no from sch_movie scm, movie m where scm.mv_no = m.mv_no";
+			String selectQuery = "select  distinct m.mv_title, m.mv_no from sch_movie scm, movie m where scm.mv_no = m.mv_no and m.mv_openornot <> 'C'";
 			pstmt = con.prepareStatement(selectQuery);
 		//3. 바인드 변수에 값 할당.
 		//4. 쿼리문 수행 후 결과 얻기
