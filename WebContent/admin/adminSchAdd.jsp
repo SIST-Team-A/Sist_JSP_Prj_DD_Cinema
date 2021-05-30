@@ -175,6 +175,7 @@
 					<strong>영화목록</strong>
 				</div>
 					<select id="adminMovieList" multiple class="form-control" style = "height : 90%"  onchange="adminMovieList()">
+					<option id ="nonValue" style = "height : 1px; " disabled="disabled"></option>
 						<%for (AdminMovieListVO amlVO : amlList){ %>
 						<option id = "<%=amlVO.getMvNo()%>"> <%= amlVO.getMvTitle()%></option>
 						<%} %>
