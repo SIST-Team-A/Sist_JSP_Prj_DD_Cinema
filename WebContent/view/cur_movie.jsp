@@ -28,106 +28,20 @@
     <script src="../common/bootstrap-3.3.2/js/bootstrap.min.js"></script>
 
     <style>
-      body,
-      html {
-        width: 100%;
-        height: 100%;
-        font-family: "Noto Sans KR", sans-serif;
-      }
-      body {
-        margin: 0px;
-        overflow-x: hidden;
-        overflow-y: overlay;
-      }
-      div {
-        /* border: 1px solid black; */
-      }
-      a {
-        text-decoration: none;
-        color: black;
-      }
-      a:hover {
-        text-decoration: none;
-        color: black;
-      }
-      #wrap {
-        display: flex;
-        height: 100%;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-      }
-      ul {
-        list-style: none;
-      }
-      #header {
-        width: 100%;
-        min-width: 950px;
-        height: 122px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        margin-bottom: auto;
-      }
-      #header-top {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 0px;
-      }
-      #header-bottom {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        width: 85%;
-        border-top: 1px solid #b2b2b2;
-        margin: 0 auto;
-      }
-      #header-bottom ul {
-        text-align: center;
-        margin: 0px;
-        padding: 0px;
-      }
-      #header-bottom ul li {
-        margin: 10px 0;
-        font-family: "Noto Sans KR", sans-serif;
-        float: left;
-      }
-
-      #left {
-        width: 25%;
-      }
-      #title {
-        font-size: 36px;
-        font-family: "Noto Sans KR", sans-serif;
-      }
-      #login {
-        width: 25%;
-        text-align: center;
-      }
-      #login a {
-        color: #656565;
-        font-family: "Noto Sans KR", sans-serif;
-        font-size: 12px;
-      }
-      #login a:hover {
-        color: #656565;
-      }
-
       #main {
         width: 100%;
         min-width: 950px;
         max-width: 1150px;
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
         justify-content: center;
+        flex-wrap: wrap;
+        padding-bottom: 20px;
       }
       #main-title {
         width: 100%;
         text-align: center;
-        padding: 10px 0;
+        padding: 15px 0;
       }
 
       .item {
@@ -137,12 +51,10 @@
         border: 1px solid black;
         text-align: center;
       }
-      
       .item img{
       	width: 300px;
         height: 500px;
       }
-
       #unfold {
         width: 100%;
         padding: 25px 0;
@@ -150,41 +62,6 @@
         flex-direction: row;
         justify-content: center;
       }
-
-      #footer {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        width: 100%;
-        min-width: 950px;
-        min-height: 140px;
-        background-color: black;
-        margin-top: auto;
-      }
-      #footertxt {
-        color: #a2a2a2;
-        font-size: 12px;
-      }
-      #footer-right {
-        width: 20%;
-      }
-
-      .header-bottom-ul li {
-        float: left;
-        margin-right: 5px;
-      }
-
-      .header-bottom-ul li::before {
-        padding-left: 5px;
-        color: #b2b2b2;
-        content: "｜";
-      }
-
-      .header-bottom-ul li:first-child::before {
-        content: "";
-      }
-
       .hidden {
         display: none;
       }

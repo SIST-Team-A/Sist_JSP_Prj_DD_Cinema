@@ -29,7 +29,6 @@
 
     <style>
 
-
       #main {
         width: 100%;
         min-width: 1150px;
@@ -38,11 +37,12 @@
         flex-direction: row;
         justify-content: center;
         flex-wrap: wrap;
+        padding-bottom: 20px;
       }
       #main-title {
         width: 100%;
         text-align: center;
-        padding: 10px 0;
+        padding: 15px 0;
       }
 
       .item {
@@ -64,40 +64,6 @@
         display: flex;
         flex-direction: row;
         justify-content: center;
-      }
-
-      #footer {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        width: 100%;
-        min-width: 950px;
-        min-height: 140px;
-        background-color: black;
-        margin-top: auto;
-      }
-      #footertxt {
-        color: #a2a2a2;
-        font-size: 12px;
-      }
-      #footer-right {
-        width: 20%;
-      }
-
-      .header-bottom-ul li {
-        float: left;
-        margin-right: 5px;
-      }
-
-      .header-bottom-ul li::before {
-        padding-left: 5px;
-        color: #b2b2b2;
-        content: "｜";
-      }
-
-      .header-bottom-ul li:first-child::before {
-        content: "";
       }
 
       .hidden {
@@ -137,7 +103,6 @@
         <div class="item hidden"><a href="movie_info.jsp?mvNo=<%= list.get(i).getMvNo() %>"><img src="<%= list.get(i).getMvPoster() %>"/></a></div>
         <% } %>
         <% } %>
-        <!-- <div class="item hidden">22</div> -->
         <div id="unfold">
           <input
             type="button"
