@@ -38,22 +38,15 @@
     	
 		
 	
-    	String modifySchNo = (request.getParameter("schNo") == null) ? "" : request.getParameter("schNo");
-    	String modifyTitle = (request.getParameter(" mvTitle") == null) ? "" : request.getParameter("mvTitle");
-    	String modifyOpenDate = (request.getParameter("openDate") == null) ? "" : request.getParameter("openDate");
-    	String modifyCloseDate = (request.getParameter("closeDate") == null) ? "" : request.getParameter("closeDate");
-		String modifyDate = (request.getParameter("schDate") == null) ? "" : request.getParameter("schDate");
-		String modifyStime = (request.getParameter("sTime") == null) ? "" : request.getParameter("sTime");
-		String modifyEtime = (request.getParameter("eTime") == null) ? "" : request.getParameter("eTime");
+    	
 		
+    	
 
-			
-		if(!modifySchNo.equals("")){
-    		
-    		boolean flag2 = asmDAO.updateMovieClose(modifyTitle, modifyCloseDate);
-    		AdminSchMovieUpdateVO asmuVO = new AdminSchMovieUpdateVO(modifySchNo, modifyDate ,modifyStime, modifyEtime);
-    		boolean flag3 =asmDAO.updateSchMovie(asmuVO);
-    	}
+    		if(!(SchNo).equals("")){
+    	   		
+    			boolean flag = sDAO.deleteSeat(SchNo);
+    			boolean flag1 = asmDAO.deleteSchMovie(SchNo);
+       	}
   %>
  
 <!DOCTYPE html>
