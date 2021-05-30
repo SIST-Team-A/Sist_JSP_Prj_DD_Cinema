@@ -65,7 +65,7 @@
 			$("#titleMovie").val(schMovieList);
 			
 			<% for ( AdminMovieListVO amlVO : amlList){%>
-					if("<%=amlVO.getMvTitle().replace(":","").replace(" ","")%>" == schMovieList.replace(":","").replace(" ","")){
+					if("<%=amlVO.getMvTitle()%>" == schMovieList){
 						$("#startMovie").val("<%=amlVO.getMvOpenDate()%>");
 					}//end if
 			<%}//end for%>
