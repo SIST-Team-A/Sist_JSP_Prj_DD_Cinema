@@ -8,13 +8,12 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String res_num = request.getParameter("reNo");
+	/* System.out.print(res_num); */
 	//String res_num = "r_00000025";
 	
 	ReservationDAO rDAO = new ReservationDAO();
 	ReservationMyPageDetVO rmpdVO = rDAO.selectReservationMyDetail(res_num);
 %>    
-        
-    
     
 <!DOCTYPE html>
 <html>

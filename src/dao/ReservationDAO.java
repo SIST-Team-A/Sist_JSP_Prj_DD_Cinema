@@ -249,6 +249,31 @@ public class ReservationDAO {
 			return cnt;
 		}
 	 
+	 public int updateSeat(String revNo) throws SQLException{
+         int cnt =0;
+         
+         Connection con = null;
+         PreparedStatement pstmt=null;
+         
+         DbConnection dc = DbConnection.getInstance();
+         
+         try {
+            con=dc.getConn();
+            
+            String deletMember = "update seat set REV_NO = null, SEAT_TF = 'F'where REV_NO = '"+ revNo +"'" ;
+            
+            pstmt = con.prepareStatement(deletMember);
+            cnt = pstmt.executeUpdate();
+            
+            
+         } finally {
+            dc.dbClose(con, pstmt, null); 
+         }//end finally
+         return cnt;
+      }
+	 
+	 
+	 
 	 public List< ReservationMainVO>  selectReservation(String id) throws SQLException{
 	      List< ReservationMainVO> rmList = new ArrayList<ReservationMainVO>(); 
 	      ReservationMainVO rmVO = null;

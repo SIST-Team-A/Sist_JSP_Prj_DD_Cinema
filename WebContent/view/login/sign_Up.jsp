@@ -85,9 +85,11 @@ function signup(){
 		cnt=mDAO.insertMember(imVO);
 		if(cnt>0){
 		%>
+			alert("회원가입이 완료되었습니다.");
 			location.href="login.jsp"
 		<% 
 		
+		}else if (cnt<=0){
 		}
 	}catch(SQLException se){
 		se.printStackTrace();

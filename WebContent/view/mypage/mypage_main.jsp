@@ -12,7 +12,6 @@ String id =(String)session.getAttribute("id");
 //DAO단의 클래스를 사용하여 DB작업 수행
 ReservationDAO mDAO=new ReservationDAO();
 List <ReservationMainVO > rmList = mDAO.selectReservation(id);
-
 %>
 <!DOCTYPE html>
 <html>
@@ -46,6 +45,7 @@ List <ReservationMainVO > rmList = mDAO.selectReservation(id);
 	$(function() {
 		$("#detailBtn").click(function() {
 			$("#frm").submit();
+			
 		});//click
 	});//ready
 </script>
@@ -59,7 +59,7 @@ List <ReservationMainVO > rmList = mDAO.selectReservation(id);
 	<div id="title">My page</div>
 	<div id="navibar">
 		<ul class="nav nav-pills">
-		  <li role="presentation"><a	href="mypage_res_detail.jsp">예매내역</a></li>
+		  <li role="presentation"><a	href="mypage_main.jsp">예매내역</a></li>
 		<li role="presentation"><a href="change_infor1.jsp">정보 수정</a></li>
 		<li role="presentation"><a	href="change_pass1.jsp">비밀번호	변경</a></li>
 		</ul>
@@ -67,7 +67,7 @@ List <ReservationMainVO > rmList = mDAO.selectReservation(id);
 	<br/>
 	<br/>
 	<div>
-	<form action = "mypage_res_detail.jsp" name = "frm" >
+	<!-- <form action = "mypage_res_detail.jsp" id = "frm" > -->
 	<table class="table table-hover">
 		<thead>
 		<tr id="taHead">
@@ -77,17 +77,27 @@ List <ReservationMainVO > rmList = mDAO.selectReservation(id);
 		</tr>
 		</thead>
 		<tbody>
-		<% for(ReservationMainVO rmVO : rmList ){%>
-		<tr>
-			<td ><input type ="hidden" name ="reNo" value = "<%= rmVO.getRevNo() %>" ><%=  rmVO.getRevNo()%> </td>
-			<td	><%= rmVO.getMvTitle() %></td>
-			<td class="detailBtn"><button class="btn btn-primary"  id="detailBtn">상세보기</button></td>
-		</tr>
+		
+	<% 		
+			for(int i=0;i<rmList.size();i++){ %>
+			<tr id="tr_<%=i%>">
+			<td ><%-- <input type ="hidden" name ="reNo" value = "<%= rmList.get(i).getRevNo() %>" > --%><%=rmList.get(i).getRevNo()%> </td>
+			<td	><%= rmList.get(i).getMvTitle() %></td>
+			<td class="detailBtn"><a href="mypage_res_detail.jsp?reNo=<%=rmList.get(i).getRevNo()%>"><button class="btn btn-primary"  id="detailBtn">상세보기</button></a></td>
+			</tr>
 		<%}%>
+		<%-- 
+			<%for (ReservationMainVO rmVO : rmList){ %>
+				<tr>
+         <td ><input type ="hidden" name ="reNo" value = "<%= rmVO.getRevNo() %>" ><%=  rmVO.getRevNo()%> </td>
+         <td   ><%= rmVO.getMvTitle() %></td>
+         <td class="detailBtn"><button class="btn btn-primary"  id="detailBtn">상세보기</button></td>
+      </tr>
+			<%} %> --%>
 		</tbody>
 		
 	</table>
-	</form>
+	<!-- </form> -->
 	</div>
 
 	</div>

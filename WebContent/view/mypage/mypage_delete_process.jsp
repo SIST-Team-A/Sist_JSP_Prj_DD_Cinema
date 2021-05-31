@@ -12,6 +12,7 @@
 	ReservationDAO rDAO = new ReservationDAO();
 	
 	rDAO.delectReservation(res_num);
+	rDAO.updateSeat(res_num);
 	
 
 
